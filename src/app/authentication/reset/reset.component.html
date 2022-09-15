@@ -1,0 +1,40 @@
+<div class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+      </div>
+     
+      <div class="card mt-4">
+        <div class="card-body login-card-body">
+  
+          <form (ngSubmit)="reset(resetForm)" #resetForm="ngForm">
+          
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="New Password" name="new_password" ngModel>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-lock"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Confirm New Password" name="confirm_new_password" ngModel>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <i class="bi bi-lock"></i>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              </div>
+            </div>
+          </form>
+  
+        </div>
+      
+      </div>
+    </div>
+    
+  </div>

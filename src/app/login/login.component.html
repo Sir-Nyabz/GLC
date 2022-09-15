@@ -1,0 +1,41 @@
+<div class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+      </div>
+     
+      <div class="card mt-4">
+        <div class="card-body login-card-body">
+  
+          <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-envelope-open"></i>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-lock"></i>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              </div>
+            </div>
+          </form>
+  
+          <p class="mb-1">
+            <a routerLink="/forgot">I forgot my password</a>
+          </p>
+        </div>
+      
+      </div>
+    </div>
+    
+  </div>
