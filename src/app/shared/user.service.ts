@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class UserService {
 
   headers= new HttpHeaders()
  
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private bnIdle:BnNgIdleService) {}
 
   // Login
   login(email: string, password: string) {
@@ -40,8 +41,18 @@ export class UserService {
 
   //logout the user
   logout() {
-    return localStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  autoLogout(){ 
+    this.bnIdle.startWatching(10).subscribe((isTimedOut:boolean)=>{
+      if(isTimedOut){
+        alert('Session expired');
+        this.logout();
+        this.bnIdle.stopTimer();
+      }
+    })
   }
 
   verifyLogged():boolean{

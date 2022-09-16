@@ -20,6 +20,7 @@
     "@angular/router": "^14.2.0",
     "@fortawesome/angular-fontawesome": "^0.11.1",
     "angular-font-awesome": "^3.1.2",
+    "bn-ng-idle": "^2.0.4",
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.1",
     "font-awesome": "^4.7.0",
