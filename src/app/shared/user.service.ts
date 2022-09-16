@@ -55,11 +55,6 @@ export class UserService {
     })
   }
 
-  verifyLogged():boolean{
-    const token=localStorage.getItem('token');
-    return token ? true:false;
-  }
-
   //change the password
   resetPassword(password: string) {
     return this.http.put(this.sendMailUrl, {
