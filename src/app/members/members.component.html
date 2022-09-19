@@ -1,1 +1,63 @@
-<p>members works!</p>
+<h3>Create Employee</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="member.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Email Id</label>
+      <input type="text" class="form-control" id="email" required [(ngModel)]="member.email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Phone number</label>
+      <input type="text" class="form-control" id="phone" required [(ngModel)]="member.phone" name="phone">
+    </div>
+    <div class="form-group">
+      <label for="name">Department</label>
+      <input type="text" class="form-control" id="department" required [(ngModel)]="member.department" name="department">
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Employee List</h2>
+    </div>
+    <div class="panel-body">
+      <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0" width="100%">
+
+        <thead>
+          <tr>
+            <th >Name</th>
+            <th >Email</th>
+            <th >Department</th>
+            <th >Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of members">
+            <td>{{member.name}}</td>
+            <td>{{member.email}}</td>
+            <td>{{member.department}}</td>
+            <td>{{member.phone}}</td>
+            
+              <td><button style='margin-right:16px' (click)="deleteEmployee(member.id)" class="btn btn-danger">Delete</button>
+                <button style='margin-right:16px' (click)="updateEmployee(member.id)" class="btn btn-success" style="margin-left: 10px">Edit details</button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+    
+    

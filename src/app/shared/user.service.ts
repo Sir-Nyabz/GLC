@@ -42,7 +42,6 @@ export class UserService {
   //logout the user
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
   }
 
   autoLogout(){ 
@@ -50,6 +49,10 @@ export class UserService {
       if(isTimedOut){
         alert('Session expired');
         this.logout();
+        this.router.navigate(['/login']).
+        then(() => {
+          window.location.reload();
+        });
         this.bnIdle.stopTimer();
       }
     })
