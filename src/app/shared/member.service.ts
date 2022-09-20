@@ -2,24 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApiResponse } from '../model/api.response';
+import { Member } from '../model/member.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MemberService {
-  getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
+  getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/';
   sendMailUrl = 'https://nyabz.pythonanywhere.com/admin-api/reset-password/';
 
   headers= new HttpHeaders()
  
   constructor(private http: HttpClient, private router: Router, private bnIdle:BnNgIdleService) {}
 
-  getMembers() : Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(this.getUrl,
+  getMembers():Observable<Member[]> {
+    return this.http.get<Member[]>(this.getUrl,
         { 'headers': this.headers }
-        );
+        )
   }
 
 }

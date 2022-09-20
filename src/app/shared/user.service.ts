@@ -45,7 +45,7 @@ export class UserService {
   }
 
   autoLogout(){ 
-    this.bnIdle.startWatching(10).subscribe((isTimedOut:boolean)=>{
+    this.bnIdle.startWatching(1000).subscribe((isTimedOut:boolean)=>{
       if(isTimedOut){
         alert('Session expired');
         this.logout();

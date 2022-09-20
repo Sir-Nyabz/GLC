@@ -1,9 +1,9 @@
-<h3>Create Employee</h3>
+<!-- <h3>Create Employee</h3>
 <div [hidden]="submitted" style="width: 400px;">
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="member.name" name="name">
+      <input type="text" class="form-control" id="first_name" required [(ngModel)]="member.first_name" name="first_name">
     </div>
 
     <div class="form-group">
@@ -13,16 +13,25 @@
 
     <div class="form-group">
       <label for="name">Phone number</label>
-      <input type="text" class="form-control" id="phone" required [(ngModel)]="member.phone" name="phone">
+      <input type="text" class="form-control" id="last_name" required [(ngModel)]="member.last_name" name="last_name">
     </div>
     <div class="form-group">
       <label for="name">Department</label>
-      <input type="text" class="form-control" id="department" required [(ngModel)]="member.department" name="department">
+      <input type="text" class="form-control" id="date_of_birth" required [(ngModel)]="member.date_of_birth" name="date_of_birth">
+    </div>
+    <div class="form-group">
+      <label for="name">Department</label>
+      <input type="text" class="form-control" id="other_name" required [(ngModel)]="member.other_name" name="other_name">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Department</label>
+      <input type="text" class="form-control" id="place_of_birth" required [(ngModel)]="member.place_of_birth" name="place_of_birth">
     </div>
 
     <button class="btn btn-success">Submit</button>
   </form>
-</div>
+</div> -->
 
 
 <div class="panel panel-primary">
@@ -35,6 +44,8 @@
         <thead>
           <tr>
             <th >Name</th>
+            <th >Name</th>
+            <th >Name</th>
             <th >Email</th>
             <th >Department</th>
             <th >Phone</th>
@@ -42,16 +53,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let member of members">
-            <td>{{member.name}}</td>
-            <td>{{member.email}}</td>
-            <td>{{member.department}}</td>
-            <td>{{member.phone}}</td>
+          <!-- <tr *ngFor="let membe of members">
+            <td>{{membe.first_name}}</td>
+            <td>{{membe.email}}</td>
+            <td>{{membe.date_of_birth}}</td>
+            <td>{{membe.place_of_birth}}</td>
+            <td>{{membe.last_name}}</td>
+            <td>{{membe.other_name}}</td>
             
-              <td><button style='margin-right:16px' (click)="deleteEmployee(member.id)" class="btn btn-danger">Delete</button>
-                <button style='margin-right:16px' (click)="updateEmployee(member.id)" class="btn btn-success" style="margin-left: 10px">Edit details</button>
+              <td><button style='margin-right:16px' (click)="deleteEmployee(membe.id)" class="btn btn-danger">Delete</button>
+                <button style='margin-right:16px' (click)="updateEmployee(membe.id)" class="btn btn-success" style="margin-left: 10px">Edit details</button>
               </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
