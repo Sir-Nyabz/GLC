@@ -13,14 +13,19 @@ export class MemberService {
   getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/';
   sendMailUrl = 'https://nyabz.pythonanywhere.com/admin-api/reset-password/';
 
-  headers= new HttpHeaders()
- 
-  constructor(private http: HttpClient, private router: Router, private bnIdle:BnNgIdleService) {}
+  headers = new HttpHeaders();
 
-  getMembers():Observable<Member[]> {
-    return this.http.get<Member[]>(this.getUrl,
-        { 'headers': this.headers }
-        )
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private bnIdle: BnNgIdleService
+  ) {}
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
+  getMembers(): Observable<any> {
+    return this.http.get<any>(this.getUrl);
+  }
 }

@@ -25,12 +25,16 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     this.userService.autoLogout();
-    this.reloadData();
-  }
+    this.memberService.getMembers().subscribe(
+      (res: any) => {
+        this.members = res;
+        console.log(this.members);
+        localStorage.setItem('token', res.token);
+      },
 
-  reloadData() {
-    this.members = this.memberService.getMembers().pipe(
-      map((obj) => obj)
+      (err) => {
+        alert('Network Challenge');
+      }
     );
   }
 

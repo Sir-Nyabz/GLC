@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr *ngFor="let membe of members">
+          <tr *ngFor="let membe of members|async">
             <td>{{membe.first_name}}</td>
             <td>{{membe.email}}</td>
             <td>{{membe.date_of_birth}}</td>
@@ -64,7 +64,7 @@
               <td><button style='margin-right:16px' (click)="deleteEmployee(membe.id)" class="btn btn-danger">Delete</button>
                 <button style='margin-right:16px' (click)="updateEmployee(membe.id)" class="btn btn-success" style="margin-left: 10px">Edit details</button>
               </td>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
     </div>
