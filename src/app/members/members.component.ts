@@ -27,7 +27,7 @@ export class MembersComponent implements OnInit {
     this.userService.autoLogout();
     this.memberService.getMembers().subscribe(
       (res: any) => {
-        this.members = res;
+        this.members = res.data_list;
         console.log(this.members);
         localStorage.setItem('token', res.token);
       },
