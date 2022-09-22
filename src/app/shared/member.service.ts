@@ -10,7 +10,7 @@ import { Member } from '../model/member.model';
   providedIn: 'root',
 })
 export class MemberService {
-  getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/';
+  getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
   sendMailUrl = 'https://nyabz.pythonanywhere.com/admin-api/reset-password/';
 
   headers = new HttpHeaders();

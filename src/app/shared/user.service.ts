@@ -10,9 +10,13 @@ export class UserService {
   loginUrl = 'https://nyabz.pythonanywhere.com/admin-api/authentication/';
   sendMailUrl = 'https://nyabz.pythonanywhere.com/admin-api/reset-password/';
 
-  headers= new HttpHeaders()
- 
-  constructor(private http: HttpClient, private router: Router, private bnIdle:BnNgIdleService) {}
+  headers = new HttpHeaders();
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private bnIdle: BnNgIdleService
+  ) {}
 
   // Login
   login(email: string, password: string) {
@@ -44,26 +48,27 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
-  autoLogout(){ 
-    this.bnIdle.startWatching(1800).subscribe((isTimedOut:boolean)=>{
-      if(isTimedOut){
+  autoLogout() {
+    this.bnIdle.startWatching(1800).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
         alert('Session expired');
         this.logout();
-        this.router.navigate(['/login']).
-        then(() => {
+        this.router.navigate(['/login']).then(() => {
           window.location.reload();
         });
         this.bnIdle.stopTimer();
       }
-    })
+    });
   }
 
   //change the password
   resetPassword(password: string) {
-    return this.http.put(this.sendMailUrl, {
-      password: password,
-    },
-    { 'headers': this.headers }
+    return this.http.put(
+      this.sendMailUrl,
+      {
+        password: password,
+      },
+      { headers: this.headers }
     );
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { ApiResponse } from '../model/api.response';
 import { Member } from '../model/member.model';
 import { MemberService } from '../shared/member.service';
 import { UserService } from '../shared/user.service';
@@ -28,10 +27,8 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe(
       (res: any) => {
         this.members = res.data_list;
-        console.log(this.members);
         localStorage.setItem('token', res.token);
       },
-
       (err) => {
         alert('Network Challenge');
       }
