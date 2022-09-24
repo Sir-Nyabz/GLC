@@ -32,4 +32,10 @@ export class NavbarComponent implements OnInit {
     ;
 
   }
+
+
+  add_new() {
+    throw new Error('Method not implemented.');
+    }
+    
 }
