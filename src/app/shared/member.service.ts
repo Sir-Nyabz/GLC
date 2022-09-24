@@ -3,12 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { map, Observable } from 'rxjs';
-import { ApiResponse } from '../model/api.response';
-import { Member } from '../model/member.model';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class MemberService {
   getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
   sendMailUrl = 'https://nyabz.pythonanywhere.com/admin-api/reset-password/';
