@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Member } from '../model/member.model';
 import { MemberService } from '../shared/member.service';
 import { UserService } from '../shared/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-members',
@@ -19,7 +20,8 @@ export class MembersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private location:Location
   ) {}
 
   ngOnInit() {
@@ -27,7 +29,7 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe(
       (res: any) => {
         this.members = res.data_list;
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('ADMIN-ASOREBA-GLC', JSON.stringify(res.token));
       },
       (err) => {
         alert('Network Challenge');

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(email, password).subscribe(
       (res: any) => {
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('ADMIN-ASOREBA-GLC', JSON.stringify(res.token));
 
         // redirect to dashboard
         this.router.navigate(['/members']).then(() => {
