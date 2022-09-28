@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-member-biodata',
@@ -8,10 +9,21 @@ import { Location } from '@angular/common';
 })
 export class MemberBiodataComponent implements OnInit {
 
-  constructor(private location:Location) { }
+  forBiodata:boolean|any;
+  contact:boolean|any;
+
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    window.location.reload()
+    if(this.userService.LoggedIn()&&window.location.href=='http://localhost:4200/biodata'){
+      this.forBiodata=true;
+    }else if(this.userService.LoggedIn()&&window.location.href=='http://localhost:4200/contact'){
+      this.contact=true
+    }
+    else{
+      this.forBiodata=false;
+      this.contact=false
+    }
   }
 
 }

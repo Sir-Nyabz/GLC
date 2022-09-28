@@ -35,17 +35,17 @@ export class UserService {
 
   //if the user is logged in
   LoggedIn() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('ADMIN-ASOREBA-GLC');
   }
 
   //get the token from the local storage
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('ADMIN-ASOREBA-GLC');
   }
 
   //logout the user
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('ADMIN-ASOREBA-GLC');
   }
 
   autoLogout() {

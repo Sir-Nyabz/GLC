@@ -21,7 +21,7 @@ export class MemberService {
   ) {}
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('ADMIN-ASOREBA-GLC');
   }
 
   getMembers(): Observable<any> {

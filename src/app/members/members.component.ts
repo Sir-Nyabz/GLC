@@ -29,7 +29,6 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe(
       (res: any) => {
         this.members = res.data_list;
-        localStorage.setItem('ADMIN-ASOREBA-GLC', JSON.stringify(res.token));
       },
       (err) => {
         alert('Network Challenge');

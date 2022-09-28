@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(email, password).subscribe(
       (res: any) => {
-        localStorage.setItem('ADMIN-ASOREBA-GLC', JSON.stringify(res.token));
+        localStorage.setItem('ADMIN-ASOREBA-GLC', res.token);
 
         // redirect to dashboard
-        this.router.navigate(['/members']).then(() => {
-          window.location.reload();
-        });
+        this.router.navigate(['/members']).then(()=>{
+          window.location.reload()
+        })
       },
       (err) => {
         alert('Network Challenge');
