@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { UserService } from '../../shared/user.service';
+import { UserService } from '../../../shared/user.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

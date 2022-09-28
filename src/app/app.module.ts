@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { BnNgIdleService } from 'bn-ng-idle';
-
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
+
 
 
 

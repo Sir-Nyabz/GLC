@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../../shared/user.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

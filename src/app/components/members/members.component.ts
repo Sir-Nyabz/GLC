@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { Member } from '../model/member.model';
-import { MemberService } from '../shared/member.service';
-import { UserService } from '../shared/user.service';
+import { Member } from '../../model/member.model';
+import { MemberService } from '../../shared/member.service';
+import { UserService } from '../../shared/user.service';
 import { Location } from '@angular/common';
 
 @Component({

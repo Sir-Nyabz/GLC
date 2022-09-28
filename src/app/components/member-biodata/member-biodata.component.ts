@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-member-biodata',
