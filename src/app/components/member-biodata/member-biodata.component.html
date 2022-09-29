@@ -1,4 +1,5 @@
-<div class="hold-transition login-page">
+<body>
+  <div class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
       </div>
@@ -9,13 +10,62 @@
           
             <div class="row">
               <div class="col-6">
-                <a class="nav-link a-logout" routerLink="/biodata">Biodata</a>
+                <a class="nav-link a-logout" onclick="document.getElementById('biodataform').style.display = 'block'" id="biodatabutton">Biodata</a>
               </div>
               <div class="col-6">
-                <a class="nav-link a-logout" routerLink="/contact">Contact</a>
+                <a class="nav-link a-logout" id="contactbutton">Contact</a>
               </div>
-              <app-biodata *ngIf="forBiodata"></app-biodata>
-              <app-contact *ngIf="contact"></app-contact>
+
+              <!-- Biodata Form -->
+              <form id="biodataform">
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <i class="bi bi-envelope-open"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <i class="bi bi-lock"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                  </div>
+                </div>
+              </form>
+
+
+               <!-- Contact Form -->
+               <form id="contactform" style="display: none;">
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Contact" name="email" ngModel>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <i class="bi bi-envelope-open"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <i class="bi bi-lock"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                  </div>
+                </div>
+              </form>
             </div>
          
           
@@ -25,3 +75,4 @@
     </div>
     
   </div>
+</body>

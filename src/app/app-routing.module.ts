@@ -3,11 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ResetComponent } from './components/authentication/reset/reset.component';
 import { ForgotComponent } from './components/forgot/forgot.component';
 import { LoginComponent } from './components/login/login.component';
-import { BiodataComponent } from './components/biodata/biodata.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { MemberBiodataComponent } from './components/member-biodata/member-biodata.component';
 import { MembersComponent } from './components/members/members.component';
-import { FoundationComponent } from './components/foundation/foundation.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -16,10 +13,7 @@ const routes: Routes = [
   { path:'authentication/reset-password/:token',component:ResetComponent },
   { path:'forgot',component:ForgotComponent },
   { path:'members',component:MembersComponent,canActivate:[AuthGuard] },
-  { path:'member_biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] },
-  {path:'biodata',component:BiodataComponent,canActivate:[AuthGuard]},
-      {path:'contact',component:ContactComponent,canActivate:[AuthGuard]},
-      {path:'foundation',component:FoundationComponent,canActivate:[AuthGuard]}
+  { path:'member_biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] }
 ];
 
 @NgModule({
@@ -32,8 +26,5 @@ export const routingComponents=[
   ResetComponent,
   ForgotComponent,
   MembersComponent,
-  MemberBiodataComponent,
-  BiodataComponent,
-  ContactComponent,
-  FoundationComponent
+  MemberBiodataComponent
 ]
