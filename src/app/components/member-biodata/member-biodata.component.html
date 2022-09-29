@@ -19,21 +19,76 @@
               <!-- Biodata Form -->
               <form id="biodataform">
                 <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <i class="bi bi-envelope-open"></i>
-                    </div>
-                  </div>
+                  <input type="text" class="form-control" placeholder="First Name" name="first_name" ngModel>
                 </div>
+
                 <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <i class="bi bi-lock"></i>
-                    </div>
-                  </div>
+                  <input type="text" class="form-control" placeholder="Last Name" name="last_name" ngModel>
                 </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Other Name" name="other_name" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <select class="form-select form-control" name="gender" ngModel>
+                    <option value="" disabled selected hidden>Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="date" class="form-control" placeholder="Date of birth" name="date_of_birth" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Place of birth" name="place_of_birth" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Hometown" name="home_town" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Postal Address" name="postal_address" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Residential Address" name="residential_address" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Occupation" name="occupation" ngModel>
+                </div>
+
+                <div class="input-group mb-3">
+                  <select class="form-select form-control" name="is_member" ngModel>
+                    <option value="" disabled selected hidden>Are you a member?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <select class="form-select form-control" name="marital_status" ngModel>
+                    <option value="" disabled selected hidden>Marital Status</option>
+                    <option>Single</option>
+                    <option>Married</option>
+                    <option>Divorced</option>
+                    <option>Separated</option>
+                    <option>Widowed</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Number of childern" name="number_of_children" ngModel>
+                </div>
+
                 <div class="row">
                   <div class="col-4">
                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
