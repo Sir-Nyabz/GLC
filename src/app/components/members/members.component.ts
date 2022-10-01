@@ -34,6 +34,15 @@ export class MembersComponent implements OnInit {
         alert('Network Challenge');
       }
     );
+
+    this.memberService.getCountries().subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (err) => {
+        alert('Network Challenge');
+      }
+    );
   }
 
   onSubmit(): void {

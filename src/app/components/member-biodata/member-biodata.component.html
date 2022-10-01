@@ -9,12 +9,13 @@
   
           
             <div class="row">
-              <div class="col-6">
-                <a class="nav-link a-logout" onclick="document.getElementById('biodataform').style.display = 'block'" id="biodatabutton">Biodata</a>
+              <div class="col-6 data_tabs">
+                <a class="nav-link a_tabs" onclick="document.getElementById('biodataform').style.display = 'block'" id="biodatabutton">Biodata</a>
+              </div><!---->
+              <div class="col-6 data_tabs a_contact">
+                <a class="nav-link a_tabs" id="contactbutton">Contact</a>
               </div>
-              <div class="col-6">
-                <a class="nav-link a-logout" id="contactbutton">Contact</a>
-              </div>
+            </div>
 
               <!-- Biodata Form -->
               <form id="biodataform">
@@ -91,7 +92,7 @@
 
                 <div class="row">
                   <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </div>
                 </div>
               </form>
@@ -100,7 +101,7 @@
                <!-- Contact Form -->
                <form id="contactform" style="display: none;">
                 <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Contact" name="email" ngModel>
+                  <input type="email" class="form-control" placeholder="Phone Number" name="msisdn" ngModel>
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <i class="bi bi-envelope-open"></i>
@@ -108,20 +109,33 @@
                   </div>
                 </div>
                 <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <i class="bi bi-lock"></i>
-                    </div>
-                  </div>
+                  <select class="form-select form-control" name="marital_status" ngModel>
+                    <option value="" disabled selected hidden>Is it reachable on voice call?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select form-control" name="marital_status" ngModel>
+                    <option value="" disabled selected hidden>Is it reachable on whatsapp?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select form-control" name="marital_status" ngModel>
+                    <option value="" disabled selected hidden>Is it reachable on telegram?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </div>
                 </div>
               </form>
-            </div>
+            
          
           
         </div>
