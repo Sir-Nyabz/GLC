@@ -9,9 +9,10 @@ import { Observable } from 'rxjs';
 })
 
 export class MemberService {
-  getUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
+  getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
-
+  regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
+ 
   headers = new HttpHeaders();
 
   constructor(
@@ -25,10 +26,16 @@ export class MemberService {
   }
 
   getMembers(): Observable<any> {
-    return this.http.get<any>(this.getUrl);
+    return this.http.get<any>(this.getAllMembersUrl);
   }
 
   getCountries(): Observable<any> {
     return this.http.get<any>(this.countriesUrl);
   }
+
+  getRegions(country_uuid:any){
+    return this.http.post(this.regionsUrl,{country_uuid:"69334056-dcfd-49fe-8f82-8e4c277dd86c"} 
+      )
+  }
+ 
 }
