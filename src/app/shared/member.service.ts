@@ -37,5 +37,10 @@ export class MemberService {
     return this.http.post(this.regionsUrl,{country_uuid:"69334056-dcfd-49fe-8f82-8e4c277dd86c"} 
       )
   }
+
+  getBranches(region_uuid:any){
+    return this.http.post(this.regionsUrl,{region_uuid:"c5e76afb-ad28-4d84-ac5f-453928a5efb7"} 
+      )
+  }
  
 }
