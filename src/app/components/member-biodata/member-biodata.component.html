@@ -56,6 +56,13 @@
                 </div>
 
                 <div class="input-group mb-3">
+                  <select *ngFor="let region of regions" class="form-select form-control" name="region" ngModel>
+                    <option value="" disabled selected hidden>Region</option>
+                    <option>{{region.region}}</option>
+                  </select>
+                </div>
+                
+                <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Postal Address" name="postal_address" ngModel>
                 </div>
 
@@ -83,6 +90,13 @@
                     <option>Divorced</option>
                     <option>Separated</option>
                     <option>Widowed</option>
+                  </select>
+                </div>
+
+                <div class="input-group mb-3">
+                  <select *ngFor="let branch of branches" class="form-select form-control" name="branch" ngModel>
+                    <option value="" disabled selected hidden>Branch</option>
+                    <option>{{branch.branch}}</option>
                   </select>
                 </div>
 

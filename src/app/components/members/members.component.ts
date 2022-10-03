@@ -13,6 +13,8 @@ import { Location } from '@angular/common';
 })
 export class MembersComponent implements OnInit {
   members: Observable<Member[]> | any;
+  regions:[] | any;
+  branches:[]|any;
   member: Member | any;
 
   submitted: any;
@@ -33,37 +35,6 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe(
       (res: any) => {
         this.members = res.data_list;
-      },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
-
-    this.memberService.getCountries().subscribe(
-      (res: any) => {
-        const countries=res.data_list
-        for(var i = 0; i < countries.length; i++){
-        return this.country_uuid=countries[i].country_uuid;
-        //localStorage.setItem('uuid', countries[i].country_uuid);
-      }
-      },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
-
-    this.memberService.getRegions(this.country_uuid).subscribe(
-      (res: any) => {
-       // console.log(res);
-      },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
-
-    this.memberService.getBranches(this.church_branch_uuid).subscribe(
-      (res: any) => {
-        console.log(res.data);
       },
       (err) => {
         alert('Network Challenge');
