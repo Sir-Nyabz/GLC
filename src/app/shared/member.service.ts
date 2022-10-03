@@ -12,6 +12,7 @@ export class MemberService {
   getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
+  branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
  
   headers = new HttpHeaders();
 
@@ -39,7 +40,7 @@ export class MemberService {
   }
 
   getBranches(region_uuid:any){
-    return this.http.post(this.regionsUrl,{region_uuid:"c5e76afb-ad28-4d84-ac5f-453928a5efb7"} 
+    return this.http.post(this.branchesUrl,{region_uuid:"c5e76afb-ad28-4d84-ac5f-453928a5efb7"} 
       )
   }
  

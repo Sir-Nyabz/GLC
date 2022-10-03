@@ -18,6 +18,8 @@ export class MembersComponent implements OnInit {
   submitted: any;
   countries: any;
   country_uuid:any;
+  region_uuid: any;
+  church_branch_uuid: any;
 
   constructor(
     private userService: UserService,
@@ -52,7 +54,16 @@ export class MembersComponent implements OnInit {
 
     this.memberService.getRegions(this.country_uuid).subscribe(
       (res: any) => {
-        console.log(res);
+       // console.log(res);
+      },
+      (err) => {
+        alert('Network Challenge');
+      }
+    );
+
+    this.memberService.getBranches(this.church_branch_uuid).subscribe(
+      (res: any) => {
+        console.log(res.data);
       },
       (err) => {
         alert('Network Challenge');
