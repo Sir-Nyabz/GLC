@@ -58,6 +58,7 @@
             </button>
             <button
               style="margin-right: 16px"
+              (click)="viewIndividualRecord(membe.asoreba_uuid)"
               data-bs-toggle="modal" data-bs-target="#exampleModal"
               class="btn btn-success"
               style="margin-left: 10px">
@@ -82,7 +83,7 @@
       <div class="modal-body">
         <form (ngSubmit)="updateRecord(updateForm)" #updateForm="ngForm">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="First Name" name="first_name" ngModel>
+            <input type="text" class="form-control" placeholder="First Name" name="first_name">
           </div>
 
           <div class="input-group mb-3">

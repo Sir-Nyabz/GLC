@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable,of } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -18,12 +18,16 @@ export class MembersComponent implements OnInit {
   regions:[] | any;
   branches:[]|any;
   member: Member | any;
+  
+  
 
   submitted: any;
   countries: any;
   country_uuid:any;
   region_uuid: any;
   church_branch_uuid: any;
+  updateForm: any;
+  formBuilder: any;
 
   constructor(
     private userService: UserService,
@@ -31,6 +35,11 @@ export class MembersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // this.updateForm = this.formBuilder.group({
+     
+    //   firstName: ['', Validators.required]
+    // });
+    
     this.userService.autoLogout();
     // also recommended
     this.memberService.getMembers().subscribe({
@@ -50,8 +59,16 @@ export class MembersComponent implements OnInit {
  
   }
 
-  onSubmit(): void {
-    throw new Error('Method not implemented.');
+
+
+  viewIndividualRecord(asoreba_uuid:any){
+    this.memberService.viewMember(asoreba_uuid).subscribe({
+      next: (v: any) => {
+        const details=v.data
+        console.log(v)
+          },
+      error: (e: any) => console.error(e)
+    })
   }
 
   deleteM(id: any) {

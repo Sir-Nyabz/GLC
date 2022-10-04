@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class MemberService {
   getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
-  getMemberUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/';
+  viewMemberUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/';
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
@@ -47,8 +47,8 @@ export class MemberService {
 
   }
 
-  getMember(id:any): Observable<any>{
-    return this.http.post(this.getMemberUrl,{})
+  viewMember(asoreba_uuid:any) {
+    return this.http.post(this.viewMemberUrl,{asoreba_uuid:asoreba_uuid})
   }
 
   getCountries(): Observable<any> {
