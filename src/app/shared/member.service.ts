@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
 
 export class MemberService {
   getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
+  getMemberUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/';
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
- 
-  headers = new HttpHeaders();
+  updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/'
 
   constructor(
     private http: HttpClient,
@@ -28,6 +28,27 @@ export class MemberService {
 
   getMembers(): Observable<any> {
     return this.http.get<any>(this.getAllMembersUrl);
+  }
+
+  resetPassword(password: string) {
+    return this.http.put(
+      this.updateMembersUrl,
+      {
+        password: password,
+      }
+    );
+  }
+
+  deleteMember(id:any){
+    return this.http.delete(this.getAllMembersUrl + id)
+  }
+
+  updateMember(form:any){
+
+  }
+
+  getMember(id:any): Observable<any>{
+    return this.http.post(this.getMemberUrl,{})
   }
 
   getCountries(): Observable<any> {

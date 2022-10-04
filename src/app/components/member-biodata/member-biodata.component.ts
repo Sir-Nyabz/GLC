@@ -51,7 +51,7 @@ this.memberService.getRegions(this.country_uuid).subscribe(
 
 this.memberService.getBranches(this.church_branch_uuid).subscribe(
   (res: any) => {
-    //console.log(res.data.church_branches);
+    console.log(res.data);
     this.branches=res.data.church_branches
     },
   (err) => {

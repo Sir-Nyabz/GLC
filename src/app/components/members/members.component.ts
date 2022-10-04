@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable,of } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Member } from '../../model/member.model';
 import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
-import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-members',
@@ -25,31 +27,101 @@ export class MembersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router,
-    private memberService: MemberService,
-    private location:Location
+    private memberService: MemberService
   ) {}
 
   ngOnInit() {
     this.userService.autoLogout();
-    this.memberService.getMembers().subscribe(
-      (res: any) => {
-        this.members = res.data_list;
+    // also recommended
+    this.memberService.getMembers().subscribe({
+  next: (v: any) => {
+    this.members = v.data_list;
       },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
+  error: (e: any) => console.error(e)
+})
+    // this.memberService.getMembers().subscribe(
+    //   (res: any) => {
+    //     this.members = res.data_list;
+    //   },
+    //   (err) => {
+    //     alert('Network Challenge');
+    //   }
+    // );
+ 
   }
 
   onSubmit(): void {
     throw new Error('Method not implemented.');
   }
 
-  deleteEmployee(arg0: any) {
-    throw new Error('Method not implemented.');
+  deleteM(id: any) {
+    this.memberService.deleteMember(id).subscribe({
+      next: (v: any) => {
+        this.memberService.getMembers().subscribe({
+          next: (v: any) => {
+            this.members = v.data_list;
+              },
+          error: (e: any) => console.error(e)
+        })
+          },
+      error: (e: any) => console.error(e)
+    })
+    // this.memberService.deleteMember(id).subscribe(
+    //   (res: any) => {
+    //     const swalWithBootstrapButtons = Swal.mixin({
+    //       customClass: {
+    //         confirmButton: 'btn btn-success',
+    //         cancelButton: 'btn btn-danger'
+    //       },
+    //       buttonsStyling: false
+    //     })
+        
+    //     swalWithBootstrapButtons.fire({
+    //       title: 'Are you sure?',
+    //       text: "You won't be able to revert this!",
+    //       icon: 'warning',
+    //       showCancelButton: true,
+    //       confirmButtonText: 'Yes, delete it!',
+    //       cancelButtonText: 'No, cancel!',
+    //       reverseButtons: true
+    //     }).then((result) => {
+    //       if (result.isConfirmed) {
+    //         swalWithBootstrapButtons.fire(
+    //           'Deleted!',
+    //           'Your file has been deleted.',
+    //           'success'
+    //         )
+    //       } else if (
+    //         /* Read more about handling dismissals below */
+    //         result.dismiss === Swal.DismissReason.cancel
+    //       ) {
+    //         swalWithBootstrapButtons.fire(
+    //           'Cancelled',
+    //           'Your imaginary file is safe :)',
+    //           'error'
+    //         )
+    //       }
+    //     })
+    //   },
+    //   (err) => {
+    //     alert('Network Challenge');
+    //   }
+    // );
   }
-  updateEmployee(arg0: any) {
-    throw new Error('Method not implemented.');
+
+  updateRecord(form:NgForm) {
+    const values: any[]=form.value
+    this.memberService.updateMember(values)
+    // .subscribe({
+    //   next: (v: any) => {
+    //     this.memberService.getMembers().subscribe({
+    //       next: (v: any) => {
+    //         this.members = v.data_list;
+    //           },
+    //       error: (e: any) => console.error(e)
+    //     })
+    //       },
+    //   error: (e: any) => console.error(e)
+    // })
   }
 }
