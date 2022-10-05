@@ -28,6 +28,7 @@ export class MembersComponent implements OnInit {
   church_branch_uuid: any;
   updateForm: any;
   @ViewChild('updateForm') form: NgForm | any
+  region: any;
 
   constructor(
     private userService: UserService,
@@ -40,10 +41,35 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe({
       next: (v: any) => {
         this.members = v.data_list;
-        console.log(this.members)
       },
       error: (e: any) => console.error(e)
     })
+
+
+    this.memberService.getRegions(this.country_uuid).subscribe(
+      (res: any) => {
+        console.log(res.data)
+        this.regions=res.data.regions;
+        for(var i = 0; i < this.regions.length; i++){
+          return this.region=this.regions[i].region;
+          //localStorage.setItem('uuid', countries[i].country_uuid);
+        }
+       
+      },
+      (err) => {
+        alert('Network Challenge');
+      }
+    );
+    
+    this.memberService.getBranches(this.region_uuid).subscribe(
+      (res: any) => {
+        this.branches=res.data.church_branches;
+        console.log(res.data)
+        },
+      (err) => {
+        alert('Network Challenge');
+      }
+    );
   }
 
   areyouamember() {
@@ -73,7 +99,9 @@ export class MembersComponent implements OnInit {
           occupation: this.details.occupation,
           is_member: this.areyouamember(),
           number_of_children: this.details.number_of_children,
-          marital_status: this.details.marital_status
+          marital_status: this.details.marital_status,
+          church_branch:this.details.church_branches,
+          region:this.details.regions
         })
       },
       error: (e: any) => console.error(e)

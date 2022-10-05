@@ -12,6 +12,8 @@ export class MemberBiodataComponent implements OnInit {
   regions: []|any;
   church_branch_uuid: any;
   branches: any;
+  region_uuid: any;
+  
 
   constructor(private userService:UserService,private memberService:MemberService) { }
 
@@ -43,13 +45,14 @@ this.memberService.getCountries().subscribe(
 this.memberService.getRegions(this.country_uuid).subscribe(
   (res: any) => {
     this.regions=res.data.regions
+   
   },
   (err) => {
     alert('Network Challenge');
   }
 );
 
-this.memberService.getBranches(this.church_branch_uuid).subscribe(
+this.memberService.getBranches(this.region_uuid).subscribe(
   (res: any) => {
     console.log(res.data);
     this.branches=res.data.church_branches

@@ -52,12 +52,12 @@ export class MemberService {
   }
 
   getRegions(country_uuid:any){
-    return this.http.post(this.regionsUrl,{country_uuid:"69334056-dcfd-49fe-8f82-8e4c277dd86c"} 
+    return this.http.post(this.regionsUrl,{country_uuid:country_uuid} 
       )
   }
 
   getBranches(region_uuid:any){
-    return this.http.post(this.branchesUrl,{region_uuid:"c5e76afb-ad28-4d84-ac5f-453928a5efb7"} 
+    return this.http.post(this.branchesUrl,{region_uuid:region_uuid} 
       )
   }
  
