@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { Country } from 'src/app/model/country.model';
+import { Region } from 'src/app/model/region.model';
 import Swal from 'sweetalert2';
 import { Member } from '../../model/member.model';
 import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
-
 
 @Component({
   selector: 'app-members',
@@ -15,7 +16,7 @@ import { UserService } from '../../shared/user.service';
 })
 export class MembersComponent implements OnInit {
   members: Observable<Member[]> | any;
-  regions: [] | any;
+  regions: any[] = [];
   branches: [] | any;
   member: Member | any;
   details: Member | any;
@@ -23,17 +24,18 @@ export class MembersComponent implements OnInit {
 
   submitted: any;
   countries: any;
-  country_uuid: any;
+  country_uuid: Observable<any> | any;
   region_uuid: any;
   church_branch_uuid: any;
   updateForm: any;
-  @ViewChild('updateForm') form: NgForm | any
-  region: any;
+  @ViewChild('updateForm') form: NgForm | any;
+  region: Region | any;
+  country: Country | any;
 
   constructor(
     private userService: UserService,
     private memberService: MemberService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userService.autoLogout();
@@ -42,30 +44,17 @@ export class MembersComponent implements OnInit {
       next: (v: any) => {
         this.members = v.data_list;
       },
-      error: (e: any) => console.error(e)
-    })
+      error: (e: any) => console.error(e),
+    });
 
-
-    this.memberService.getRegions(this.country_uuid).subscribe(
+    this.memberService.getCountries().subscribe(
       (res: any) => {
-        console.log(res.data)
-        this.regions=res.data.regions;
-        for(var i = 0; i < this.regions.length; i++){
-          return this.region=this.regions[i].region;
-          //localStorage.setItem('uuid', countries[i].country_uuid);
+        const countries = res.data_list;
+        //console.log(countries)
+        for (var i = 0; i < countries.length; i++) {
+          return (this.country = countries[i]);
         }
-       
       },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
-    
-    this.memberService.getBranches(this.region_uuid).subscribe(
-      (res: any) => {
-        this.branches=res.data.church_branches;
-        console.log(res.data)
-        },
       (err) => {
         alert('Network Challenge');
       }
@@ -74,17 +63,42 @@ export class MembersComponent implements OnInit {
 
   areyouamember() {
     if (this.details.is_member == true) {
-      return this.detail = 'Yes'
+      return (this.detail = 'Yes');
     } else {
-      return this.detail = 'No'
+      return (this.detail = 'No');
     }
+  }
+
+  checkRegion() {
+    // console.log(this.country.country_uuid);
+    // this.memberService.getRegions(this.country.country_uuid).subscribe(
+    //   (res: any) => {
+    //     console.log(res.data);
+    //     this.regions = res.data.regions;
+    //     for (var i = 0; i < this.regions.length; i++) {
+    //       //this.region_uuid=this.regions[i].region_uuid;
+    //       this.region = this.regions[i];
+    //     }
+    //   },
+    //   (err) => {
+    //     alert('Network Challenge');
+    //   }
+    // );
+    // for (var i = 0; i < this.regions.length; i++) {
+    //   if ((this.details.region_uuid && this.region.region) == this.regions[i]) {
+    //     return this.region.region;
+    //   } else {
+    //     alert('Region and Region Uuid mismatch');
+    //   }
+    // }
   }
 
   viewIndividualRecord(asoreba_uuid: any) {
     this.memberService.viewMember(asoreba_uuid).subscribe({
       next: (v: any) => {
-        this.details = v.data
-        console.log(this.details)
+        console.log(v)
+        this.details = v.data;
+        console.log(this.details);
         this.form.setValue({
           first_name: this.details.first_name,
           date_of_birth: this.details.date_of_birth,
@@ -97,23 +111,25 @@ export class MembersComponent implements OnInit {
           postal_address: this.details.postal_address,
           residential_address: this.details.residential_address,
           occupation: this.details.occupation,
-          is_member: this.areyouamember(),
+          // is_member: this.areyouamember(),
+          is_member: true,
           number_of_children: this.details.number_of_children,
           marital_status: this.details.marital_status,
-          church_branch:this.details.church_branches,
-          region:this.details.regions
-        })
+          // church_branch: this.details.church_branches,
+          church_branch: '',
+          // region: this.checkRegion(),
+          region: '',
+        });
       },
-      error: (e: any) => console.error(e)
-    })
+      error: (e: any) => console.error(e),
+    });
   }
 
   deleteM(id: any) {
     this.memberService.deleteMember(id).subscribe({
-      next: (v: any) => {
-      },
-      error: (e: any) => console.error(e)
-    })
+      next: (v: any) => {},
+      error: (e: any) => console.error(e),
+    });
     // this.memberService.deleteMember(id).subscribe(
     //   (res: any) => {
     //     const swalWithBootstrapButtons = Swal.mixin({
@@ -159,7 +175,7 @@ export class MembersComponent implements OnInit {
 
   updateRecord(form: NgForm) {
     console.log(form.value);
-    this.memberService.updateMember(form.value)
+    this.memberService.updateMember(form.value);
     // .subscribe({
     //   next: (v: any) => {
     //     this.memberService.getMembers().subscribe({
@@ -173,4 +189,3 @@ export class MembersComponent implements OnInit {
     // })
   }
 }
-
