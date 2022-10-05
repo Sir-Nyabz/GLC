@@ -1,14 +1,9 @@
-
-
 <div class="panel panel-primary">
   <div class="panel-heading" style="margin-left: 100px;">
     <h2></h2>
   </div>
   <div class="panel-body">
-    <table
-      id="example"
-      class="table table-striped table-bordered table-sm row-border hover"
-      cellspacing="0"
+    <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0"
       width="100%">
       <thead>
         <tr>
@@ -45,23 +40,18 @@
           <td>{{ membe.postal_address }}</td>
           <td>{{ membe.residential_address }}</td>
           <td>{{ membe.occupation }}</td>
-          <td>{{ membe.is_member }}</td>
+          <td *ngIf="membe.is_member==true; else elseBlock">Yes</td>
+          <ng-template #elseBlock>
+            No
+          </ng-template>
           <td>{{ membe.membership_number }}</td>
           <td>{{ membe.number_of_children }}</td>
           <td>
-            <button
-              style="margin-right: 16px"
-              (click)="deleteM(membe.asoreba_uuid)"
-              class="btn btn-danger"
-            >
+            <button style="margin-right: 16px" (click)="deleteM(membe.asoreba_uuid)" class="btn btn-danger">
               Delete
             </button>
-            <button
-              style="margin-right: 16px"
-              (click)="viewIndividualRecord(membe.asoreba_uuid)"
-              data-bs-toggle="modal" data-bs-target="#exampleModal"
-              class="btn btn-success"
-              style="margin-left: 10px">
+            <button style="margin-right: 16px" (click)="viewIndividualRecord(membe.asoreba_uuid)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" class="btn btn-success" style="margin-left: 10px">
               Edit details
             </button>
           </td>
@@ -71,7 +61,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -83,7 +74,7 @@
       <div class="modal-body">
         <form (ngSubmit)="updateRecord(updateForm)" #updateForm="ngForm">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="First Name" name="first_name">
+            <input type="text" class="form-control" placeholder="First Name" name="first_name" ngModel>
           </div>
 
           <div class="input-group mb-3">
@@ -124,13 +115,14 @@
               <option>{{region.region}}</option>
             </select>
           </div>
-          
+
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Postal Address" name="postal_address" ngModel>
           </div>
 
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Residential Address" name="residential_address" ngModel>
+            <input type="text" class="form-control" placeholder="Residential Address" name="residential_address"
+              ngModel>
           </div>
 
           <div class="input-group mb-3">

@@ -30,21 +30,17 @@ export class MemberService {
     return this.http.get<any>(this.getAllMembersUrl);
   }
 
-  resetPassword(password: string) {
-    return this.http.put(
-      this.updateMembersUrl,
-      {
-        password: password,
-      }
-    );
-  }
-
   deleteMember(id:any){
     return this.http.delete(this.getAllMembersUrl + id)
   }
 
   updateMember(form:any){
-
+    return this.http.put(
+      this.updateMembersUrl,
+      {
+        form: form,
+      }
+    );
   }
 
   viewMember(asoreba_uuid:any) {
