@@ -10,7 +10,7 @@
           
             <div class="row">
               <div class="col-6 data_tabs">
-                <a class="nav-link a_tabs" onclick="document.getElementById('biodataform').style.display = 'block'" id="biodatabutton">Biodata</a>
+                <a class="nav-link a_tabs" id="biodatabutton">Biodata</a>
               </div><!---->
               <div class="col-6 data_tabs a_contact">
                 <a class="nav-link a_tabs" id="contactbutton">Contact</a>
@@ -56,9 +56,9 @@
                 </div>
 
                 <div class="input-group mb-3">
-                  <select *ngFor="let region of regions" class="form-select form-control" name="region" ngModel>
+                  <select class="form-select form-control" name="region" ngModel>
                     <option value="" disabled selected hidden>Region</option>
-                    <option>{{region.region}}</option>
+                    <option>{{region}}</option>
                   </select>
                 </div>
                 
@@ -94,9 +94,9 @@
                 </div>
 
                 <div class="input-group mb-3">
-                  <select *ngFor="let branch of branches" class="form-select form-control" name="branch" ngModel>
+                  <select class="form-select form-control" name="branch" ngModel>
                     <option value="" disabled selected hidden>Branch</option>
-                    <option>{{branch.branch}}</option>
+                    <option>{{branch}}</option>
                   </select>
                 </div>
 

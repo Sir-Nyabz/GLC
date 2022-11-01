@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { data } from 'jquery';
+import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
 import { Country } from 'src/app/model/country.model';
 import { Region } from 'src/app/model/region.model';
 import Swal from 'sweetalert2';
@@ -46,22 +47,11 @@ export class MembersComponent implements OnInit {
       },
       error: (e: any) => console.error(e),
     });
-
-    this.memberService.getCountries().subscribe(
-      (res: any) => {
-        const countries = res.data_list;
-        //console.log(countries)
-        for (var i = 0; i < countries.length; i++) {
-          return (this.country = countries[i]);
-        }
-      },
-      (err) => {
-        alert('Network Challenge');
-      }
-    );
   }
 
-  areyouamember() {
+  
+
+  areyouamember(): "Yes" | "No" {
     if (this.details.is_member == true) {
       return (this.detail = 'Yes');
     } else {
