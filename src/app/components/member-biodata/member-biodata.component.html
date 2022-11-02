@@ -18,7 +18,7 @@
           </div>
 
           <!-- Biodata Form -->
-          <form (ngSubmit)="addBiodata()" [formGroup]="biodataGroup" novalidate>
+          <form (ngSubmit)="addBiodata()" [formGroup]="biodataGroup" id="biodataform" novalidate>
             <div class="form-group mb-3">
               <input type="text" class="form-control" formControlName="first_name" [ngClass]="{'is-invalid':submitted && emailid['first_name'].errors}" placeholder="First Name">
               <div *ngIf="submitted && emailid['first_name'].errors" class="show-error">
@@ -61,14 +61,14 @@
             <div class="form-group mb-3">
               <input type="email" class="form-control" formControlName="email1" [ngClass]="{'is-invalid':submitted && emailid['email1'].errors}"  placeholder="Email">
               <div *ngIf="submitted && emailid['email1'].errors" class="show-error">
-                  <div *ngIf="submitted && emailid['email1'].errors">Email field cannot be empty</div>
+                  <div *ngIf="submitted && emailid['email1'].errors">Email field cannot be empty or invalid</div>
               </div>
             </div>
 
             <div class="form-group mb-3">
               <input type="text" class="form-control" formControlName="place_of_birth" [ngClass]="{'is-invalid':submitted && emailid['place_of_birth'].errors}"  placeholder="Place of birth">
               <div *ngIf="submitted && emailid['place_of_birth'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['place_of_birth'].errors">Place of birth field cannot be empty</div>
+                Place of birth cannot be empty
             </div>
             </div>
 
@@ -148,8 +148,8 @@
             <div class="form-group mb-3">
               <input type="text" class="form-control" formControlName="number_of_children" [ngClass]="{'is-invalid':submitted && emailid['number_of_children'].errors}"  placeholder="Number of childern">
               <div *ngIf="submitted && emailid['number_of_children'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['number_of_children'].errors">Number of children field cannot be empty</div>
-            </div>
+                Number of children field cannot be empty
+              </div>
             </div>
 
             <div class="row">
@@ -161,36 +161,52 @@
 
 
           <!-- Contact Form -->
-          <form id="contactform" style="display: none;">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Phone Number" name="msisdn" ngModel>
+          <form (ngSubmit)="addContact()" [formGroup]="contactGroup" id="contactform" novalidate>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="msisdn" [ngClass]="{'is-invalid':submitted && c['msisdn'].errors}" placeholder="Phone Number">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="bi bi-envelope-open"></i>
                 </div>
               </div>
+              <div *ngIf="submitted && c['msisdn'].errors" class="show-error">
+                Enter a phone number
+              </div>
             </div>
-            <div class="input-group mb-3">
-              <select class="form-select form-control" name="marital_status" ngModel>
+
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="voice_call" [ngClass]="{'is-invalid':submitted && c['voice_call'].errors}">
                 <option value="" disabled selected hidden>Is it reachable on voice call?</option>
                 <option>Yes</option>
                 <option>No</option>
               </select>
+              <div *ngIf="submitted && c['voice_call'].errors" class="show-error">
+                Select something
+              </div>
             </div>
-            <div class="input-group mb-3">
-              <select class="form-select form-control" name="marital_status" ngModel>
+
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="whatsapp" [ngClass]="{'is-invalid':submitted && c['whatsapp'].errors}">
                 <option value="" disabled selected hidden>Is it reachable on whatsapp?</option>
                 <option>Yes</option>
                 <option>No</option>
               </select>
+              <div *ngIf="submitted && c['whatsapp'].errors" class="show-error">
+                Select something
+              </div>
             </div>
-            <div class="input-group mb-3">
-              <select class="form-select form-control" name="marital_status" ngModel>
+
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="telegram" [ngClass]="{'is-invalid':submitted && c['telegram'].errors}">
                 <option value="" disabled selected hidden>Is it reachable on telegram?</option>
                 <option>Yes</option>
                 <option>No</option>
               </select>
+              <div *ngIf="submitted && c['telegram'].errors" class="show-error">
+                Select something
+              </div>
             </div>
+
             <div class="row">
               <div class="col-4">
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>

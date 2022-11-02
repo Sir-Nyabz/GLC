@@ -12,8 +12,7 @@ import { MembersComponent } from '../members/members.component';
 })
 export class MemberBiodataComponent implements OnInit {
 
-  
-
+  contactGroup:FormGroup;
   biodataGroup:FormGroup;
   submitted=false;
   country_uuid: any;
@@ -48,9 +47,21 @@ export class MemberBiodataComponent implements OnInit {
       branch:['',[Validators.required]],
       is_member:['',[Validators.required]]
     })
+
+
+    this.contactGroup=this.formBuilder.group({
+      msisdn:['',Validators.required],
+      voice_call:['',[Validators.required]],
+      whatsapp:['',[Validators.required]],
+      telegram:['',[Validators.required]]
+    })
   }
   get emailid(){
     return this.biodataGroup.controls
+  }
+
+  get c(){
+    return this.contactGroup.controls
   }
 
   ngOnInit(): void {
@@ -70,6 +81,11 @@ export class MemberBiodataComponent implements OnInit {
   addBiodata(){
     this.submitted=true;
     console.log(this.biodataGroup.value)
+  }
+
+  addContact(){
+    this.submitted=true;
+    console.log(this.contactGroup.value)
   }
 
   testConcatMap() {
