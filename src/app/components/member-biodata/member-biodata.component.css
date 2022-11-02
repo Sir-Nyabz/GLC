@@ -29,3 +29,7 @@ div.data_tabs{
     padding:0px; 
     margin-left:-4px; 
   }
+
+  .show-error{
+    color: red;
+  }

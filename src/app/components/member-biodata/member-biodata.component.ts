@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl, NgForm } from '@angular/forms';
 import { concatMap, tap } from 'rxjs';
 import { MemberService } from 'src/app/shared/member.service';
 import { UserService } from '../../shared/user.service';
@@ -10,8 +11,13 @@ import { MembersComponent } from '../members/members.component';
   styleUrls: ['./member-biodata.component.css']
 })
 export class MemberBiodataComponent implements OnInit {
+
+  
+
+  biodataGroup:FormGroup;
+  submitted=false;
   country_uuid: any;
-  regions: []|any;
+  regions: [] | any;
   church_branch_uuid: any;
   branches: any;
   region_uuid: any;
@@ -21,103 +27,82 @@ export class MemberBiodataComponent implements OnInit {
   church_branches: any;
   branch: any;
   branch_uuid: any;
-  
 
-  constructor(private userService:UserService,private memberService:MemberService) { }
+
+  constructor(private userService: UserService, private memberService: MemberService,private formBuilder:FormBuilder) { 
+    this.biodataGroup=this.formBuilder.group({
+      first_name:['',[Validators.required]],
+      email1:['',[Validators.required,Validators.email]],
+      last_name:['',[Validators.required]],
+      other_name:[''],
+      gender:['',[Validators.required]],
+      date_of_birth:['',[Validators.required]],
+      place_of_birth:['',[Validators.required]],
+      home_town:['',[Validators.required]],
+      region:['',[Validators.required]],
+      postal_address:[''],
+      residential_address:['',[Validators.required]],
+      occupation:['',[Validators.required]],
+      number_of_children:[''],
+      marital_status:['',[Validators.required]],
+      branch:['',[Validators.required]],
+      is_member:['',[Validators.required]]
+    })
+  }
+  get emailid(){
+    return this.biodataGroup.controls
+  }
 
   ngOnInit(): void {
-    $('#contactbutton').click(function() {
+    $('#contactbutton').click(function () {
       $('#contactform').show();
       $('#biodataform').hide();
-  });
+    });
 
-  $('#biodatabutton').click(function() {
-    $('#contactform').hide();
-    $('#biodataform').show();
-});
+    $('#biodatabutton').click(function () {
+      $('#contactform').hide();
+      $('#biodataform').show();
+    });
 
-this.testConcatMap();
+    this.testConcatMap();
+  }
 
-// this.memberService.getCountries().subscribe(
-//   (res: any) => {
-//     const countries=res.data_list
-//     for(var i = 0; i < countries.length; i++){
-//     // return this.country_uuid=countries[i].country_uuid;
-//     //localStorage.setItem('uuid', countries[i].country_uuid);
-//   }
-//   },
-//   (err) => {
-//     alert('Network Challenge');
-//   }
-// );
+  addBiodata(){
+    this.submitted=true;
+    console.log(this.biodataGroup.value)
+  }
 
-// this.memberService.getRegions(this.country_uuid).subscribe(
-//   (res: any) => {
-//     this.regions=res.data.regions
-   
-//   },
-//   (err) => {
-//     alert('Network Challenge');
-//   }
-// );
+  testConcatMap() {
+    this.memberService.getCountries().pipe(
+      tap(res => {
 
-// this.memberService.getBranches(this.region_uuid).subscribe(
-//   (res: any) => {
-//     console.log(res.data);
-//     this.branches=res.data.church_branches
-//     },
-//   (err) => {
-//     alert('Network Challenge');
-//   }
-// );
-}
+        const countries = res.data_list
+        for (var i = 0; i < countries.length; i++) {
 
-testConcatMap() {
-  this.memberService.getCountries().pipe(
-    tap(res => {
-    
-      const countries=res.data_list
-      for (var i = 0; i < countries.length; i++) {
-              
-               this.country_uuid=countries[i].country_uuid
-             }
-    }),
-    concatMap(res=>this.memberService.getRegions(this.country_uuid)),
-    tap((res:any) => {
-      
-      this.regions=res.data.regions
-      for (var i = 0; i < this.regions.length; i++) {
-       
-        this.region=this.regions[i].region
-        this.region_uuid=this.regions[i].region_uuid
-      }
-    }),
-    concatMap(res => this.memberService.getBranches(this.region_uuid)),
-    tap((res:any) =>{
-      console.log('Third result', res.data.church_branches)
-      this.church_branches=res.data.church_branches;
-      for (var i = 0; i < this.church_branches.length; i++) {
-       
-        this.branch=this.church_branches[i].branch
-        this.branch_uuid=this.church_branches[i].branch_uuid
-      }
-    }),
-  ).subscribe(resp => {
-    console.log('final resp', resp)
-  })
-}
+          this.country_uuid = countries[i].country_uuid
+        }
+      }),
+      concatMap(res => this.memberService.getRegions(this.country_uuid)),
+      tap((res: any) => {
 
-getRegions(){
-  this.memberService.getRegions(this.country_uuid).subscribe(
-    (res:any)=>{
-      this.regions=res.data.regions
-      for (var i = 0; i < this.regions.length; i++) {
-        //console.log(this.countries[i]);
-        this.region=this.regions[i].region
-        this.region_uuid=this.regions[i].region_uuid
-      }
-    }
-  )
-}
+        this.regions = res.data.regions
+        for (var i = 0; i < this.regions.length; i++) {
+
+          this.region = this.regions[i].region
+          this.region_uuid = this.regions[i].region_uuid
+        }
+      }),
+      concatMap(res => this.memberService.getBranches(this.region_uuid)),
+      tap((res: any) => {
+        //console.log('Third result', res.data.church_branches)
+        this.church_branches = res.data.church_branches;
+        for (var i = 0; i < this.church_branches.length; i++) {
+
+          this.branch = this.church_branches[i].branch
+          this.branch_uuid = this.church_branches[i].branch_uuid
+        }
+      }),
+    ).subscribe()
+  }
 }
 

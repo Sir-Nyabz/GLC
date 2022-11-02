@@ -36,7 +36,7 @@ export class MembersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private memberService: MemberService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.autoLogout();
@@ -49,7 +49,7 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  
+
 
   areyouamember(): "Yes" | "No" {
     if (this.details.is_member == true) {
@@ -117,7 +117,7 @@ export class MembersComponent implements OnInit {
 
   deleteM(id: any) {
     this.memberService.deleteMember(id).subscribe({
-      next: (v: any) => {},
+      next: (v: any) => { },
       error: (e: any) => console.error(e),
     });
     // this.memberService.deleteMember(id).subscribe(

@@ -3,159 +3,144 @@
     <div class="login-box">
       <div class="login-logo">
       </div>
-     
+
       <div class="card mt-4">
         <div class="card-body login-card-body">
-  
-          
-            <div class="row">
-              <div class="col-6 data_tabs">
-                <a class="nav-link a_tabs" id="biodatabutton">Biodata</a>
-              </div><!---->
-              <div class="col-6 data_tabs a_contact">
-                <a class="nav-link a_tabs" id="contactbutton">Contact</a>
+
+
+          <div class="row">
+            <div class="col-6 data_tabs">
+              <a class="nav-link a_tabs" id="biodatabutton">Biodata</a>
+            </div>
+            <div class="col-6 data_tabs a_contact">
+              <a class="nav-link a_tabs" id="contactbutton">Contact</a>
+            </div>
+          </div>
+
+          <!-- Biodata Form -->
+          <form (ngSubmit)="addBiodata()" [formGroup]="biodataGroup" novalidate>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="first_name" [ngClass]="{'is-invalid':submitted && emailid['first_name'].errors}" placeholder="First Name">
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="last_name" [ngClass]="{'is-invalid':submitted && emailid['last_name'].errors}"  placeholder="Last Name" name="last_name" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="other_name" [ngClass]="{'is-invalid':submitted && emailid['other_name'].errors}"  placeholder="Other Name" name="other_name" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="gender" [ngClass]="{'is-invalid':submitted && emailid['gender'].errors}"  name="gender" ngModel>
+                <option value="" disabled selected hidden>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <input type="date" class="form-control" formControlName="date_of_birth" [ngClass]="{'is-invalid':submitted && emailid['date_of_birth'].errors}"  placeholder="Date of birth" name="date_of_birth" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <input type="email" class="form-control" formControlName="email1" [ngClass]="{'is-invalid':submitted && emailid['email1'].errors}"  placeholder="Email"  name="email" id="email">
+              <div *ngIf="emailid['email1'].touched && emailid['email1'].invalid" class="show-error">
+                  <div *ngIf="emailid['email1'].errors?.['required'] && emailid['email1'].dirty">Cannot be empty</div>
+                  <div *ngIf="emailid['email1'].errors?.['email1'] && emailid['email1'].dirty">Enter a valid email</div>
               </div>
             </div>
-
-              <!-- Biodata Form -->
-              <form id="biodataform">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="First Name" name="first_name" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Last Name" name="last_name" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Other Name" name="other_name" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="gender" ngModel>
-                    <option value="" disabled selected hidden>Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="date" class="form-control" placeholder="Date of birth" name="date_of_birth" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Place of birth" name="place_of_birth" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Hometown" name="home_town" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="region" ngModel>
-                    <option value="" disabled selected hidden>Region</option>
-                    <option>{{region}}</option>
-                  </select>
-                </div>
-                
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Postal Address" name="postal_address" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Residential Address" name="residential_address" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Occupation" name="occupation" ngModel>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="is_member" ngModel>
-                    <option value="" disabled selected hidden>Are you a member?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="marital_status" ngModel>
-                    <option value="" disabled selected hidden>Marital Status</option>
-                    <option>Single</option>
-                    <option>Married</option>
-                    <option>Divorced</option>
-                    <option>Separated</option>
-                    <option>Widowed</option>
-                  </select>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="branch" ngModel>
-                    <option value="" disabled selected hidden>Branch</option>
-                    <option>{{branch}}</option>
-                  </select>
-                </div>
-
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Number of childern" name="number_of_children" ngModel>
-                </div>
-
-                <div class="row">
-                  <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                  </div>
-                </div>
-              </form>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="place_of_birth" [ngClass]="{'is-invalid':submitted && emailid['place_of_birth'].errors}"  placeholder="Place of birth" name="place_of_birth" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="home_town" [ngClass]="{'is-invalid':submitted && emailid['home_town'].errors}"  placeholder="Hometown" name="home_town" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="region" [ngClass]="{'is-invalid':submitted && emailid['region'].errors}"  name="region" ngModel>
+                <option value="" disabled selected hidden>Region</option>
+                <option>{{region}}</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="postal_address" [ngClass]="{'is-invalid':submitted && emailid['postal_address'].errors}"  placeholder="Postal Address" name="postal_address" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="residential_address" [ngClass]="{'is-invalid':submitted && emailid['residential_address'].errors}"  placeholder="Residential Address" name="residential_address"
+                ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="occupation" [ngClass]="{'is-invalid':submitted && emailid['occupation'].errors}"  placeholder="Occupation" name="occupation" ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="is_member" [ngClass]="{'is-invalid':submitted && emailid['is_member'].errors}"  name="is_member" ngModel>
+                <option value="" disabled selected hidden>Are you a member?</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="marital_status" [ngClass]="{'is-invalid':submitted && emailid['marital_status'].errors}"  name="marital_status" ngModel>
+                <option value="" disabled selected hidden>Marital Status</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+                <option>Separated</option>
+                <option>Widowed</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <select class="form-select form-control" formControlName="branch" [ngClass]="{'is-invalid':submitted && emailid['branch'].errors}"  name="branch" ngModel>
+                <option value="" disabled selected hidden>Branch</option>
+                <option>{{branch}}</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" formControlName="number_of_children" [ngClass]="{'is-invalid':submitted && emailid['number_of_children'].errors}"  placeholder="Number of childern" name="number_of_children"
+                ngModel>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              </div>
+            </div>
+          </form>
 
 
-               <!-- Contact Form -->
-               <form id="contactform" style="display: none;">
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Phone Number" name="msisdn" ngModel>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <i class="bi bi-envelope-open"></i>
-                    </div>
-                  </div>
+          <!-- Contact Form -->
+          <form id="contactform" style="display: none;">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Phone Number" name="msisdn" ngModel>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-envelope-open"></i>
                 </div>
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="marital_status" ngModel>
-                    <option value="" disabled selected hidden>Is it reachable on voice call?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="marital_status" ngModel>
-                    <option value="" disabled selected hidden>Is it reachable on whatsapp?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-                <div class="input-group mb-3">
-                  <select class="form-select form-control" name="marital_status" ngModel>
-                    <option value="" disabled selected hidden>Is it reachable on telegram?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                  </div>
-                </div>
-              </form>
-            
-         
-          
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <select class="form-select form-control" name="marital_status" ngModel>
+                <option value="" disabled selected hidden>Is it reachable on voice call?</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <select class="form-select form-control" name="marital_status" ngModel>
+                <option value="" disabled selected hidden>Is it reachable on whatsapp?</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <select class="form-select form-control" name="marital_status" ngModel>
+                <option value="" disabled selected hidden>Is it reachable on telegram?</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              </div>
+            </div>
+          </form>
         </div>
-      
       </div>
     </div>
-    
   </div>
 </body>
