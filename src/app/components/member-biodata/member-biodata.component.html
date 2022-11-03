@@ -164,11 +164,6 @@
           <form (ngSubmit)="addContact()" [formGroup]="contactGroup" id="contactform" novalidate>
             <div class="form-group mb-3">
               <input type="text" class="form-control" formControlName="msisdn" [ngClass]="{'is-invalid':submitted && c['msisdn'].errors}" placeholder="Phone Number">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <i class="bi bi-envelope-open"></i>
-                </div>
-              </div>
               <div *ngIf="submitted && c['msisdn'].errors" class="show-error">
                 Enter a phone number
               </div>
@@ -213,6 +208,7 @@
               </div>
             </div>
           </form>
+
         </div>
       </div>
     </div>

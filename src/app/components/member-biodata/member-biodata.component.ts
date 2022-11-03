@@ -85,7 +85,7 @@ export class MemberBiodataComponent implements OnInit {
 
   addContact(){
     this.submitted=true;
-    console.log(this.contactGroup.value)
+    console.log(this.contactGroup.value.telegram)
   }
 
   testConcatMap() {

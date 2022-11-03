@@ -19,17 +19,17 @@ export class UserService {
   ) {}
 
   // Login
-  login(email: string, password: string) {
+  login(email:string,password:string) {
     return this.http.post(this.loginUrl, {
-      email: email,
-      password: password,
+     email:email,
+     password:password
     });
   }
 
   //Send Mail
   sendMail(email: string) {
     return this.http.post(this.sendMailUrl, {
-      email: email,
+      email: email
     });
   }
 
@@ -66,7 +66,7 @@ export class UserService {
     return this.http.put(
       this.sendMailUrl,
       {
-        password: password,
+        password: password
       },
       { headers: this.headers }
     );
