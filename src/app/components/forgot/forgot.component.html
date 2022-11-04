@@ -6,15 +6,20 @@
       <div class="card mt-4">
         <div class="card-body login-card-body">
   
-          <form (ngSubmit)="onSubmit(forgotForm)" #forgotForm="ngForm">
+          <form (ngSubmit)="onSubmit()" [formGroup]="forgotGroup">
+            <div class="mb-3">
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
+              <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{'is-invalid':submitted && f['email'].errors}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="bi bi-envelope-open"></i>
                 </div>
               </div>
             </div>
+            <div *ngIf="submitted && f['email'].errors" class="show-error">
+              Empty or invalid
+            </div>
+          </div>
             
             <div class="row">
               <div class="col-4">

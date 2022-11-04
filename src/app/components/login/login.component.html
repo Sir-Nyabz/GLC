@@ -6,12 +6,14 @@
     <div class="card mt-4">
       <div class="card-body login-card-body">
 
-        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" [formGroup]="loginGroup">
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{'is-invalid':submitted && l['email'].errors}">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <i class="bi bi-envelope-open"></i>
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginGroup">
+          <div class="mb-3">
+            <div class="input-group">
+              <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{'is-invalid':submitted && l['email'].errors}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-envelope-open"></i>
+                </div>
               </div>
             </div>
             <div *ngIf="submitted && l['email'].errors" class="show-error">
@@ -19,11 +21,13 @@
             </div>
           </div>
 
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':submitted && l['password'].errors}">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <i class="bi bi-lock"></i>
+          <div class="mb-3">
+            <div class="input-group">
+              <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':submitted && l['password'].errors}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="bi bi-lock"></i>
+                </div>
               </div>
             </div>
             <div *ngIf="submitted && l['password'].errors" class="show-error">

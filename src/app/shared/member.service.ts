@@ -15,6 +15,7 @@ export class MemberService {
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
   updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/'
+  addProfileUrl='https://nyabz.pythonanywhere.com/admin-api/profile/add/asoreba/'
 
   constructor(
     private http: HttpClient,
@@ -57,7 +58,48 @@ export class MemberService {
   }
 
   getBranches(region_uuid:any){
-    return this.http.post(this.branchesUrl,{region_uuid:region_uuid} 
+    return this.http.post(this.branchesUrl,
+      {region_uuid:region_uuid} 
+      )
+  }
+
+  addAsorebaProfile(
+    first_name: any,
+    last_name: any,
+    other_name: any,
+    gender: any,
+    date_of_birth: any,
+    email: any,
+    place_of_birth: any,
+    home_town: any,
+    region_uuid:any,
+    postal_address: any,
+    residential_address: any,
+    occupation: any,
+    membership_number: any,
+    number_of_children: any,
+    marital_status: any,
+    branch_uuid: any
+  ){
+    return this.http.post(this.addProfileUrl,
+      {
+        first_name: first_name,
+        last_name: last_name,
+        other_name: other_name,
+        gender: gender,
+        date_of_birth: date_of_birth,
+        email: email,
+        place_of_birth: place_of_birth,
+        home_town: home_town,
+        region_uuid:region_uuid,
+        postal_address: postal_address,
+        residential_address: residential_address,
+        occupation: occupation,
+        membership_number: membership_number,
+        number_of_children: number_of_children,
+        marital_status: marital_status,
+        branch_uuid: branch_uuid
+      } 
       )
   }
  

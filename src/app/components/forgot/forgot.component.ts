@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot',
@@ -10,22 +10,33 @@ import { NgForm } from '@angular/forms';
 })
 export class ForgotComponent implements OnInit {
 
-  constructor(private userService:UserService,private router:Router) { }
+  submitted=false;
+  forgotGroup:FormGroup;
+
+  constructor(private userService:UserService,private router:Router,private formBuilder:FormBuilder) { 
+    this.forgotGroup=this.formBuilder.group({
+      email:['',[Validators.required,Validators.email]]
+    })
+  }
+
+  get f(){
+    return this.forgotGroup.controls
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form:NgForm){
-    const email = form.value.email;
-    const password = form.value.password;
+  onSubmit(){
+    this.submitted=true;
+    const email = this.forgotGroup.value.email;
 
     this.userService.sendMail(email).subscribe((res:any)=>{
       if(res){
         this.router.navigate(['/forgot']);
-      form.reset();
+      //form.reset();
       }else{
         alert("Email does not exist");
-        form.reset();
+        //form.reset();
       }
       
     },
