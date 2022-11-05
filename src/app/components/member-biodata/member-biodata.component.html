@@ -59,9 +59,9 @@
             </div>
 
             <div class="form-group mb-3">
-              <input type="email" class="form-control" formControlName="email1" [ngClass]="{'is-invalid':submitted && emailid['email1'].errors}"  placeholder="Email">
-              <div *ngIf="submitted && emailid['email1'].errors" class="show-error">
-                  <div *ngIf="submitted && emailid['email1'].errors">Email field cannot be empty or invalid</div>
+              <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid':submitted && emailid['email'].errors}"  placeholder="Email">
+              <div *ngIf="submitted && emailid['email'].errors" class="show-error">
+                  <div *ngIf="submitted && emailid['email'].errors">Email field cannot be empty or invalid</div>
               </div>
             </div>
 

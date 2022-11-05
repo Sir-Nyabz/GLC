@@ -1,4 +1,5 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +37,8 @@ import { TokenInterceptorService } from './shared/token-interceptor.service';
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,
     multi:true
-  }
+  },
+  DatePipe
   ],
   bootstrap: [AppComponent]
 })
