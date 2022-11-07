@@ -16,6 +16,7 @@ export class MemberService {
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
   updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/'
   addProfileUrl='https://nyabz.pythonanywhere.com/admin-api/profile/add/asoreba/'
+  addContactUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/contact/'
 
   constructor(
     private http: HttpClient,
@@ -101,6 +102,24 @@ export class MemberService {
         postal_address: postal_address,
         region_uuid:region_uuid,
         residential_address: residential_address,
+      } 
+      )
+  }
+
+  addAsorebaContact(
+    msisdn: string,
+    is_voice_call: string,
+    is_telegram: string,
+    is_whatsapp: string,
+    asoreba_uuid:string
+  ){
+    return this.http.post(this.addProfileUrl,
+      {
+        msisdn: msisdn,
+        is_voice_call: is_voice_call,
+        is_whatsapp: is_whatsapp,
+        is_telegram: is_telegram,
+        asoreba_uuid:asoreba_uuid
       } 
       )
   }

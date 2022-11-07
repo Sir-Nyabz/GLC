@@ -28,6 +28,8 @@ export class MemberBiodataComponent implements OnInit {
   church_branches: any;
   branch: any;
   branch_uuid: any;
+  uuid: any;
+  members: any;
 
 
   constructor(private datepipe:DatePipe, private memberService: MemberService,private formBuilder:FormBuilder,private router:Router) { 
@@ -68,6 +70,15 @@ export class MemberBiodataComponent implements OnInit {
 
   ngOnInit(): void {
     $('#contactform').hide();
+
+    this.memberService.getMembers().subscribe({
+      next: (v: any) => {
+        this.members = v.data_list;
+        console.log(this.members)
+      },
+      error: (e: any) => console.error(e),
+    });
+
     $('#contactbutton').click(function () {
       $('#contactform').show();
       $('#biodataform').hide();
@@ -101,8 +112,7 @@ export class MemberBiodataComponent implements OnInit {
     const number_of_children=this.biodataGroup.value.number_of_children;
     const marital_status=this.biodataGroup.value.number_of_children;
     const branch_uuid=this.branch_uuid;
-    const is_member=this.biodataGroup.value.is_member
-    console.log(date_of_birth)
+    const is_member=this.biodataGroup.value.is_member;
     this.memberService.addAsorebaProfile(
       branch_uuid,
       date_of_birth,
@@ -120,7 +130,7 @@ export class MemberBiodataComponent implements OnInit {
       place_of_birth,
       postal_address,
       region_uuid,
-      residential_address,
+      residential_address
     ).subscribe((res:any)=>{
 
     },
@@ -131,7 +141,24 @@ export class MemberBiodataComponent implements OnInit {
 
   addContact(){
     this.submitted=true;
-    console.log(this.contactGroup.value.telegram)
+    
+    const msisdn=this.contactGroup.value.msisdn;
+    const is_voice_call=this.contactGroup.value.voice_call;
+    const is_telegram=this.contactGroup.value.telegram;
+    const is_whatsapp=this.contactGroup.value.whatsapp;
+    const asoreba_uuid=this.uuid
+    this.memberService.addAsorebaContact(
+      msisdn,
+      is_voice_call,
+      is_whatsapp,
+      is_telegram,
+      asoreba_uuid
+    ).subscribe((res:any)=>{
+
+    },
+    err=>{
+      console.log(err);
+    })
   }
 
   testConcatMap() {
