@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
+import { IsLoaderComponent } from './is-loader/is-loader.component';
 
 
 
@@ -20,7 +21,8 @@ import { TokenInterceptorService } from './shared/token-interceptor.service';
   declarations: [
     AppComponent,
     routingComponents,
-    NavbarComponent
+    NavbarComponent,
+    IsLoaderComponent
   ],
   imports: [
    

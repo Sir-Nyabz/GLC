@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 
 export class MemberService {
   getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
-  viewMemberUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/';
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
   updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/'
   addProfileUrl='https://nyabz.pythonanywhere.com/admin-api/profile/add/asoreba/'
   addContactUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/contact/'
+  viewRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/"
 
   constructor(
     private http: HttpClient,
@@ -24,6 +24,7 @@ export class MemberService {
     private bnIdle: BnNgIdleService
   ) {}
 
+  
   getToken() {
     return localStorage.getItem('ADMIN-ASOREBA-GLC');
   }
@@ -46,7 +47,7 @@ export class MemberService {
   }
 
   viewMember(asoreba_uuid:any) {
-    return this.http.post(this.viewMemberUrl,{asoreba_uuid:asoreba_uuid})
+    return this.http.post(this.viewRecordUrl,{asoreba_uuid:asoreba_uuid})
   }
 
   getCountries(): Observable<any> {
@@ -108,12 +109,12 @@ export class MemberService {
 
   addAsorebaContact(
     msisdn: string,
-    is_voice_call: string,
-    is_telegram: string,
-    is_whatsapp: string,
+    is_voice_call: boolean,
+    is_telegram: boolean,
+    is_whatsapp: boolean,
     asoreba_uuid:string
   ){
-    return this.http.post(this.addProfileUrl,
+    return this.http.post(this.addContactUrl,
       {
         msisdn: msisdn,
         is_voice_call: is_voice_call,

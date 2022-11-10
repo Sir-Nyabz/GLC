@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   submitted=false;
   loginGroup:FormGroup;
+  is_Loader:boolean=true;
 
   constructor(private userService: UserService, private router: Router,private formBuilder:FormBuilder) {
 
@@ -28,6 +29,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    setTimeout(()=>
+    {
+      this.is_Loader=false
+    },3000
+    )
     this.submitted=true;
     const email = this.loginGroup.value.email;
     const password = this.loginGroup.value.password;

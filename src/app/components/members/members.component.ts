@@ -20,8 +20,8 @@ export class MembersComponent implements OnInit {
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
-  details: Member | any;
   detail: any;
+  details:any
 
   submitted: any;
   countries: any;
@@ -32,6 +32,12 @@ export class MembersComponent implements OnInit {
   @ViewChild('updateForm') form: NgForm | any;
   region: Region | any;
   country: Country | any;
+  status: any;
+  asoreba_uuid: any;
+  branch: any;
+  church_branches: any;
+  branch_uuid: any;
+  B: any;
 
   constructor(
     private userService: UserService,
@@ -41,75 +47,132 @@ export class MembersComponent implements OnInit {
   ngOnInit() {
     this.userService.autoLogout();
     // also recommended
-    this.memberService.getMembers().subscribe({
-      next: (v: any) => {
+    this.memberService.getMembers().pipe(
+      tap(
+      (v: any) => {
         this.members = v.data_list;
-        //console.log(this.members)
-      },
-      error: (e: any) => console.error(e),
-    });
+        for (var i = 0; i < this.members.length; i++) {
+         
+          //console.log(this.members[i].email)
+          this.asoreba_uuid = this.details[i].asoreba_uuid
+      }
+    }
+    ),
+    concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
+    tap((res: any) => {
+      this.member=res.data
+
+      console.log(res)
+      }),
+    ).subscribe();
+
+
+    this.memberService.getCountries().pipe(
+      tap(res => {
+
+        const countries = res.data_list
+        for (var i = 0; i < countries.length; i++) {
+
+          this.country_uuid = countries[i].country_uuid
+        }
+      }),
+      concatMap(res => this.memberService.getRegions(this.country_uuid)),
+      tap((res: any) => {
+
+        this.regions = res.data.regions
+        for (var i = 0; i < this.regions.length; i++) {
+
+          this.region = this.regions[i].region
+          this.region_uuid = this.regions[i].region_uuid
+        }
+      }),
+      concatMap(res => this.memberService.getBranches(this.region_uuid)),
+      tap((res: any) => {
+        this.church_branches = res.data.church_branches;
+        for (var i = 0; i < this.church_branches.length; i++) {
+
+          this.branch = this.church_branches[i].branch
+          this.branch_uuid = this.church_branches[i].branch_uuid
+        }
+      }),
+    ).subscribe()
   }
 
+  churchBranch(){
+    if(this.member.church_branch=='Head Office - Dansoma'){
+      return (this.B='Head Office')
+    }
+    else{
+      return (this.status='Office')
+    }
+  }
 
+  Gender(){
+    if(this.member.gender=='male'){
+      return (this.B='Male')
+    }
+    else if(this.member.gender=='female'){
+      return (this.B='Female')
+    }
+    else{
+      return (this.B='')
+    }
+  }
+
+maritalStatus(){
+  if(this.member.marital_status==0){
+    return (this.status='Single')
+  }
+  else if(this.member.marital_status==1){
+    return (this.status='Married')
+  }
+  else if(this.member.marital_status==2){
+    return (this.status='Divorced')
+  }
+  else if(this.member.marital_status==3){
+    return (this.status='Separated')
+  }
+  else if(this.member.marital_status==4){
+    return (this.status='Widowed')
+  }
+  else{
+    return (this.status='')
+  }
+}
+  
 
   areyouamember(): "Yes" | "No" {
-    if (this.details.is_member == true) {
+    if (this.member.is_member == true) {
       return (this.detail = 'Yes');
     } else {
       return (this.detail = 'No');
     }
   }
 
-  checkRegion() {
-    // console.log(this.country.country_uuid);
-    // this.memberService.getRegions(this.country.country_uuid).subscribe(
-    //   (res: any) => {
-    //     console.log(res.data);
-    //     this.regions = res.data.regions;
-    //     for (var i = 0; i < this.regions.length; i++) {
-    //       //this.region_uuid=this.regions[i].region_uuid;
-    //       this.region = this.regions[i];
-    //     }
-    //   },
-    //   (err) => {
-    //     alert('Network Challenge');
-    //   }
-    // );
-    // for (var i = 0; i < this.regions.length; i++) {
-    //   if ((this.details.region_uuid && this.region.region) == this.regions[i]) {
-    //     return this.region.region;
-    //   } else {
-    //     alert('Region and Region Uuid mismatch');
-    //   }
-    // }
-  }
 
   viewIndividualRecord(asoreba_uuid: any) {
     this.memberService.viewMember(asoreba_uuid).subscribe({
       next: (v: any) => {
         console.log(v)
-        this.details = v.data;
-        console.log(this.details);
+        this.member = v.data;
+        console.log(this.member);
         this.form.setValue({
-          first_name: this.details.first_name,
-          date_of_birth: this.details.date_of_birth,
-          email: this.details.email,
-          gender: this.details.gender,
-          other_name: this.details.other_name,
-          last_name: this.details.last_name,
-          place_of_birth: this.details.place_of_birth,
-          home_town: this.details.home_town,
-          postal_address: this.details.postal_address,
-          residential_address: this.details.residential_address,
-          occupation: this.details.occupation,
-          // is_member: this.areyouamember(),
-          is_member: true,
-          number_of_children: this.details.number_of_children,
-          marital_status: this.details.marital_status,
-          // church_branch: this.details.church_branches,
-          church_branch: '',
-          // region: this.checkRegion(),
-          region: '',
+          first_name: this.member.first_name,
+          date_of_birth: this.member.date_of_birth,
+          email: this.member.email,
+          gender: this.Gender(),
+          other_name: this.member.other_name,
+          last_name: this.member.last_name,
+          place_of_birth: this.member.place_of_birth,
+          home_town: this.member.home_town,
+          postal_address: this.member.postal_address,
+          residential_address: this.member.residential_address,
+          occupation: this.member.occupation,
+          is_member: this.areyouamember(),
+          number_of_children: this.member.number_of_children,
+          marital_status: this.maritalStatus(),
+          church_branch: this.churchBranch(),
+          region: this.member.region,
         });
       },
       error: (e: any) => console.error(e),
@@ -165,8 +228,8 @@ export class MembersComponent implements OnInit {
   }
 
   updateRecord(form: NgForm) {
-    console.log(form.value);
-    this.memberService.updateMember(form.value);
+    //console.log(form.value);
+    this.memberService.updateMember(form.value)
     // .subscribe({
     //   next: (v: any) => {
     //     this.memberService.getMembers().subscribe({

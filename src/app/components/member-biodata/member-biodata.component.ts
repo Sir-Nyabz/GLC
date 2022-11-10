@@ -28,8 +28,8 @@ export class MemberBiodataComponent implements OnInit {
   church_branches: any;
   branch: any;
   branch_uuid: any;
-  uuid: any;
   members: any;
+  asoreba_uuid: any;
 
 
   constructor(private datepipe:DatePipe, private memberService: MemberService,private formBuilder:FormBuilder,private router:Router) { 
@@ -54,6 +54,7 @@ export class MemberBiodataComponent implements OnInit {
 
 
     this.contactGroup=this.formBuilder.group({
+      cemail:['',[Validators.required,Validators.email]],
       msisdn:['',Validators.required],
       voice_call:['',[Validators.required]],
       whatsapp:['',[Validators.required]],
@@ -71,13 +72,21 @@ export class MemberBiodataComponent implements OnInit {
   ngOnInit(): void {
     $('#contactform').hide();
 
-    this.memberService.getMembers().subscribe({
-      next: (v: any) => {
-        this.members = v.data_list;
-        console.log(this.members)
-      },
-      error: (e: any) => console.error(e),
-    });
+    this.memberService.getMembers().pipe(
+      tap(res => {
+        this.members = res.data_list
+        console.log(res)
+        for (var i = 0; i < this.members.length; i++) {
+         
+            //console.log(this.members[i].email)
+            this.asoreba_uuid = this.members[i].asoreba_uuid
+        }
+      }),
+      concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
+      tap((res: any) => {
+        console.log(res)
+        }),
+    ).subscribe()
 
     $('#contactbutton').click(function () {
       $('#contactform').show();
@@ -89,7 +98,7 @@ export class MemberBiodataComponent implements OnInit {
       $('#biodataform').show();
     });
 
-    this.testConcatMap();
+    this.getCountriesRegionsBranches();
   }
 
   addBiodata(){
@@ -131,37 +140,56 @@ export class MemberBiodataComponent implements OnInit {
       postal_address,
       region_uuid,
       residential_address
-    ).subscribe((res:any)=>{
-
+    ).subscribe({
+      next:(res:any)=>{
+        alert('Success')
     },
-    err=>{
-      console.log(err);
-    })
+    error: (e: any) => console.error(e),
+   })
+  }
+
+  is_voiceCall(){
+    if(this.contactGroup.value.voice_call=='Yes'){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  is_Telegram(){
+    if(this.contactGroup.value.telegram=='Yes'){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  is_Whatsapp(){
+    if(this.contactGroup.value.whatsapp=='Yes'){
+      return true
+    }else{
+      return false
+    }
   }
 
   addContact(){
     this.submitted=true;
-    
+
     const msisdn=this.contactGroup.value.msisdn;
-    const is_voice_call=this.contactGroup.value.voice_call;
-    const is_telegram=this.contactGroup.value.telegram;
-    const is_whatsapp=this.contactGroup.value.whatsapp;
-    const asoreba_uuid=this.uuid
+    const is_voice_call=this.is_voiceCall();
+    const is_telegram=this.is_Telegram();
+    const is_whatsapp=this.is_Whatsapp();
+    const asoreba_uuid=this.asoreba_uuid
+
     this.memberService.addAsorebaContact(
       msisdn,
       is_voice_call,
       is_whatsapp,
       is_telegram,
-      asoreba_uuid
-    ).subscribe((res:any)=>{
-
-    },
-    err=>{
-      console.log(err);
-    })
+      asoreba_uuid).subscribe()
   }
 
-  testConcatMap() {
+  getCountriesRegionsBranches() {
     this.memberService.getCountries().pipe(
       tap(res => {
 
@@ -183,7 +211,6 @@ export class MemberBiodataComponent implements OnInit {
       }),
       concatMap(res => this.memberService.getBranches(this.region_uuid)),
       tap((res: any) => {
-        //console.log('Third result', res.data.church_branches)
         this.church_branches = res.data.church_branches;
         for (var i = 0; i < this.church_branches.length; i++) {
 
