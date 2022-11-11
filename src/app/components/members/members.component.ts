@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
 import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
 import { Country } from 'src/app/model/country.model';
 import { Region } from 'src/app/model/region.model';
@@ -9,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Member } from '../../model/member.model';
 import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-members',
@@ -41,19 +41,20 @@ export class MembersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    
+    private toaster:ToastrService
   ) { }
 
   ngOnInit() {
     this.userService.autoLogout();
-    // also recommended
+    this.toaster.success('loaded')
     this.memberService.getMembers().pipe(
       tap(
       (v: any) => {
         this.members = v.data_list;
         for (var i = 0; i < this.members.length; i++) {
          
-          //console.log(this.members[i].email)
           this.asoreba_uuid = this.details[i].asoreba_uuid
       }
     }
@@ -63,8 +64,11 @@ export class MembersComponent implements OnInit {
       this.member=res.data
 
       console.log(res)
+      
       }),
-    ).subscribe();
+    ).subscribe((resp:any)=>{
+      this.toaster.success('Worked')
+    })
 
 
     this.memberService.getCountries().pipe(
@@ -153,9 +157,9 @@ maritalStatus(){
   viewIndividualRecord(asoreba_uuid: any) {
     this.memberService.viewMember(asoreba_uuid).subscribe({
       next: (v: any) => {
-        console.log(v)
+        //console.log(v)
         this.member = v.data;
-        console.log(this.member);
+        //console.log(this.member);
         this.form.setValue({
           first_name: this.member.first_name,
           date_of_birth: this.member.date_of_birth,

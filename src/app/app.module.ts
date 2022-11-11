@@ -1,5 +1,5 @@
 import { CommonModule,DatePipe } from '@angular/common';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
 import { IsLoaderComponent } from './is-loader/is-loader.component';
@@ -25,7 +26,8 @@ import { IsLoaderComponent } from './is-loader/is-loader.component';
     IsLoaderComponent
   ],
   imports: [
-   
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
     CommonModule,

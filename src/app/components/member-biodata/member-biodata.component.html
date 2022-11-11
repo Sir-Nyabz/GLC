@@ -162,13 +162,7 @@
 
           <!-- Contact Form -->
           <form (ngSubmit)="addContact()" [formGroup]="contactGroup" id="contactform" novalidate>
-            <div class="form-group mb-3">
-              <input type="email" class="form-control" formControlName="cemail" [ngClass]="{'is-invalid':submitted && c['cemail'].errors}"  placeholder="Enter a registered Email">
-              <div *ngIf="submitted && c['cemail'].errors" class="show-error">
-                  <div *ngIf="submitted && c['cemail'].errors">Email field cannot be empty or invalid</div>
-              </div>
-            </div>
-
+    
             <div class="form-group mb-3">
               <input type="text" class="form-control" formControlName="msisdn" [ngClass]="{'is-invalid':submitted && c['msisdn'].errors}" placeholder="Phone Number">
               <div *ngIf="submitted && c['msisdn'].errors" class="show-error">

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../../shared/user.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset',
@@ -11,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ResetComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute,private userService:UserService,private router:Router) { }
+  constructor(private route:ActivatedRoute,private userService:UserService,private router:Router,private toaster:ToastrService) { }
 
   ngOnInit(): void {
     const snapshot=this.route.snapshot.params['token']
@@ -25,23 +26,23 @@ export class ResetComponent implements OnInit {
     if(confirm_new_password==new_password){
     this.userService.resetPassword(new_password).subscribe((res:any)=>{
       if(res.status==200){
-      alert('Password reset successsful')
+      this.toaster.success('Password reset successsful')
       this.router.navigate(['/login']);
       localStorage.removeItem('token');
     }
     else{
-      alert('Password change was unsuccessful')
+      this.toaster.error('Password reset unsuccesssful')
       this.router.navigate(['/forgot']);
       localStorage.removeItem('token');
     }
     },
     err=>{
-      alert('Network challenge')
+      this.toaster.error('Network Challenge')
       localStorage.removeItem('token');
     })
 
   }else{
-    alert('Passwords mismatch')
+    this.toaster.error('Passwords mismatch')
     form.reset()
   }
 }

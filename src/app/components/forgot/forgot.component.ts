@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot',
@@ -13,7 +14,7 @@ export class ForgotComponent implements OnInit {
   submitted=false;
   forgotGroup:FormGroup;
 
-  constructor(private userService:UserService,private router:Router,private formBuilder:FormBuilder) { 
+  constructor(private userService:UserService,private router:Router,private formBuilder:FormBuilder,private toaster:ToastrService) { 
     this.forgotGroup=this.formBuilder.group({
       email:['',[Validators.required,Validators.email]]
     })
@@ -32,16 +33,19 @@ export class ForgotComponent implements OnInit {
 
     this.userService.sendMail(email).subscribe((res:any)=>{
       if(res){
+        this.toaster.success('Check your mail for reset link');
         this.router.navigate(['/forgot']);
+        this.forgotGroup.reset()
       //form.reset();
       }else{
-        alert("Email does not exist");
+        this.toaster.error('Email does not exist');
+        this.forgotGroup.reset()
         //form.reset();
       }
       
     },
     err=>{
-      console.log(err);
+      this.toaster.error('Network Challenge');
     })
 
   }

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { concatMap, tap } from 'rxjs';
 import { MemberService } from 'src/app/shared/member.service';
 import { UserService } from '../../shared/user.service';
-import { MembersComponent } from '../members/members.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member-biodata',
@@ -32,7 +32,12 @@ export class MemberBiodataComponent implements OnInit {
   asoreba_uuid: any;
 
 
-  constructor(private datepipe:DatePipe, private memberService: MemberService,private formBuilder:FormBuilder,private router:Router) { 
+  constructor(private datepipe:DatePipe,
+     private memberService: MemberService,
+     private formBuilder:FormBuilder,
+     private router:Router, 
+     private toaster:ToastrService) 
+     { 
     this.biodataGroup=this.formBuilder.group({
       first_name:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
@@ -75,16 +80,16 @@ export class MemberBiodataComponent implements OnInit {
     this.memberService.getMembers().pipe(
       tap(res => {
         this.members = res.data_list
-        console.log(res)
+        //console.log(res)
         for (var i = 0; i < this.members.length; i++) {
          
-            //console.log(this.members[i].email)
+            this.toaster.success('Data Retrieved')
             this.asoreba_uuid = this.members[i].asoreba_uuid
         }
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {
-        console.log(res)
+        //console.log(res)
         }),
     ).subscribe()
 
@@ -142,9 +147,9 @@ export class MemberBiodataComponent implements OnInit {
       residential_address
     ).subscribe({
       next:(res:any)=>{
-        alert('Success')
+        this.toaster.success('Profile added successfully')
     },
-    error: (e: any) => console.error(e),
+    error: (e: any) => this.toaster.error('There was an error'),
    })
   }
 
@@ -186,7 +191,17 @@ export class MemberBiodataComponent implements OnInit {
       is_voice_call,
       is_whatsapp,
       is_telegram,
-      asoreba_uuid).subscribe()
+      asoreba_uuid).subscribe({
+        next:(res:any)=>{
+          this.toaster.success('Contact added successfully');
+          this.contactGroup.reset();
+          console.log(res)
+      },
+      error: (e: any) => {this.toaster.error('There was an error');
+      this.contactGroup.reset()
+    },
+     }
+      )
   }
 
   getCountriesRegionsBranches() {

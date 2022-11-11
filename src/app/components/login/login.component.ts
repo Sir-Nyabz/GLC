@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
-import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl, NgForm } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginGroup:FormGroup;
   is_Loader:boolean=true;
 
-  constructor(private userService: UserService, private router: Router,private formBuilder:FormBuilder) {
+  constructor(private userService: UserService, private router: Router,private formBuilder:FormBuilder,private toaster:ToastrService) {
 
     this.loginGroup=this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
       this.is_Loader=false
     },3000
     )
+
     this.submitted=true;
     const email = this.loginGroup.value.email;
     const password = this.loginGroup.value.password;
@@ -45,12 +47,12 @@ export class LoginComponent implements OnInit {
         // redirect to dashboard
         this.router.navigate(['/members']).then(()=>{
           window.location.reload();
-          console.log(res)
+          this.toaster.success('Logged in successfully');
         })
         
       },
       (err) => {
-        alert('Network Challenge');
+        this.toaster.error('Network Challenge');
       }
     );
   }
