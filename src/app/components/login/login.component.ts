@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         this.toaster.error('Network Challenge');
+        window.location.reload();
       }
     );
   }

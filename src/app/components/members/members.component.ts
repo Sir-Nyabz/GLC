@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
 import { Country } from 'src/app/model/country.model';
@@ -9,14 +9,15 @@ import { Member } from '../../model/member.model';
 import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
+declare const $:any;
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css'],
 })
-export class MembersComponent implements OnInit {
-  members: Observable<Member[]> | any;
+export class MembersComponent implements OnInit{
+  
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
@@ -42,9 +43,11 @@ export class MembersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private memberService: MemberService,
-    
     private toaster:ToastrService
   ) { }
+  first_name:any;
+  members:any=[];
+  dtOptions:DataTables.Settings={}
 
   ngOnInit() {
     this.userService.autoLogout();
@@ -53,6 +56,7 @@ export class MembersComponent implements OnInit {
       tap(
       (v: any) => {
         this.members = v.data_list;
+        console.log(this.members)
         for (var i = 0; i < this.members.length; i++) {
          
           this.asoreba_uuid = this.details[i].asoreba_uuid
@@ -67,9 +71,15 @@ export class MembersComponent implements OnInit {
       
       }),
     ).subscribe((resp:any)=>{
+      
       this.toaster.success('Worked')
     })
-
+    // this.dtOptions={
+    //   pagingType:'full_numbers',
+    //   pageLength:5,
+    //   lengthMenu:[5,10,15,20],
+    //   processing:true
+    // }
 
     this.memberService.getCountries().pipe(
       tap(res => {
@@ -151,6 +161,20 @@ maritalStatus(){
     } else {
       return (this.detail = 'No');
     }
+  }
+
+  Search(){
+    if(this.first_name=''){
+      this.ngOnInit()
+    }else{
+      this.members=this.members.filter((res:any)=>{
+        return res.first_name.toLocaleLowerCase().match(this.first_name.toLocaleLowerCase())
+      })
+    }
+  }
+
+  sortData(){
+
   }
 
 

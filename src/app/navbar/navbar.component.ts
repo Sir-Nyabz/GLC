@@ -10,9 +10,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  first:any;
   LoggedInn:boolean=false;
-  for_biodata:boolean|any;
+  for_biodata:boolean=false;
   constructor(private userService:UserService,private router:Router,private http: HttpClient,private location:Location) { }
 
   ngOnInit(): void {
@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit {
       this.LoggedInn=false;
       this.for_biodata=false
     }
+  }
+
+  Search(){
+    
   }
 
   Logout(){
