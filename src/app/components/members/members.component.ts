@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
@@ -39,6 +39,10 @@ export class MembersComponent implements OnInit{
   church_branches: any;
   branch_uuid: any;
   B: any;
+
+  isDesc: boolean=false;
+  
+  searchText:string=''
 
   constructor(
     private userService: UserService,
@@ -112,6 +116,8 @@ export class MembersComponent implements OnInit{
     ).subscribe()
   }
 
+
+
   churchBranch(){
     if(this.member.church_branch=='Head Office - Dansoma'){
       return (this.B='Head Office')
@@ -163,18 +169,23 @@ maritalStatus(){
     }
   }
 
-  Search(){
-    if(this.first_name=''){
-      this.ngOnInit()
-    }else{
-      this.members=this.members.filter((res:any)=>{
-        return res.first_name.toLocaleLowerCase().match(this.first_name.toLocaleLowerCase())
-      })
-    }
-  }
+ onSearchTextEntered(searchValue:any){
+  this.searchText=searchValue;
+  console.log(this.searchText)
+ }
 
-  sortData(){
-
+  sortData(property:any){
+    this.isDesc=!this.isDesc;
+    let direction=this.isDesc?1:-1;
+    this.members.sort(function(a:any,b:any){
+      if(a[property]<b[property]){
+        return -1 * direction
+      }else if(a[property]>b[property]){
+        return 1 * direction
+      }else{
+        return 0;
+      }
+    })
   }
 
 
