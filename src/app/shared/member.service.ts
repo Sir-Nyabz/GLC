@@ -75,7 +75,7 @@ export class MemberService {
     is_member:string,
     last_name: string,
     marital_status: string,
-    membership_number: string,
+    membership_number: any,
     number_of_children: string,
     occupation: string,
     other_name: string,

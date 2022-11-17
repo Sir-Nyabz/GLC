@@ -30,7 +30,8 @@ export class MemberBiodataComponent implements OnInit {
   branch_uuid: any;
   members: any;
   asoreba_uuid: any;
-
+  B: any;
+  id: any;
 
   constructor(private datepipe:DatePipe,
      private memberService: MemberService,
@@ -104,6 +105,31 @@ export class MemberBiodataComponent implements OnInit {
     });
 
     this.getCountriesRegionsBranches();
+    
+  }
+
+  Gender(){
+    if(this.biodataGroup.value.gender=='male'||this.biodataGroup.value.gender=='Male'){
+      return (this.B='Male')
+    }
+    else if(this.biodataGroup.value.gender=='female'||this.biodataGroup.value.gender=='Female'){
+      return (this.B='Female')
+    }
+    else{
+      return (this.B='')
+    }
+  }
+
+  membershipNumber(){
+    const initial='GLC';
+    const first_num:number=Math.floor(Math.random() * 10);
+    const second_num:number=Math.floor(Math.random() * 10);
+    const third_num:number=Math.floor(Math.random() * 10);
+    const fourth_num:number=Math.floor(Math.random() * 10);
+    const fifth_num:number=Math.floor(Math.random() * 10);
+    const id= initial+first_num+second_num+third_num+fourth_num+fifth_num;
+    
+    return id;
   }
 
   addBiodata(){
@@ -112,8 +138,7 @@ export class MemberBiodataComponent implements OnInit {
     const first_name=this.biodataGroup.value.first_name;
     const last_name=this.biodataGroup.value.last_name;
     const other_name=this.biodataGroup.value.other_name;
-    const gender="male";
-    const l=this.biodataGroup.value.date_of_birth
+    const gender=this.Gender();
     const date_of_birth= this.biodataGroup.value.date_of_birth
     const email = this.biodataGroup.value.email;
     const place_of_birth=this.biodataGroup.value.place_of_birth;
@@ -122,7 +147,7 @@ export class MemberBiodataComponent implements OnInit {
     const postal_address=this.biodataGroup.value.postal_address;
     const residential_address=this.biodataGroup.value.residential_address;
     const occupation=this.biodataGroup.value.occupation;
-    const membership_number='12';
+    const membership_number=this.membershipNumber();
     const number_of_children=this.biodataGroup.value.number_of_children;
     const marital_status=this.biodataGroup.value.number_of_children;
     const branch_uuid=this.branch_uuid;

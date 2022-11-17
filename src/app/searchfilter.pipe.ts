@@ -12,8 +12,7 @@ export class SearchfilterPipe implements PipeTransform {
       return Members;
     }
     return Members.filter(membe=>
-      membe.first_name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-      membe.last_name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      membe.first_name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) 
       );
   }
 

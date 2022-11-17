@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
 import { Country } from 'src/app/model/country.model';
@@ -18,6 +18,7 @@ declare const $:any;
 })
 export class MembersComponent implements OnInit{
   
+  updateGroup:FormGroup;
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
@@ -53,8 +54,28 @@ export class MembersComponent implements OnInit{
   constructor(
     private userService: UserService,
     private memberService: MemberService,
-    private toaster:ToastrService
-  ) { }
+    private toaster:ToastrService,
+    private formBuilder:FormBuilder
+  ) { 
+    this.updateGroup=this.formBuilder.group({
+      first_name:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
+      last_name:['',Validators.required],
+      other_name:[''],
+      gender:['',Validators.required],
+      date_of_birth:['',Validators.required],
+      place_of_birth:['',Validators.required],
+      home_town:['',Validators.required],
+      region:['',Validators.required],
+      postal_address:[''],
+      residential_address:['',Validators.required],
+      occupation:['',Validators.required],
+      number_of_children:[''],
+      marital_status:['',Validators.required],
+      branch:['',Validators.required],
+      is_member:['',Validators.required]
+    })
+  }
   first_name:any;
   members:any=[];
   dtOptions:DataTables.Settings={}
@@ -84,12 +105,6 @@ export class MembersComponent implements OnInit{
       
       this.toaster.success('Worked')
     })
-    // this.dtOptions={
-    //   pagingType:'full_numbers',
-    //   pageLength:5,
-    //   lengthMenu:[5,10,15,20],
-    //   processing:true
-    // }
 
     this.memberService.getCountries().pipe(
       tap(res => {
@@ -212,7 +227,7 @@ maritalStatus(){
         //console.log(v)
         this.member = v.data;
         //console.log(this.member);
-        this.form.setValue({
+        this.updateGroup.setValue({
           first_name: this.member.first_name,
           date_of_birth: this.member.date_of_birth,
           email: this.member.email,
@@ -227,7 +242,7 @@ maritalStatus(){
           is_member: this.areyouamember(),
           number_of_children: this.member.number_of_children,
           marital_status: this.maritalStatus(),
-          church_branch: this.churchBranch(),
+          branch: this.churchBranch(),
           region: this.member.region,
         });
       },
@@ -283,9 +298,9 @@ maritalStatus(){
     // );
   }
 
-  updateRecord(form: NgForm) {
+  updateRecord() {
     //console.log(form.value);
-    this.memberService.updateMember(form.value)
+    //this.memberService.updateMember()
     // .subscribe({
     //   next: (v: any) => {
     //     this.memberService.getMembers().subscribe({
