@@ -17,7 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
 import { IsLoaderComponent } from './is-loader/is-loader.component';
-import { SearchComponent } from './search/search.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { SearchComponent } from './search/search.component';
     routingComponents,
     NavbarComponent,
     IsLoaderComponent,
-    SearchComponent
+    SearchfilterPipe
   ],
   imports: [
     ToastrModule.forRoot(),

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
@@ -42,7 +42,13 @@ export class MembersComponent implements OnInit{
 
   isDesc: boolean=false;
   
-  searchText:string=''
+  searchText:string='';
+  searchValue:any='';
+
+  page:number=1;
+  count:number=0;
+  tableSize:number=10;
+  tableSizes:any=[5,10,15,20]
 
   constructor(
     private userService: UserService,
@@ -63,7 +69,7 @@ export class MembersComponent implements OnInit{
         console.log(this.members)
         for (var i = 0; i < this.members.length; i++) {
          
-          this.asoreba_uuid = this.details[i].asoreba_uuid
+          this.asoreba_uuid = this.members[i].asoreba_uuid
       }
     }
     ),
@@ -186,6 +192,17 @@ maritalStatus(){
         return 0;
       }
     })
+  }
+
+  onTableDataChange(event:any){
+    this.page=event;
+    this.members
+  }
+
+  onTableSizeChange(event:any):void{
+    this.tableSize=event.target.value;
+    this.page=1
+    this.members
   }
 
 
