@@ -85,36 +85,6 @@ export class MembersComponent implements OnDestroy,OnInit{
       this.dtTrigger.next(this.dtOptions);
       this.toaster.success('Worked')
     })
-
-    this.memberService.getCountries().pipe(
-      tap(res => {
-
-        const countries = res.data_list
-        for (var i = 0; i < countries.length; i++) {
-
-          this.country_uuid = countries[i].country_uuid
-        }
-      }),
-      concatMap(res => this.memberService.getRegions(this.country_uuid)),
-      tap((res: any) => {
-
-        this.regions = res.data.regions
-        for (var i = 0; i < this.regions.length; i++) {
-
-          this.region = this.regions[i].region
-          this.region_uuid = this.regions[i].region_uuid
-        }
-      }),
-      concatMap(res => this.memberService.getBranches(this.region_uuid)),
-      tap((res: any) => {
-        this.church_branches = res.data.church_branches;
-        for (var i = 0; i < this.church_branches.length; i++) {
-
-          this.branch = this.church_branches[i].branch
-          this.branch_uuid = this.church_branches[i].branch_uuid
-        }
-      }),
-    ).subscribe()
   }
 
 

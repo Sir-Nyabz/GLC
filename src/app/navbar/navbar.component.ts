@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit {
       this.for_biodata=true
     }else if(this.userService.LoggedIn()&&window.location.href=='http://localhost:4200/biodata'){
       this.for_biodata=true
+    }else if(this.userService.LoggedIn()&&window.location.href=='http://localhost:4200/edit'){
+      this.for_biodata=true
     }else if(this.userService.LoggedIn()&&window.location.href=='http://localhost:4200/contact'){
       this.for_biodata=true
     }
@@ -31,9 +33,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  Search(){
-    
-  }
 
   Logout(){
     this.userService.logout()

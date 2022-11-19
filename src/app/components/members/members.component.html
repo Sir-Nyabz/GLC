@@ -9,174 +9,35 @@
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <!-- <th>Name</th>
-          <th>Other Name</th> -->
           <th>Gender</th>
-          <!-- <th>Date of birth</th> -->
           <th>Email</th>
-          <!-- <th>Place of birth</th> -->
           <th>Hometown</th>
           <th>Postal Address</th>
           <th>Residential Address</th>
           <th>Occupation</th>
-          <th>Are you a member?</th>
           <th>Membership number</th>
-          <th>Number of children</th>
-
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let membe of members">
           <td>{{ membe.first_name+' '+membe.other_name+' '+membe.last_name }}</td>
-          <!-- <td>{{ membe.last_name }}</td>
-          <td>{{ membe.other_name }}</td> -->
           <td>{{ membe.gender }}</td>
-          <!-- <td>{{ membe.date_of_birth }}</td> -->
           <td>{{ membe.email }}</td>
-          <!-- <td>{{ membe.place_of_birth }}</td> -->
           <td>{{ membe.home_town }}</td>
           <td>{{ membe.postal_address }}</td>
           <td>{{ membe.residential_address }}</td>
           <td>{{ membe.occupation }}</td>
-          <td *ngIf="membe.is_member">Yes</td>
-          <td *ngIf="!membe.is_member">No</td>
           <td>{{ membe.membership_number }}</td>
-          <td>{{ membe.number_of_children }}</td>
           <td>
             <button style="margin-right: 16px" (click)="deleteM(membe.asoreba_uuid)" class="btn btn-danger">
               Delete
             </button>
-            <button style="margin-right: 16px" (click)="viewIndividualRecord(membe.asoreba_uuid)" data-bs-toggle="modal"
-              data-bs-target="#exampleModal" class="btn btn-success" style="margin-left: 10px">
-              Edit details
-            </button>
+            <a [routerLink]="['/edit']" style="margin-right: 16px" class="btn btn-success">Edit</a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-</div>
-
-<!-- UPDATE FORM -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="updateRecord()" [formGroup]="updateGroup" #updateForm="ngForm">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="First Name" formControlName="first_name"
-              name="first_name" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" name="last_name"
-              ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Other Name" formControlName="other_name"
-              name="other_name" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <select class="form-select form-control" name="gender" formControlName="gender" ngModel>
-              <option value="" disabled selected hidden>Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="date" class="form-control" placeholder="Date of birth" formControlName="date_of_birth"
-              name="date_of_birth" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Place of birth" formControlName="place_of_birth"
-              name="place_of_birth" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Hometown" name="home_town" formControlName="home_town"
-              ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <select class="form-select form-control" name="region" formControlName="region" ngModel>
-              <option value="" disabled selected hidden>Region</option>
-              <option>{{region}}</option>
-            </select>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Postal Address" formControlName="postal_address"
-              name="postal_address" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Residential Address"
-              formControlName="residential_address" name="residential_address" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Occupation" formControlName="occupation"
-              name="occupation" ngModel>
-          </div>
-
-          <div class="input-group mb-3">
-            <select class="form-select form-control" name="is_member" formControlName="is_member" ngModel>
-              <option value="" disabled selected hidden>Are you a member?</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-
-          <div class="input-group mb-3">
-            <select class="form-select form-control" name="marital_status" formControlName="marital_status" ngModel>
-              <option value="" disabled selected hidden>Marital Status</option>
-              <option>Single</option>
-              <option>Married</option>
-              <option>Divorced</option>
-              <option>Separated</option>
-              <option>Widowed</option>
-            </select>
-          </div>
-
-          <div class="input-group mb-3">
-            <select class="form-select form-control" formControlName="branch" name="branch" ngModel>
-              <option value="" disabled selected hidden>Branch</option>
-              <option>{{branch}}</option>
-            </select>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Number of childern"
-              formControlName="number_of_children" name="number_of_children" ngModel>
-          </div>
-
-          <div class="row">
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>

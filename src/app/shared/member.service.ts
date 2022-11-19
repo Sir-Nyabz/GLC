@@ -37,11 +37,46 @@ export class MemberService {
     return this.http.delete(this.getAllMembersUrl + id)
   }
 
-  updateMember(form:any){
+  updateMember(
+    asoreba_uuid: string,
+    branch_uuid: string,
+    date_of_birth: string,
+    email: string,
+    first_name: string,
+    gender: string,
+    home_town: string,
+    is_member:string,
+    last_name: string,
+    marital_status: string,
+    membership_number: any,
+    number_of_children: string,
+    occupation: string,
+    other_name: string,
+    place_of_birth: string,
+    postal_address: string,
+    region_uuid:string,
+    residential_address: string){
     return this.http.put(
       this.updateMembersUrl,
       {
-        form: form,
+        asoreba_uuid:asoreba_uuid,
+        branch_uuid: branch_uuid,
+        date_of_birth: date_of_birth,
+        email: email,
+        first_name: first_name,
+        gender: gender,
+        home_town: home_town,
+        is_member:is_member,
+        last_name: last_name,
+        marital_status: marital_status,
+        membership_number: membership_number,
+        number_of_children: number_of_children,
+        occupation: occupation,
+        other_name: other_name,
+        place_of_birth: place_of_birth,
+        postal_address: postal_address,
+        region_uuid:region_uuid,
+        residential_address: residential_address
       }
     );
   }
