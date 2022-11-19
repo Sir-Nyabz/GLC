@@ -17,15 +17,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
 import { IsLoaderComponent } from './is-loader/is-loader.component';
-import { SearchfilterPipe } from './searchfilter.pipe';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     NavbarComponent,
-    IsLoaderComponent,
-    SearchfilterPipe
+    IsLoaderComponent
   ],
   imports: [
     ToastrModule.forRoot(),

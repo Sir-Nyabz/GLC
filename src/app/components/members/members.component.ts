@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { concatMap, map, Observable, of, pipe, tap } from 'rxjs';
+import { concatMap, Subject, Observable, of, pipe, tap } from 'rxjs';
 import { Country } from 'src/app/model/country.model';
 import { Region } from 'src/app/model/region.model';
 import Swal from 'sweetalert2';
@@ -9,6 +9,7 @@ import { Member } from '../../model/member.model';
 import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 declare const $:any;
 
 @Component({
@@ -16,15 +17,16 @@ declare const $:any;
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css'],
 })
-export class MembersComponent implements OnInit{
+export class MembersComponent implements OnDestroy,OnInit{
   
+  dtOptions: any = {};
   updateGroup:FormGroup;
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
   detail: any;
   details:any
-
+  
   submitted: any;
   countries: any;
   country_uuid: Observable<any> | any;
@@ -40,16 +42,6 @@ export class MembersComponent implements OnInit{
   church_branches: any;
   branch_uuid: any;
   B: any;
-
-  isDesc: boolean=false;
-  
-  searchText:string='';
-  searchValue:any='';
-
-  page:number=1;
-  count:number=0;
-  tableSize:number=10;
-  tableSizes:any=[5,10,15,20]
 
   constructor(
     private userService: UserService,
@@ -76,33 +68,21 @@ export class MembersComponent implements OnInit{
       is_member:['',Validators.required]
     })
   }
-  first_name:any;
-  members:any=[];
-  dtOptions:DataTables.Settings={}
+ 
+  members:Member[]=[];
+  dtTrigger: Subject<any> = new Subject<any>();
 
-  ngOnInit() {
+  ngOnInit():void {
     this.userService.autoLogout();
-    this.toaster.success('loaded')
-    this.memberService.getMembers().pipe(
-      tap(
-      (v: any) => {
-        this.members = v.data_list;
-        console.log(this.members)
-        for (var i = 0; i < this.members.length; i++) {
-         
-          this.asoreba_uuid = this.members[i].asoreba_uuid
-      }
-    }
-    ),
-    concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
-    tap((res: any) => {
-      this.member=res.data
 
-      console.log(res)
-      
-      }),
-    ).subscribe((resp:any)=>{
-      
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5
+    };
+
+    this.memberService.getMembers().subscribe((v:any)=>{
+      this.members = v.data_list;
+      this.dtTrigger.next(this.dtOptions);
       this.toaster.success('Worked')
     })
 
@@ -190,43 +170,11 @@ maritalStatus(){
     }
   }
 
- onSearchTextEntered(searchValue:any){
-  this.searchText=searchValue;
-  console.log(this.searchText)
- }
-
-  sortData(property:any){
-    this.isDesc=!this.isDesc;
-    let direction=this.isDesc?1:-1;
-    this.members.sort(function(a:any,b:any){
-      if(a[property]<b[property]){
-        return -1 * direction
-      }else if(a[property]>b[property]){
-        return 1 * direction
-      }else{
-        return 0;
-      }
-    })
-  }
-
-  onTableDataChange(event:any){
-    this.page=event;
-    this.members
-  }
-
-  onTableSizeChange(event:any):void{
-    this.tableSize=event.target.value;
-    this.page=1
-    this.members
-  }
-
-
   viewIndividualRecord(asoreba_uuid: any) {
     this.memberService.viewMember(asoreba_uuid).subscribe({
       next: (v: any) => {
-        //console.log(v)
         this.member = v.data;
-        //console.log(this.member);
+        console.log(this.member);
         this.updateGroup.setValue({
           first_name: this.member.first_name,
           date_of_birth: this.member.date_of_birth,
@@ -312,5 +260,10 @@ maritalStatus(){
     //       },
     //   error: (e: any) => console.error(e)
     // })
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }

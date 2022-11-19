@@ -5,6 +5,7 @@ import { ForgotComponent } from './components/forgot/forgot.component';
 import { LoginComponent } from './components/login/login.component';
 import { MemberBiodataComponent } from './components/member-biodata/member-biodata.component';
 import { MembersComponent } from './components/members/members.component';
+import { EditComponent } from './edit/edit.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path:'authentication/reset-password/:token',component:ResetComponent },
   { path:'forgot',component:ForgotComponent },
   { path:'members',component:MembersComponent,canActivate:[AuthGuard] },
+  { path:'edit',component:EditComponent,canActivate:[AuthGuard] },
   { path:'member_biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] }
 ];
 
@@ -26,5 +28,6 @@ export const routingComponents=[
   ResetComponent,
   ForgotComponent,
   MembersComponent,
-  MemberBiodataComponent
+  MemberBiodataComponent,
+  EditComponent
 ]

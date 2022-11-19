@@ -1,0 +1,104 @@
+<div class="modal-body">
+    <form (ngSubmit)="updateRecord()" [formGroup]="updateGroup" #updateForm="ngForm">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="First Name" formControlName="first_name"
+          name="first_name" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" name="last_name"
+          ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Other Name" formControlName="other_name"
+          name="other_name" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-select form-control" name="gender" formControlName="gender" ngModel>
+          <option value="" disabled selected hidden>Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="date" class="form-control" placeholder="Date of birth" formControlName="date_of_birth"
+          name="date_of_birth" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Place of birth" formControlName="place_of_birth"
+          name="place_of_birth" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Hometown" name="home_town" formControlName="home_town"
+          ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-select form-control" name="region" formControlName="region" ngModel>
+          <option value="" disabled selected hidden>Region</option>
+          <option>{{region}}</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Postal Address" formControlName="postal_address"
+          name="postal_address" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Residential Address"
+          formControlName="residential_address" name="residential_address" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Occupation" formControlName="occupation"
+          name="occupation" ngModel>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-select form-control" name="is_member" formControlName="is_member" ngModel>
+          <option value="" disabled selected hidden>Are you a member?</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-select form-control" name="marital_status" formControlName="marital_status" ngModel>
+          <option value="" disabled selected hidden>Marital Status</option>
+          <option>Single</option>
+          <option>Married</option>
+          <option>Divorced</option>
+          <option>Separated</option>
+          <option>Widowed</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-select form-control" formControlName="branch" name="branch" ngModel>
+          <option value="" disabled selected hidden>Branch</option>
+          <option>{{branch}}</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Number of childern"
+          formControlName="number_of_children" name="number_of_children" ngModel>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
