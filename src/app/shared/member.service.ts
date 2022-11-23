@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,12 @@ export class MemberService {
     private bnIdle: BnNgIdleService
   ) {}
 
+  private receiveMembers=new BehaviorSubject<any>(false);
+  currentMember=this.receiveMembers.asObservable();
+
+  setMember(object:any){
+    this.receiveMembers.next(object)
+  }
   
   getToken() {
     return localStorage.getItem('ADMIN-ASOREBA-GLC');
@@ -45,7 +51,7 @@ export class MemberService {
     first_name: string,
     gender: string,
     home_town: string,
-    is_member:string,
+    is_member:any,
     last_name: string,
     marital_status: string,
     membership_number: any,

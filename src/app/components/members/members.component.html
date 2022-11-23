@@ -33,7 +33,7 @@
             <button style="margin-right: 16px" (click)="deleteM(membe.asoreba_uuid)" class="btn btn-danger">
               Delete
             </button>
-            <a [routerLink]="['/edit']" style="margin-right: 16px" class="btn btn-success">Edit</a>
+            <a (click)="edit(membe)" style="margin-right: 16px" class="btn btn-success">Edit</a>
           </td>
         </tr>
       </tbody>

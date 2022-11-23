@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { data } from 'jquery';
 import { ToastrService } from 'ngx-toastr';
-import { concatMap, tap } from 'rxjs';
+import { concatMap, take, tap } from 'rxjs';
 import { MemberService } from '../shared/member.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class EditComponent implements OnInit {
   church_branches: any;
   branch: any;
   branch_uuid: any;
-  updateGroup!:FormGroup;
+  updateGroup:FormGroup;
   member: any;
   detail!: string;
   status: any;
@@ -27,6 +28,9 @@ export class EditComponent implements OnInit {
   asoreba_uuid: any;
   Branch: any;
   submitted: boolean=false;
+  m: any;
+  sex: any;
+  marital: any;
 
   constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
     this.updateGroup=this.formBuilder.group({
@@ -84,49 +88,48 @@ export class EditComponent implements OnInit {
       }),
     ).subscribe()
 
-    this.memberService.getMembers().pipe(
-      tap(res => {
+    this.getMember();
+  }
 
-        this.members = res.data_list
-        for (var i = 0; i < this.members.length; i++) {
-
-          this.asoreba_uuid = this.members[i].asoreba_uuid
-        }
-      }),
-      concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
-      tap((res: any) => {
-        this.member = res.data;
-        console.log(this.member);
+  getMember(){
+    this.memberService.currentMember.pipe(take(1)).subscribe(
+      data=>{
+        if(data){
+        this.asoreba_uuid = data.asoreba_uuid;
+        this.sex=data.gender;
+        data=data.is_member;
+        this.marital=data.marital_status
+        //console.log(this.asoreba_uuid);
         this.updateGroup.setValue({
-          first_name: this.member.first_name,
-          date_of_birth: this.member.date_of_birth,
-          email: this.member.email,
+          first_name: data.first_name,
+          date_of_birth: data.date_of_birth,
+          email: data.email,
           gender: this.Gender(),
-          other_name: this.member.other_name,
-          last_name: this.member.last_name,
-          place_of_birth: this.member.place_of_birth,
-          home_town: this.member.home_town,
-          postal_address: this.member.postal_address,
-          residential_address: this.member.residential_address,
-          occupation: this.member.occupation,
-          is_member: this.areyouamember(),
-          number_of_children: this.member.number_of_children,
+          other_name: data.other_name,
+          last_name: data.last_name,
+          place_of_birth: data.place_of_birth,
+          home_town: data.home_town,
+          postal_address: data.postal_address,
+          residential_address: data.residential_address,
+          occupation: data.occupation,
+          is_member: data.is_member,
+          number_of_children: data.number_of_children,
           marital_status: this.maritalStatus(),
-          branch: this.member.church_branch,
-          region: this.member.region,
+          branch: data.church_branch,
+          region: data.region,
         });
+      }else{
+        this.router.navigate(['/members'])
+      }
       },
-     
-    )).subscribe()
-//console.log(this.churchBranch())
-    
+    )
   }
 
   Gender(){
-    if(this.member.gender=='male'){
+    if(this.sex=='male'){
       return (this.B='Male')
     }
-    else if(this.member.gender=='female'){
+    else if(this.sex=='female'){
       return (this.B='Female')
     }
     else{
@@ -135,7 +138,7 @@ export class EditComponent implements OnInit {
   }
 
   areyouamember(): "Yes" | "No" {
-    if (this.member.is_member == true) {
+    if (this.member == true) {
       return (this.detail = 'Yes');
     } else {
       return (this.detail = 'No');
@@ -143,19 +146,19 @@ export class EditComponent implements OnInit {
   }
 
   maritalStatus(){
-    if(this.member.marital_status==0){
+    if(this.marital==0){
       return (this.status='Single')
     }
-    else if(this.member.marital_status==1){
+    else if(this.marital==1){
       return (this.status='Married')
     }
-    else if(this.member.marital_status==2){
+    else if(this.marital==2){
       return (this.status='Divorced')
     }
-    else if(this.member.marital_status==3){
+    else if(this.marital==3){
       return (this.status='Separated')
     }
-    else if(this.member.marital_status==4){
+    else if(this.marital==4){
       return (this.status='Widowed')
     }
     else{
@@ -174,7 +177,7 @@ export class EditComponent implements OnInit {
   
   updateRecord() {
     this.submitted=true;
-    const asoreba_uuid=this.member.asoreba_uuid
+    const asoreba_uuid=this.asoreba_uuid
     const first_name=this.updateGroup.value.first_name;
     const last_name=this.updateGroup.value.last_name;
     const other_name=this.updateGroup.value.other_name;
@@ -187,11 +190,11 @@ export class EditComponent implements OnInit {
     const postal_address=this.updateGroup.value.postal_address;
     const residential_address=this.updateGroup.value.residential_address;
     const occupation=this.updateGroup.value.occupation;
-    const membership_number=this.member.membership_number;
+    const membership_number=12;
     const number_of_children=this.updateGroup.value.number_of_children;
     const marital_status=this.updateGroup.value.number_of_children;
     const branch_uuid=this.branch_uuid;
-    const is_member=this.updateGroup.value.is_member;
+    const is_member=this.areyouamember();
     this.memberService.updateMember(
       asoreba_uuid,
       branch_uuid,

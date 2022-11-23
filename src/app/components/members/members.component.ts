@@ -25,7 +25,9 @@ export class MembersComponent implements OnDestroy,OnInit{
   branches: [] | any;
   member: Member | any;
   detail: any;
-  details:any
+  details:any;
+  members:Member[]=[];
+  dtTrigger: Subject<any> = new Subject<any>();
   
   submitted: any;
   countries: any;
@@ -47,7 +49,8 @@ export class MembersComponent implements OnDestroy,OnInit{
     private userService: UserService,
     private memberService: MemberService,
     private toaster:ToastrService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private router:Router
   ) { 
     this.updateGroup=this.formBuilder.group({
       first_name:['',Validators.required],
@@ -69,8 +72,7 @@ export class MembersComponent implements OnDestroy,OnInit{
     })
   }
  
-  members:Member[]=[];
-  dtTrigger: Subject<any> = new Subject<any>();
+ 
 
   ngOnInit():void {
     this.userService.autoLogout();
@@ -230,6 +232,11 @@ maritalStatus(){
     //       },
     //   error: (e: any) => console.error(e)
     // })
+  }
+
+  edit(membe:Member){
+    this.memberService.setMember(membe);
+    this.router.navigate(['/edit']);
   }
 
   ngOnDestroy(): void {
