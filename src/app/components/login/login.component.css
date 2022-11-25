@@ -2,3 +2,20 @@
     width: 600px;
     margin: auto;
 }
+
+.login-card-body{
+    background-color: rgb(46, 200, 95);;
+}
+
+.i-forgot-my-password{
+    color: white;
+}
+ label{
+    color: white;
+    text-align: right;
+    margin-right: 10px;
+ }
+
+ .text-box{
+    width: 50px;
+ }

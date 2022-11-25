@@ -50,8 +50,7 @@ export class MembersComponent implements OnDestroy,OnInit{
     private memberService: MemberService,
     private toaster:ToastrService,
     private formBuilder:FormBuilder,
-    private router:Router
-  ) { 
+    private router:Router) { 
     this.updateGroup=this.formBuilder.group({
       first_name:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
@@ -71,8 +70,6 @@ export class MembersComponent implements OnDestroy,OnInit{
       is_member:['',Validators.required]
     })
   }
- 
- 
 
   ngOnInit():void {
     this.userService.autoLogout();

@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
 import { IsLoaderComponent } from './is-loader/is-loader.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -25,7 +26,8 @@ import { IsLoaderComponent } from './is-loader/is-loader.component';
     AppComponent,
     routingComponents,
     NavbarComponent,
-    IsLoaderComponent
+    IsLoaderComponent,
+    FooterComponent
   ],
   imports: [
     ToastrModule.forRoot(),
