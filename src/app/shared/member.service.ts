@@ -44,7 +44,7 @@ export class MemberService {
   }
 
   updateMember(
-    asoreba_uuid: string,
+    asoreba_uuid: any,
     branch_uuid: string,
     date_of_birth: string,
     email: string,

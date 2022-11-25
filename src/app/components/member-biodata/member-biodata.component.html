@@ -113,8 +113,8 @@
             <div class="form-group mb-3">
               <select class="form-select form-control" formControlName="is_member" [ngClass]="{'is-invalid':submitted && emailid['is_member'].errors}">
                 <option value="" disabled selected hidden>Are you a member?</option>
-                <option>Yes</option>
-                <option>No</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
               </select>
               <div *ngIf="submitted && emailid['is_member'].errors" class="show-error">
                 <div *ngIf="submitted && emailid['is_member'].errors">Select something</div>
@@ -124,7 +124,7 @@
             <div class="form-group mb-3">
               <select class="form-select form-control" formControlName="marital_status" [ngClass]="{'is-invalid':submitted && emailid['marital_status'].errors}">
                 <option value="" disabled selected hidden>Marital Status</option>
-                <option>Single</option>
+                <option va>Single</option>
                 <option>Married</option>
                 <option>Divorced</option>
                 <option>Separated</option>

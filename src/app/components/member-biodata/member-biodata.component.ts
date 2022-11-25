@@ -149,7 +149,7 @@ export class MemberBiodataComponent implements OnInit {
     const occupation=this.biodataGroup.value.occupation;
     const membership_number=this.membershipNumber();
     const number_of_children=this.biodataGroup.value.number_of_children;
-    const marital_status=this.biodataGroup.value.number_of_children;
+    const marital_status=this.biodataGroup.value.marital_status;
     const branch_uuid=this.branch_uuid;
     const is_member=this.biodataGroup.value.is_member;
     this.memberService.addAsorebaProfile(

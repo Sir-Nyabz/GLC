@@ -89,87 +89,6 @@ export class MembersComponent implements OnDestroy,OnInit{
     })
   }
 
-
-
-  churchBranch(){
-    if(this.member.church_branch=='Head Office - Dansoma'){
-      return (this.B='Head Office')
-    }
-    else{
-      return (this.status='Office')
-    }
-  }
-
-  Gender(){
-    if(this.member.gender=='male'){
-      return (this.B='Male')
-    }
-    else if(this.member.gender=='female'){
-      return (this.B='Female')
-    }
-    else{
-      return (this.B='')
-    }
-  }
-
-maritalStatus(){
-  if(this.member.marital_status==0){
-    return (this.status='Single')
-  }
-  else if(this.member.marital_status==1){
-    return (this.status='Married')
-  }
-  else if(this.member.marital_status==2){
-    return (this.status='Divorced')
-  }
-  else if(this.member.marital_status==3){
-    return (this.status='Separated')
-  }
-  else if(this.member.marital_status==4){
-    return (this.status='Widowed')
-  }
-  else{
-    return (this.status='')
-  }
-}
-  
-
-  areyouamember(): "Yes" | "No" {
-    if (this.member.is_member == true) {
-      return (this.detail = 'Yes');
-    } else {
-      return (this.detail = 'No');
-    }
-  }
-
-  viewIndividualRecord(asoreba_uuid: any) {
-    this.memberService.viewMember(asoreba_uuid).subscribe({
-      next: (v: any) => {
-        this.member = v.data;
-        console.log(this.member);
-        this.updateGroup.setValue({
-          first_name: this.member.first_name,
-          date_of_birth: this.member.date_of_birth,
-          email: this.member.email,
-          gender: this.Gender(),
-          other_name: this.member.other_name,
-          last_name: this.member.last_name,
-          place_of_birth: this.member.place_of_birth,
-          home_town: this.member.home_town,
-          postal_address: this.member.postal_address,
-          residential_address: this.member.residential_address,
-          occupation: this.member.occupation,
-          is_member: this.areyouamember(),
-          number_of_children: this.member.number_of_children,
-          marital_status: this.maritalStatus(),
-          branch: this.churchBranch(),
-          region: this.member.region,
-        });
-      },
-      error: (e: any) => console.error(e),
-    });
-  }
-
   deleteM(id: any) {
     this.memberService.deleteMember(id).subscribe({
       next: (v: any) => { },
@@ -216,22 +135,6 @@ maritalStatus(){
     //     alert('Network Challenge');
     //   }
     // );
-  }
-
-  updateRecord() {
-    //console.log(form.value);
-    //this.memberService.updateMember()
-    // .subscribe({
-    //   next: (v: any) => {
-    //     this.memberService.getMembers().subscribe({
-    //       next: (v: any) => {
-    //         this.members = v.data_list;
-    //           },
-    //       error: (e: any) => console.error(e)
-    //     })
-    //       },
-    //   error: (e: any) => console.error(e)
-    // })
   }
 
   edit(membe:Member){

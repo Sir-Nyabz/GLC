@@ -31,6 +31,8 @@ export class EditComponent implements OnInit {
   m: any;
   sex: any;
   marital: any;
+  first_name: any;
+  reg_uuid: any;
 
   constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
     this.updateGroup=this.formBuilder.group({
@@ -74,10 +76,10 @@ export class EditComponent implements OnInit {
         for (var i = 0; i < this.regions.length; i++) {
 
           this.region = this.regions[i].region
-          this.region_uuid = this.regions[i].region_uuid
+          this.reg_uuid = this.regions[i].region_uuid
         }
       }),
-      concatMap(res => this.memberService.getBranches(this.region_uuid)),
+      concatMap(res => this.memberService.getBranches(this.reg_uuid)),
       tap((res: any) => {
         this.church_branches = res.data.church_branches;
         for (var i = 0; i < this.church_branches.length; i++) {
@@ -95,16 +97,13 @@ export class EditComponent implements OnInit {
     this.memberService.currentMember.pipe(take(1)).subscribe(
       data=>{
         if(data){
-        this.asoreba_uuid = data.asoreba_uuid;
-        this.sex=data.gender;
-        data=data.is_member;
-        this.marital=data.marital_status
-        //console.log(this.asoreba_uuid);
+        console.log(data);
+        this.asoreba_uuid=data.asoreba_uuid
         this.updateGroup.setValue({
           first_name: data.first_name,
           date_of_birth: data.date_of_birth,
           email: data.email,
-          gender: this.Gender(),
+          gender: data.gender,
           other_name: data.other_name,
           last_name: data.last_name,
           place_of_birth: data.place_of_birth,
@@ -114,9 +113,9 @@ export class EditComponent implements OnInit {
           occupation: data.occupation,
           is_member: data.is_member,
           number_of_children: data.number_of_children,
-          marital_status: this.maritalStatus(),
-          branch: data.church_branch,
-          region: data.region,
+          marital_status: data.marital_status,
+          branch: data.church_branch_uuid,
+          region: data.region_uuid,
         });
       }else{
         this.router.navigate(['/members'])
@@ -124,56 +123,6 @@ export class EditComponent implements OnInit {
       },
     )
   }
-
-  Gender(){
-    if(this.sex=='male'){
-      return (this.B='Male')
-    }
-    else if(this.sex=='female'){
-      return (this.B='Female')
-    }
-    else{
-      return (this.B='')
-    }
-  }
-
-  areyouamember(): "Yes" | "No" {
-    if (this.member == true) {
-      return (this.detail = 'Yes');
-    } else {
-      return (this.detail = 'No');
-    }
-  }
-
-  maritalStatus(){
-    if(this.marital==0){
-      return (this.status='Single')
-    }
-    else if(this.marital==1){
-      return (this.status='Married')
-    }
-    else if(this.marital==2){
-      return (this.status='Divorced')
-    }
-    else if(this.marital==3){
-      return (this.status='Separated')
-    }
-    else if(this.marital==4){
-      return (this.status='Widowed')
-    }
-    else{
-      return (this.status='')
-    }
-  }
-
-  // churchBranch(){
-  //   if(this.branch=='Head Office - Dansoma'){
-  //     return (this.Branch='Head Office')
-  //   }
-  //   else{
-  //     return (this.Branch='')
-  //   }
-  // }
   
   updateRecord() {
     this.submitted=true;
@@ -181,12 +130,12 @@ export class EditComponent implements OnInit {
     const first_name=this.updateGroup.value.first_name;
     const last_name=this.updateGroup.value.last_name;
     const other_name=this.updateGroup.value.other_name;
-    const gender=this.Gender();
+    const gender=this.updateGroup.value.gender;
     const date_of_birth= this.updateGroup.value.date_of_birth
     const email = this.updateGroup.value.email;
     const place_of_birth=this.updateGroup.value.place_of_birth;
     const home_town=this.updateGroup.value.home_town;
-    const region_uuid=this.region_uuid;
+    const region_uuid=this.updateGroup.value.region;
     const postal_address=this.updateGroup.value.postal_address;
     const residential_address=this.updateGroup.value.residential_address;
     const occupation=this.updateGroup.value.occupation;
@@ -194,7 +143,7 @@ export class EditComponent implements OnInit {
     const number_of_children=this.updateGroup.value.number_of_children;
     const marital_status=this.updateGroup.value.number_of_children;
     const branch_uuid=this.branch_uuid;
-    const is_member=this.areyouamember();
+    const is_member=this.updateGroup.value.is_member;
     this.memberService.updateMember(
       asoreba_uuid,
       branch_uuid,
