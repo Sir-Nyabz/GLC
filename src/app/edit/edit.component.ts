@@ -33,6 +33,7 @@ export class EditComponent implements OnInit {
   marital: any;
   first_name: any;
   reg_uuid: any;
+  membershipNumber: any;
 
   constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
     this.updateGroup=this.formBuilder.group({
@@ -97,8 +98,8 @@ export class EditComponent implements OnInit {
     this.memberService.currentMember.pipe(take(1)).subscribe(
       data=>{
         if(data){
-        console.log(data);
-        this.asoreba_uuid=data.asoreba_uuid
+        this.asoreba_uuid=data.asoreba_uuid;
+        this.membershipNumber=data.membership_number
         this.updateGroup.setValue({
           first_name: data.first_name,
           date_of_birth: data.date_of_birth,
@@ -139,7 +140,7 @@ export class EditComponent implements OnInit {
     const postal_address=this.updateGroup.value.postal_address;
     const residential_address=this.updateGroup.value.residential_address;
     const occupation=this.updateGroup.value.occupation;
-    const membership_number=12;
+    const membership_number=this.membershipNumber;
     const number_of_children=this.updateGroup.value.number_of_children;
     const marital_status=this.updateGroup.value.number_of_children;
     const branch_uuid=this.branch_uuid;

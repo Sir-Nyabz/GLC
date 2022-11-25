@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MemberBiodataComponent implements OnInit {
 
-  contactGroup:FormGroup;
+  
   biodataGroup:FormGroup;
   submitted=false;
   country_uuid: any;
@@ -59,20 +59,9 @@ export class MemberBiodataComponent implements OnInit {
     })
 
 
-    this.contactGroup=this.formBuilder.group({
-      cemail:['',[Validators.required,Validators.email]],
-      msisdn:['',Validators.required],
-      voice_call:['',[Validators.required]],
-      whatsapp:['',[Validators.required]],
-      telegram:['',[Validators.required]]
-    })
   }
   get emailid(){
     return this.biodataGroup.controls
-  }
-
-  get c(){
-    return this.contactGroup.controls
   }
 
   ngOnInit(): void {
@@ -83,10 +72,9 @@ export class MemberBiodataComponent implements OnInit {
         this.members = res.data_list
         //console.log(res)
         for (var i = 0; i < this.members.length; i++) {
-         
-            this.toaster.success('Data Retrieved')
             this.asoreba_uuid = this.members[i].asoreba_uuid
         }
+        this.toaster.success('Data Retrieved')
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {
@@ -121,15 +109,19 @@ export class MemberBiodataComponent implements OnInit {
   }
 
   membershipNumber(){
-    const initial='GLC';
-    const first_num:number=Math.floor(Math.random() * 10);
-    const second_num:number=Math.floor(Math.random() * 10);
-    const third_num:number=Math.floor(Math.random() * 10);
-    const fourth_num:number=Math.floor(Math.random() * 10);
-    const fifth_num:number=Math.floor(Math.random() * 10);
-    const id= initial+first_num+second_num+third_num+fourth_num+fifth_num;
     
-    return id;
+      const first_char='G';
+      const second_char='L';
+      const third_char='C';
+      const fourth_char=Math.floor(Math.random() * 10);
+      const fifth_char=Math.floor(Math.random() * 10);
+      const sixth_char=Math.floor(Math.random() * 10);
+      const seventh_char=Math.floor(Math.random() * 10);
+      const eighth_char=Math.floor(Math.random() * 10);
+  
+      const ID=first_char+second_char+third_char+fourth_char+fifth_char+sixth_char+seventh_char+eighth_char;
+       return ID;
+    
   }
 
   addBiodata(){
@@ -178,56 +170,6 @@ export class MemberBiodataComponent implements OnInit {
    })
   }
 
-  is_voiceCall(){
-    if(this.contactGroup.value.voice_call=='Yes'){
-      return true
-    }else{
-      return false
-    }
-  }
-
-  is_Telegram(){
-    if(this.contactGroup.value.telegram=='Yes'){
-      return true
-    }else{
-      return false
-    }
-  }
-
-  is_Whatsapp(){
-    if(this.contactGroup.value.whatsapp=='Yes'){
-      return true
-    }else{
-      return false
-    }
-  }
-
-  addContact(){
-    this.submitted=true;
-
-    const msisdn=this.contactGroup.value.msisdn;
-    const is_voice_call=this.is_voiceCall();
-    const is_telegram=this.is_Telegram();
-    const is_whatsapp=this.is_Whatsapp();
-    const asoreba_uuid=this.asoreba_uuid
-
-    this.memberService.addAsorebaContact(
-      msisdn,
-      is_voice_call,
-      is_whatsapp,
-      is_telegram,
-      asoreba_uuid).subscribe({
-        next:(res:any)=>{
-          this.toaster.success('Contact added successfully');
-          this.contactGroup.reset();
-          console.log(res)
-      },
-      error: (e: any) => {this.toaster.error('There was an error');
-      this.contactGroup.reset()
-    },
-     }
-      )
-  }
 
   getCountriesRegionsBranches() {
     this.memberService.getCountries().pipe(

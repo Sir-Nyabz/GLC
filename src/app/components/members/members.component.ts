@@ -136,7 +136,8 @@ export class MembersComponent implements OnDestroy,OnInit{
 
   edit(membe:Member){
     this.memberService.setMember(membe);
-    this.router.navigate(['/edit']);
+    this.router.navigate(['/edit'])
+    
   }
 
   ngOnDestroy(): void {

@@ -18,6 +18,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { TokenInterceptorService } from './shared/token-interceptor.service';
 import { IsLoaderComponent } from './is-loader/is-loader.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -27,7 +28,8 @@ import { FooterComponent } from './footer/footer.component';
     routingComponents,
     NavbarComponent,
     IsLoaderComponent,
-    FooterComponent
+    FooterComponent,
+    ContactComponent
   ],
   imports: [
     ToastrModule.forRoot(),

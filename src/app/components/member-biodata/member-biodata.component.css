@@ -34,3 +34,7 @@ div.data_tabs{
     color: red;
     font-size: small;
   }
+
+  .biodataForm{
+    margin-bottom: 60px;
+  }
