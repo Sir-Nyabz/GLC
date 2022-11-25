@@ -137,7 +137,11 @@ export class MembersComponent implements OnDestroy,OnInit{
   edit(membe:Member){
     this.memberService.setMember(membe);
     this.router.navigate(['/edit'])
-    
+  }
+
+  openDetails(membe:Member){
+    console.log(membe)
+    document.getElementById('fname')!.setAttribute('value',membe.first_name)
   }
 
   ngOnDestroy(): void {
