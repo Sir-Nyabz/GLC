@@ -1,0 +1,17 @@
+.details-modal{
+    margin-left: 30%;
+}
+
+.form-control-plaintext{
+    margin-left: 20%;
+}
+
+label{
+    white-space: nowrap;
+    text-align: right;
+}
+
+i.bi-printer{
+    margin-left: 50%;
+}
+

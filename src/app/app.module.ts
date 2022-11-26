@@ -12,6 +12,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NgxPrintModule } from "ngx-print";
 
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './shared/auth.guard';
@@ -35,7 +36,6 @@ import { ContactComponent } from './contact/contact.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
-   
     ReactiveFormsModule,
     CommonModule,
     AppRoutingModule,   
@@ -43,7 +43,8 @@ import { ContactComponent } from './contact/contact.component';
     HttpClientModule,
     DataTablesModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxPrintModule
   ],
   providers: [AuthGuard,BnNgIdleService,
   {
