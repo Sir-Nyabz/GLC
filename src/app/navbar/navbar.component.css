@@ -1,5 +1,5 @@
 .nav-item a:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
     color: rgb(255, 255, 255);
 }
 
@@ -18,5 +18,5 @@
 }
 
 .navbar-brand{
-    color: white;
+    /* color: white; */
 }

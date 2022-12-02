@@ -82,7 +82,7 @@ export class MembersComponent implements OnDestroy,OnInit{
     this.memberService.getMembers().subscribe((v:any)=>{
       this.members = v.data_list;
       this.dtTrigger.next(this.dtOptions);
-      this.toaster.success('Worked')
+      //this.toaster.success('Worked')
     })
   }
 

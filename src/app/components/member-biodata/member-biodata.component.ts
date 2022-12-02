@@ -164,7 +164,8 @@ export class MemberBiodataComponent implements OnInit {
       residential_address
     ).subscribe({
       next:(res:any)=>{
-        this.toaster.success('Profile added successfully')
+        this.toaster.success('Profile added successfully');
+        console.log(res)
     },
     error: (e: any) => this.toaster.error('There was an error'),
    })
