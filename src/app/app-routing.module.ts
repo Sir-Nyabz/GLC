@@ -16,7 +16,7 @@ const routes: Routes = [
   { path:'forgot',component:ForgotComponent },
   { path:'members',component:MembersComponent,canActivate:[AuthGuard] },
   { path:'edit',component:EditComponent,canActivate:[AuthGuard] },
-  { path:'member_biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] },
+  { path:'member-biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] },
   { path:'contact',component:ContactComponent,canActivate:[AuthGuard] }
 ];
 

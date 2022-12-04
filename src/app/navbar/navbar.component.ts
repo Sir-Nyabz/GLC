@@ -16,7 +16,12 @@ export class NavbarComponent implements OnInit {
   constructor(private userService:UserService,private router:Router,private http: HttpClient,private location:Location) { }
 
   ngOnInit(): void {
-   
+    if(window.location.href=='http://localhost:4200/members' || 
+    window.location.href=='http://localhost:4200/member-biodata' || 
+    window.location.href=='http://localhost:4200/contact' || 
+    window.location.href=='http://localhost:4200/edit'){
+      this.LoggedInn=true;
+    }
   }
 
 
@@ -28,12 +33,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  navig_member_biodata(){
-    this.router.navigate(['/member_biodata']).
-    then(() => {
-      window.location.reload();
-    });
-  }
+
 
   goBack(){
     this.location.back();

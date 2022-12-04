@@ -15,6 +15,10 @@ i.bi-printer{
     margin-left: 50%;
 }
 
-table{
-    
+.addButton{
+    align-items: center;
+    margin: 10px;
+    align-content: center;
+    align-self: center;
+    clear: both;
 }

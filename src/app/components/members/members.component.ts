@@ -86,6 +86,13 @@ export class MembersComponent implements OnDestroy,OnInit{
     })
   }
 
+  navig_member_biodata(){
+    this.router.navigate(['/member-biodata']).
+    then(() => {
+      window.location.reload();
+    });
+  }
+
   deleteM(id: any) {
     this.memberService.deleteMember(id).subscribe({
       next: (v: any) => { },
