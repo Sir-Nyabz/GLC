@@ -18,16 +18,16 @@
     aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <!-- <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto" *ngIf="LoggedInn">
       <li class="nav-item">
         <a class="nav-link a-logout" (click)="Logout()" href="#"><i class="bi bi-box-arrow-left"></i>Logout</a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto" *ngIf="LoggedInn">
       <li class="nav-item">
         <a class="nav-link a-logout" (click)="goBack()"><i class="bi bi-skip-backward"></i>Back</a>
       </li>

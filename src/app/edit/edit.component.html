@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-8 mt-2 mb-2">
+        <div class="col-sm-8">
             <form (ngSubmit)="updateRecord()" [formGroup]="updateGroup" class="editForm">
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" [ngClass]="{'is-invalid':submitted && u['first_name'].errors}">
