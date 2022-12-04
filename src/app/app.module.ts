@@ -5,9 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
-import { Ng2SearchPipeModule } from "ng2-search-filter";
-import { Ng2OrderModule } from 'ng2-order-pipe';
-import { NgxPaginationModule } from "ngx-pagination";
 import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,8 +37,6 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     HttpClientModule,
     DataTablesModule,
-    Ng2SearchPipeModule,
-    NgxPaginationModule,
     NgxPrintModule
   ],
   providers: [AuthGuard,BnNgIdleService,
