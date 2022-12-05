@@ -67,7 +67,7 @@ export class MemberBiodataComponent implements OnInit {
   ngOnInit(): void {
     $('#contactform').hide();
 
-    this.memberService.getMembers().pipe(
+    this.memberService.getAllMembers().pipe(
       tap(res => {
         this.members = res.data_list
         //console.log(res)
@@ -81,16 +81,6 @@ export class MemberBiodataComponent implements OnInit {
         //console.log(res)
         }),
     ).subscribe()
-
-    $('#contactbutton').click(function () {
-      $('#contactform').show();
-      $('#biodataform').hide();
-    });
-
-    $('#biodatabutton').click(function () {
-      $('#contactform').hide();
-      $('#biodataform').show();
-    });
 
     this.getCountriesRegionsBranches();
     
@@ -144,32 +134,34 @@ export class MemberBiodataComponent implements OnInit {
     const marital_status=this.biodataGroup.value.marital_status;
     const branch_uuid=this.branch_uuid;
     const is_member=this.biodataGroup.value.is_member;
-    this.memberService.addAsorebaProfile(
-      branch_uuid,
-      date_of_birth,
-      email,
-      first_name,
-      gender,
-      home_town,
-      is_member,
-      last_name,
-      marital_status,
-      membership_number,
-      number_of_children,
-      occupation,
-      other_name,
-      place_of_birth,
-      postal_address,
-      region_uuid,
-      residential_address
-    ).subscribe({
-      next:(res:any)=>{
-        this.toaster.success('Profile added successfully');
-        console.log(res)
-    },
-    error: (e: any) => this.toaster.error('There was an error'),
-   })
-  }
+
+      this.memberService.addAsorebaProfile(
+        branch_uuid,
+        date_of_birth,
+        email,
+        first_name,
+        gender,
+        home_town,
+        is_member,
+        last_name,
+        marital_status,
+        membership_number,
+        number_of_children,
+        occupation,
+        other_name,
+        place_of_birth,
+        postal_address,
+        region_uuid,
+        residential_address
+      ).subscribe({
+        next:(res:any)=>{
+          this.toaster.success('Profile added successfully');
+          console.log(res)
+      },
+      error: (e: any) => this.toaster.error('There was an error'),
+     })
+    
+    }
 
 
   getCountriesRegionsBranches() {

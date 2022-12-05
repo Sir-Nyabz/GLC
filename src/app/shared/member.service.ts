@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export class MemberService {
   getAllMembersUrl = 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/all/';
+  getOnlyMembersUrl= 'https://nyabz.pythonanywhere.com/admin-api/profile/asoremma/'
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
@@ -35,7 +36,11 @@ export class MemberService {
     return localStorage.getItem('ADMIN-ASOREBA-GLC');
   }
 
-  getMembers(): Observable<any> {
+  getOnlyMembers(): Observable<any> {
+    return this.http.get<any>(this.getOnlyMembersUrl);
+  }
+
+  getAllMembers(): Observable<any> {
     return this.http.get<any>(this.getAllMembersUrl);
   }
 

@@ -76,14 +76,36 @@ export class MembersComponent implements OnDestroy,OnInit{
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5
+      pageLength: 5,
     };
 
-    this.memberService.getMembers().subscribe((v:any)=>{
-      this.members = v.data_list;
-      this.dtTrigger.next(this.dtOptions);
-      //this.toaster.success('Worked')
-    })
+    // this.memberService.getOnlyMembers().subscribe((v:any)=>{
+    //   this.members = v.data_list;
+    //   this.dtTrigger.next(this.dtOptions);
+    //   //this.toaster.success('Worked')
+    // })
+  }
+
+  getProfile(){
+    if((document.getElementById('getprofile') as HTMLInputElement).value=='all'){
+  
+      this.memberService.getAllMembers().subscribe((v:any)=>{
+        this.members = v.data_list;
+        
+        this.dtTrigger.next(this.dtOptions);
+        $("#displayTable").dataTable().fnDestroy();
+        //this.toaster.success('Worked')
+      })
+    }else{
+  
+      this.memberService.getOnlyMembers().subscribe((v:any)=>{
+        this.members = v.data_list;
+        
+        this.dtTrigger.next(this.dtOptions);
+        $("#displayTable").dataTable().fnDestroy();
+        //this.toaster.success('Worked')
+      })
+    }
   }
 
   navig_member_biodata(){

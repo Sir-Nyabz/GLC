@@ -22,3 +22,11 @@ i.bi-printer{
     align-self: center;
     clear: both;
 }
+
+.listtodisplay{
+    align-items: center;
+    margin: 10px;
+    align-content: center;
+    align-self: center;
+    clear: both;
+}
