@@ -1,20 +1,20 @@
-export class Member {
-    asoreba_uuid: any;
-    first_name: any;
-    other_name: any;
-    email: any;
-    last_name: any;
-    gender: any;
-    place_of_birth: any;
-    home_town: any;
-    date_of_birth: any;
-    postal_address: any;
-    residential_address: any;
-    occupation: any;
-    is_member: any;
-    membership_number: any;
-    number_of_children: any;
-    marital_status: any;
-    region_uuid: any;
-    church_branch_uuid: any
+export interface Member {
+    asoreba_uuid: string;
+    first_name: string;
+    other_name: string;
+    email: string;
+    last_name: string;
+    gender: string;
+    place_of_birth: string;
+    home_town: string;
+    date_of_birth: string;
+    postal_address: string;
+    residential_address: string;
+    occupation: string;
+    is_member: boolean;
+    membership_number: string;
+    number_of_children: string;
+    marital_status: string;
+    region_uuid: string;
+    church_branch_uuid: string;
 }

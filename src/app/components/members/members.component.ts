@@ -170,21 +170,7 @@ export class MembersComponent implements OnDestroy,OnInit{
 
   openDetails(membe:Member){
     console.log(membe);
-    document.getElementById('mnumber')!.setAttribute('value',membe.membership_number);
-    document.getElementById('fname')!.setAttribute('value',membe.first_name);
-    document.getElementById('lname')!.setAttribute('value',membe.last_name);
-    document.getElementById('oname')!.setAttribute('value',membe.other_name);
-    document.getElementById('dbirth')!.setAttribute('value',membe.date_of_birth);
-    document.getElementById('email')!.setAttribute('value',membe.email);
-    document.getElementById('gender')!.setAttribute('value',membe.gender);
-    document.getElementById('htown')!.setAttribute('value',membe.home_town);
-    document.getElementById('occupation')!.setAttribute('value',membe.occupation);
-    document.getElementById('numberofchildren')!.setAttribute('value',membe.number_of_children);
-    document.getElementById('mstatus')!.setAttribute('value',membe.marital_status);
-    document.getElementById('raddress')!.setAttribute('value',membe.residential_address);
-    document.getElementById('placeofbirth')!.setAttribute('value',membe.home_town);
-    document.getElementById('paddress')!.setAttribute('value',membe.postal_address);
-    document.getElementById('ismember')!.setAttribute('value',membe.is_member);
+    
   }
 
   ngOnDestroy(): void {

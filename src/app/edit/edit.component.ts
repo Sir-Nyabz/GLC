@@ -34,7 +34,6 @@ export class EditComponent implements OnInit {
   first_name: any;
   reg_uuid: any;
   membershipNumber: any;
-  memberor: any;
   church_branch_uuid: any;
 
   constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
@@ -102,11 +101,8 @@ export class EditComponent implements OnInit {
         if(data){
         this.asoreba_uuid=data.asoreba_uuid;
         this.membershipNumber=data.membership_number;
-        this.memberor=data.is_member;
         this.church_branch_uuid=data.church_branch_uuid
-        console.log(data);
-        console.log(this.memberor)
-        this.updateGroup.setValue({
+        this.updateGroup.patchValue({
           first_name: data.first_name,
           date_of_birth: data.date_of_birth,
           email: data.email,
@@ -118,12 +114,21 @@ export class EditComponent implements OnInit {
           postal_address: data.postal_address,
           residential_address: data.residential_address,
           occupation: data.occupation,
-          is_member: data.is_member,
           number_of_children: data.number_of_children,
           marital_status: data.marital_status,
           branch: data.church_branch_uuid,
           region: data.region_uuid,
         });
+
+        if(data.is_member !== undefined) {
+          this.updateGroup.patchValue({
+            is_member: data.is_member,
+          });
+        } else {
+          this.updateGroup.patchValue({
+            is_member: true,
+          });
+        }
       }else{
         this.router.navigate(['/members'])
       }
