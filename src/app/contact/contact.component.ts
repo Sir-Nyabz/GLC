@@ -36,7 +36,12 @@ export class ContactComponent implements OnInit {
   }
   
   ngOnInit(): void {
-   
+    this.memberService.currentMember.pipe(take(1)).subscribe(
+      data=>{
+        this.asoreba_uuid=data.asoreba_uuid;
+        console.log(this.asoreba_uuid)
+      },
+    )
   }
 
   addContact(){
@@ -48,7 +53,7 @@ export class ContactComponent implements OnInit {
     )
     const msisdn=this.contactGroup.value.msisdn;
     const is_voice_call=this.contactGroup.value.voice_call;
-    const is_telegram=this.contactGroup.value.telegram();
+    const is_telegram=this.contactGroup.value.telegram;
     const is_whatsapp=this.contactGroup.value.whatsapp;
     const asoreba_uuid=this.asoreba_uuid
 

@@ -11,7 +11,8 @@
     <div class="col-sm-2">
        
       <select class="form-select form-control listtodisplay" id="getprofile" (change)="getProfile()">
-        <option selected value="all">All</option>
+        <option value="" disabled selected hidden>Select</option>
+        <option value="all">All</option>
         <option value="onlymembers">Only Members</option>
       </select>
         
@@ -27,8 +28,6 @@
           <th>Gender</th>
           <th>Email</th>
           <th>Hometown</th>
-          <th>Postal Address</th>
-          <th>Residential Address</th>
           <th>Occupation</th>
           <th>Membership number</th>
           <th></th>
@@ -40,8 +39,6 @@
           <td>{{ membe.gender }}</td>
           <td>{{ membe.email }}</td>
           <td>{{ membe.home_town }}</td>
-          <td>{{ membe.postal_address }}</td>
-          <td>{{ membe.residential_address }}</td>
           <td>{{ membe.occupation }}</td>
           <td>{{ membe.membership_number }}</td>
           <td>

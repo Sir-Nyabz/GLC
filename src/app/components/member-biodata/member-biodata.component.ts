@@ -65,12 +65,11 @@ export class MemberBiodataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('#contactform').hide();
 
     this.memberService.getAllMembers().pipe(
       tap(res => {
         this.members = res.data_list
-        //console.log(res)
+        
         for (var i = 0; i < this.members.length; i++) {
             this.asoreba_uuid = this.members[i].asoreba_uuid
         }
@@ -78,7 +77,7 @@ export class MemberBiodataComponent implements OnInit {
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {
-        //console.log(res)
+        
         }),
     ).subscribe()
 
@@ -155,8 +154,10 @@ export class MemberBiodataComponent implements OnInit {
         residential_address
       ).subscribe({
         next:(res:any)=>{
+          this.memberService.setMember(res);
           this.toaster.success('Profile added successfully');
-          console.log(res)
+          this.router.navigate(['/contact'])
+          //console.log(res)
       },
       error: (e: any) => this.toaster.error('There was an error'),
      })
