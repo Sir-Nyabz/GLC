@@ -35,6 +35,7 @@ export class EditComponent implements OnInit {
   reg_uuid: any;
   membershipNumber: any;
   memberor: any;
+  church_branch_uuid: any;
 
   constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
     this.updateGroup=this.formBuilder.group({
@@ -101,7 +102,10 @@ export class EditComponent implements OnInit {
         if(data){
         this.asoreba_uuid=data.asoreba_uuid;
         this.membershipNumber=data.membership_number;
-        this.memberor=data.is_member
+        this.memberor=data.is_member;
+        this.church_branch_uuid=data.church_branch_uuid
+        console.log(data);
+        console.log(this.memberor)
         this.updateGroup.setValue({
           first_name: data.first_name,
           date_of_birth: data.date_of_birth,

@@ -43,7 +43,8 @@
                   <div class="col-sm-4"></div>
     
                   <div class="col-sm-4">
-                    <label for="are_you_a_member_label" class="are_you_a_member_label">Are you a member?</label>
+                    <div class="input-group">
+                      <label for="are_you_a_member_label" class="are_you_a_member_label">Are you a member?</label>
                     <div class="form-group form-check form-check-inline" [ngClass]="{'is-invalid':submitted && u['is_member'].errors}">
                       <input class="form-check-input" type="radio" name="is_member" id="is_member" value="true" formControlName="is_member" [ngModel]="memberor">
                       <label class="form-check-label" for="yes">Yes</label>
@@ -55,6 +56,7 @@
                     <div *ngIf="submitted && u['is_member'].errors" class="show-error">
                       <div *ngIf="submitted && u['is_member'].errors">Select something</div>
                   </div>
+                    </div>
                   </div>
                 </div>
           
