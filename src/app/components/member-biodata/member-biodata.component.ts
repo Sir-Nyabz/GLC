@@ -73,7 +73,7 @@ export class MemberBiodataComponent implements OnInit {
         for (var i = 0; i < this.members.length; i++) {
             this.asoreba_uuid = this.members[i].asoreba_uuid
         }
-        this.toaster.success('Data Retrieved')
+        //this.toaster.success('Data Retrieved')
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {

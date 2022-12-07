@@ -101,7 +101,8 @@ export class EditComponent implements OnInit {
         if(data){
         this.asoreba_uuid=data.asoreba_uuid;
         this.membershipNumber=data.membership_number;
-        this.church_branch_uuid=data.church_branch_uuid
+        this.church_branch_uuid=data.church_branch_uuid;
+console.log(data)
         this.updateGroup.patchValue({
           first_name: data.first_name,
           date_of_birth: data.date_of_birth,
