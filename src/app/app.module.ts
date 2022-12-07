@@ -1,5 +1,5 @@
 import { CommonModule,DatePipe } from '@angular/common';
-import { MaterialModule } from "./material/material.module";
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -38,8 +38,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     HttpClientModule,
     DataTablesModule,
-    NgxPrintModule,
-    MaterialModule
+    NgxPrintModule
   ],
   providers: [AuthGuard,BnNgIdleService,
   {

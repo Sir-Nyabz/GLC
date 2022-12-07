@@ -3,7 +3,7 @@
     color: rgb(255, 255, 255);
 }
 
-.nav-item a.active {
+.nav-item a.active{
     background-color: #04AA6D;
     color: white;
 }
@@ -17,6 +17,13 @@
     background-color: rgb(46, 200, 95);
 }
 
-.navbar-brand{
-    /* color: white; */
+.navbar-brand a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+    font: 35px bold Franklin Gothic Medium italic;
+    
 }

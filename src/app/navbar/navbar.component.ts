@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class NavbarComponent implements OnInit {
   first:any;
-  LoggedInn:boolean=false;
+  LoggedIn:boolean=false;
   for_biodata:boolean=false;
   constructor(private userService:UserService,private router:Router,private http: HttpClient,private location:Location) { }
 
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     window.location.href=='http://localhost:4200/member-biodata' || 
     window.location.href=='http://localhost:4200/contact' || 
     window.location.href=='http://localhost:4200/edit'){
-      this.LoggedInn=true;
+      this.LoggedIn=true;
     }
   }
 
