@@ -120,47 +120,47 @@ export class MembersComponent implements OnDestroy,OnInit{
       next: (v: any) => { },
       error: (e: any) => console.error(e),
     });
-    // this.memberService.deleteMember(id).subscribe(
-    //   (res: any) => {
-    //     const swalWithBootstrapButtons = Swal.mixin({
-    //       customClass: {
-    //         confirmButton: 'btn btn-success',
-    //         cancelButton: 'btn btn-danger'
-    //       },
-    //       buttonsStyling: false
-    //     })
+    this.memberService.deleteMember(id).subscribe(
+      (res: any) => {
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
 
-    //     swalWithBootstrapButtons.fire({
-    //       title: 'Are you sure?',
-    //       text: "You won't be able to revert this!",
-    //       icon: 'warning',
-    //       showCancelButton: true,
-    //       confirmButtonText: 'Yes, delete it!',
-    //       cancelButtonText: 'No, cancel!',
-    //       reverseButtons: true
-    //     }).then((result) => {
-    //       if (result.isConfirmed) {
-    //         swalWithBootstrapButtons.fire(
-    //           'Deleted!',
-    //           'Your file has been deleted.',
-    //           'success'
-    //         )
-    //       } else if (
-    //         /* Read more about handling dismissals below */
-    //         result.dismiss === Swal.DismissReason.cancel
-    //       ) {
-    //         swalWithBootstrapButtons.fire(
-    //           'Cancelled',
-    //           'Your imaginary file is safe :)',
-    //           'error'
-    //         )
-    //       }
-    //     })
-    //   },
-    //   (err) => {
-    //     alert('Network Challenge');
-    //   }
-    // );
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'Cancelled',
+              'Your imaginary file is safe :)',
+              'error'
+            )
+          }
+        })
+      },
+      (err) => {
+        alert('Network Challenge');
+      }
+    );
   }
 
   edit(membe:Member){
