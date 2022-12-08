@@ -78,12 +78,6 @@ export class MembersComponent implements OnDestroy,OnInit{
       pagingType: 'full_numbers',
       pageLength: 5,
     };
-
-    // this.memberService.getOnlyMembers().subscribe((v:any)=>{
-    //   this.members = v.data_list;
-    //   this.dtTrigger.next(this.dtOptions);
-    //   //this.toaster.success('Worked')
-    // })
   }
 
   getProfile(){
@@ -94,7 +88,6 @@ export class MembersComponent implements OnDestroy,OnInit{
         
         this.dtTrigger.next(this.dtOptions);
         $("#displayTable").dataTable().fnDestroy();
-        //this.toaster.success('Worked')
       })
     }else{
   
@@ -102,8 +95,7 @@ export class MembersComponent implements OnDestroy,OnInit{
         this.members = v.data_list;
         
         this.dtTrigger.next(this.dtOptions);
-        $("#displayTable").dataTable().fnDestroy();
-        //this.toaster.success('Worked')
+        $("#displayTable").dataTable().fnDestroy()
       })
     }
   }
@@ -116,21 +108,9 @@ export class MembersComponent implements OnDestroy,OnInit{
   }
 
   deleteM(id: any) {
-    this.memberService.deleteMember(id).subscribe({
-      next: (v: any) => { },
-      error: (e: any) => console.error(e),
-    });
-    this.memberService.deleteMember(id).subscribe(
-      (res: any) => {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: false
-        })
+   
 
-        swalWithBootstrapButtons.fire({
+        Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
           icon: 'warning',
@@ -140,7 +120,7 @@ export class MembersComponent implements OnDestroy,OnInit{
           reverseButtons: true
         }).then((result) => {
           if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
               'Deleted!',
               'Your file has been deleted.',
               'success'
@@ -149,20 +129,14 @@ export class MembersComponent implements OnDestroy,OnInit{
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
           ) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
               'Cancelled',
               'Your imaginary file is safe :)',
               'error'
             )
           }
         })
-      },
-      (err) => {
-        alert('Network Challenge');
       }
-    );
-  }
-
   edit(membe:Member){
     this.memberService.setMember(membe);
     this.router.navigate(['/edit'])
