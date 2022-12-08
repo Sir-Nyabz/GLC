@@ -126,7 +126,6 @@ export class MembersComponent implements OnDestroy,OnInit{
               'success'
             )
           } else if (
-            /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
           ) {
             Swal.fire(
