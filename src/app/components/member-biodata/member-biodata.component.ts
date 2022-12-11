@@ -84,20 +84,9 @@ export class MemberBiodataComponent implements OnInit {
     
   }
 
-  Gender(){
-    if(this.biodataGroup.value.gender=='male'||this.biodataGroup.value.gender=='Male'){
-      return (this.B='Male')
-    }
-    else if(this.biodataGroup.value.gender=='female'||this.biodataGroup.value.gender=='Female'){
-      return (this.B='Female')
-    }
-    else{
-      return (this.B='')
-    }
-  }
-
   membershipNumber(){
-    
+    const member=this.biodataGroup.value.is_member;
+
       const first_char='G';
       const second_char='L';
       const third_char='C';
@@ -108,8 +97,14 @@ export class MemberBiodataComponent implements OnInit {
       const eighth_char=Math.floor(Math.random() * 10);
   
       const ID=first_char+second_char+third_char+fourth_char+fifth_char+sixth_char+seventh_char+eighth_char;
-       return ID;
-    
+
+      if(member==true){
+      const memberID=ID+"M"
+      return memberID
+      }else{
+        const memberID=ID+"N"
+      return memberID
+      }
   }
 
   addBiodata(){
@@ -118,7 +113,7 @@ export class MemberBiodataComponent implements OnInit {
     const first_name=this.biodataGroup.value.first_name;
     const last_name=this.biodataGroup.value.last_name;
     const other_name=this.biodataGroup.value.other_name;
-    const gender=this.Gender();
+    const gender=this.biodataGroup.value.gender;
     const date_of_birth= this.biodataGroup.value.date_of_birth
     const email = this.biodataGroup.value.email;
     const place_of_birth=this.biodataGroup.value.place_of_birth;

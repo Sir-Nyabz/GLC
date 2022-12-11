@@ -66,7 +66,7 @@ export class ContactComponent implements OnInit {
         next:(res:any)=>{
           this.toaster.success('Contact added successfully');
           this.contactGroup.reset();
-          // console.log(res)
+          this.router.navigate(['/members'])
       },
       error: (e: any) => {this.toaster.error('There was an error');
       this.contactGroup.reset()
