@@ -20,7 +20,7 @@ declare const $:any;
 export class MembersComponent implements OnDestroy,OnInit{
   
   dtOptions: any = {};
-  updateGroup:FormGroup;
+  printGroup:FormGroup;
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
@@ -35,7 +35,7 @@ export class MembersComponent implements OnDestroy,OnInit{
   region_uuid: any;
   church_branch_uuid: any;
   updateForm: any;
-  @ViewChild('updateForm') form: NgForm | any;
+  @ViewChild('printForm') form: NgForm | any;
   region: Region | any;
   country: Country | any;
   status: any;
@@ -44,6 +44,9 @@ export class MembersComponent implements OnDestroy,OnInit{
   church_branches: any;
   branch_uuid: any;
   B: any;
+  memberShip!: boolean;
+  Yes: boolean=false;
+  No: boolean=false;
 
   constructor(
     private userService: UserService,
@@ -51,7 +54,8 @@ export class MembersComponent implements OnDestroy,OnInit{
     private toaster:ToastrService,
     private formBuilder:FormBuilder,
     private router:Router) { 
-    this.updateGroup=this.formBuilder.group({
+    this.printGroup=this.formBuilder.group({
+      membership_number:['',Validators.required],
       first_name:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
       last_name:['',Validators.required],
@@ -143,7 +147,34 @@ export class MembersComponent implements OnDestroy,OnInit{
 
   openDetails(membe:Member){
     console.log(membe);
+    this.memberShip=membe.is_member
+
+    if(this.memberShip==true || this.memberShip==undefined){
+      this.Yes=true
+    }
     
+    if(this.memberShip==false){
+      this.No=true
+    }
+
+    this.printGroup.patchValue({
+      membership_number: membe.membership_number,
+      first_name: membe.first_name,
+      date_of_birth: membe.date_of_birth,
+      email: membe.email,
+      gender: membe.gender,
+      other_name: membe.other_name,
+      last_name: membe.last_name,
+      place_of_birth: membe.place_of_birth,
+      home_town: membe.home_town,
+      postal_address: membe.postal_address,
+      residential_address: membe.residential_address,
+      occupation: membe.occupation,
+      number_of_children: membe.number_of_children,
+      marital_status: membe.marital_status,
+      branch: membe.church_branch_uuid,
+      region: membe.region_uuid,
+    });
   }
 
   ngOnDestroy(): void {

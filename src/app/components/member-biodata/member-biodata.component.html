@@ -13,6 +13,7 @@
               <!-- Biodata Form -->
           <form class="biodataForm" (ngSubmit)="addBiodata()" [formGroup]="biodataGroup" id="biodataform" novalidate>
             <div class="form-group mb-3">
+              <label for="firstName">First Name</label>
               <input type="text" class="form-control" formControlName="first_name" [ngClass]="{'is-invalid':submitted && emailid['first_name'].errors}" placeholder="First Name">
               <div *ngIf="submitted && emailid['first_name'].errors" class="show-error">
                 <div *ngIf="submitted && emailid['first_name'].errors">First name field cannot be empty</div>
@@ -20,6 +21,7 @@
             </div>
 
             <div class="form-group mb-3">
+              <label for="lastName">Last Name</label>
               <input type="text" class="form-control" formControlName="last_name" [ngClass]="{'is-invalid':submitted && emailid['last_name'].errors}"  placeholder="Last Name">
               <div *ngIf="submitted && emailid['last_name'].errors" class="show-error">
                 <div *ngIf="submitted && emailid['last_name'].errors">Last name field cannot be empty</div>
@@ -27,15 +29,14 @@
             </div>
 
             <div class="form-group mb-3">
-              <input type="text" class="form-control" formControlName="other_name" [ngClass]="{'is-invalid':submitted && emailid['other_name'].errors}"  placeholder="Other Name">
-              <div *ngIf="submitted && emailid['other_name'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['other_name'].errors">Other name field cannot be empty</div>
-            </div>
+              <label for="otherName">Other Names</label>
+              <input type="text" class="form-control" formControlName="other_name" placeholder="Other Name">
             </div>
 
             <div class="form-group mb-3">
+              <label for="sex">Gender</label>
               <select class="form-select form-control" formControlName="gender" [ngClass]="{'is-invalid':submitted && emailid['gender'].errors}">
-                <option value="" disabled selected hidden>Gender</option>
+                <option value="" disabled selected hidden>--Select--</option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
@@ -47,6 +48,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group mb-3">
+                  <label for="dateOfBirth">Date of birth</label>
                   <input type="date" class="form-control" formControlName="date_of_birth" [ngClass]="{'is-invalid':submitted && emailid['date_of_birth'].errors}"  placeholder="Date of birth">
                   <div *ngIf="submitted && emailid['date_of_birth'].errors" class="show-error">
                     <div *ngIf="submitted && emailid['date_of_birth'].errors">Date field cannot be empty</div>
@@ -54,7 +56,7 @@
                 </div>
               </div>
 
-              <div class="col-sm-4"></div>
+              <div class="col-sm-2"></div>
 
               <div class="col-sm-4">
                 <label for="are_you_a_member_label" class="are_you_a_member_label">Are you a member?</label>
@@ -73,6 +75,7 @@
             </div>
 
             <div class="form-group mb-3">
+              <label for="email">Email</label>
               <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid':submitted && emailid['email'].errors}"  placeholder="Email">
               <div *ngIf="submitted && emailid['email'].errors" class="show-error">
                   <div *ngIf="submitted && emailid['email'].errors">Email field cannot be empty or invalid</div>
@@ -80,13 +83,12 @@
             </div>
 
             <div class="form-group mb-3">
-              <input type="text" class="form-control" formControlName="place_of_birth" [ngClass]="{'is-invalid':submitted && emailid['place_of_birth'].errors}"  placeholder="Place of birth">
-              <div *ngIf="submitted && emailid['place_of_birth'].errors" class="show-error">
-                Place of birth cannot be empty
-            </div>
+              <label for="placeOfBirth">Place of birth</label>
+              <input type="text" class="form-control" formControlName="place_of_birth" placeholder="Place of birth">
             </div>
 
             <div class="form-group mb-3">
+              <label for="homeTown">Hometwon</label>
               <input type="text" class="form-control" formControlName="home_town" [ngClass]="{'is-invalid':submitted && emailid['home_town'].errors}"  placeholder="Hometown">
               <div *ngIf="submitted && emailid['home_town'].errors" class="show-error">
                 <div *ngIf="submitted && emailid['home_town'].errors">Select something</div>
@@ -94,20 +96,8 @@
             </div>
 
             <div class="form-group mb-3">
-              <select class="form-select form-control" formControlName="region" [ngClass]="{'is-invalid':submitted && emailid['region'].errors}">
-                <option value="" disabled selected hidden>Region</option>
-                <option>{{region}}</option>
-              </select>
-              <div *ngIf="submitted && emailid['region'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['region'].errors">Select something</div>
-            </div>
-            </div>
-
-            <div class="form-group mb-3">
-              <input type="text" class="form-control" formControlName="postal_address" [ngClass]="{'is-invalid':submitted && emailid['postal_address'].errors}"  placeholder="Postal Address">
-              <div *ngIf="submitted && emailid['postal_address'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['postal_address'].errors">Postal address field cannot be empty</div>
-            </div>
+              <label for="postalAddress">Postal address</label>
+              <input type="text" class="form-control" formControlName="postal_address" placeholder="Postal Address">
             </div>
 
             <div class="form-group mb-3">
@@ -118,15 +108,14 @@
             </div>
 
             <div class="form-group mb-3">
-              <input type="text" class="form-control" formControlName="occupation" [ngClass]="{'is-invalid':submitted && emailid['occupation'].errors}"  placeholder="Occupation">
-              <div *ngIf="submitted && emailid['occupation'].errors" class="show-error">
-                <div *ngIf="submitted && emailid['occupation'].errors">Occupation field cannot be empty</div>
-            </div>
+              <label for="occupation">Occupation</label>
+              <input type="text" class="form-control" formControlName="occupation" placeholder="Occupation">
             </div>
 
             <div class="form-group mb-3">
+              <label for="maritalStatus">Marital Status</label>
               <select class="form-select form-control" formControlName="marital_status" [ngClass]="{'is-invalid':submitted && emailid['marital_status'].errors}">
-                <option value="" disabled selected hidden>Marital Status</option>
+                <option value="" disabled selected hidden>--Select--</option>
                 <option va>Single</option>
                 <option>Married</option>
                 <option>Divorced</option>
@@ -137,10 +126,23 @@
                 <div *ngIf="submitted && emailid['marital_status'].errors">Select something</div>
             </div>
             </div>
+            
 
             <div class="form-group mb-3">
+              <label for="region">Which region is the church?</label>
+              <select class="form-select form-control" formControlName="region" [ngClass]="{'is-invalid':submitted && emailid['region'].errors}">
+                <option value="" disabled selected hidden>--Select--</option>
+                <option>{{region}}</option>
+              </select>
+              <div *ngIf="submitted && emailid['region'].errors" class="show-error">
+                <div *ngIf="submitted && emailid['region'].errors">Select something</div>
+            </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="region">Which branch do you attend?</label>
               <select class="form-select form-control" formControlName="branch" [ngClass]="{'is-invalid':submitted && emailid['branch'].errors}">
-                <option value="" disabled selected hidden>Branch</option>
+                <option value="" disabled selected hidden>--Select--</option>
                 <option>{{branch}}</option>
               </select>
               <div *ngIf="submitted && emailid['branch'].errors" class="show-error">
@@ -149,6 +151,7 @@
             </div>
 
             <div class="form-group mb-3">
+              <label for="numberOfChildren">Number of Children</label>
               <input type="text" class="form-control" formControlName="number_of_children" [ngClass]="{'is-invalid':submitted && emailid['number_of_children'].errors}"  placeholder="Number of childern">
               <div *ngIf="submitted && emailid['number_of_children'].errors" class="show-error">
                 Number of children field cannot be empty

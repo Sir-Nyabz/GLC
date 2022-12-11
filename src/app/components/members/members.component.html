@@ -59,114 +59,93 @@
         <div class="modal-content" id="section">
           <div class="modal-header">
             <h5 class="modal-title">Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="row details-modal">
-            <label for="mnumber" class="col-sm-2 col-form-label">Membership Number</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="mnumber">
-            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
 
-          <div class="mb-3 row details-modal">
-            <label for="fname" class="col-sm-2 col-form-label">First Name</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="fname">
+          <form [formGroup]="printGroup" id="printForm" novalidate>
+            <div class="form-group">
+                <label for="mnumber">Membership Number</label>
+                  <input type="text" readonly class="form-control-plaintext" id="mnumber" formControlName="membership_number">
             </div>
-          </div>
-
-          <div class="mb-3 row details-modal">
-            <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="lname">
+            <hr>
+            <div class="form-group">
+              <label for="fname">First Name</label>
+                <input type="text" readonly class="form-control-plaintext" id="fname" formControlName="first_name">
             </div>
-          </div>
-
-          <div class="mb-3 row details-modal">
-            <label for="oname" class="col-sm-2 col-form-label">Other Name</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="oname">
+            <hr>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              
+                <input type="text" readonly class="form-control-plaintext" id="lname" formControlName="last_name">
+              
             </div>
-          </div>
-
-          <div class="mb-3 row details-modal">
-            <label for="dbirth" class="col-sm-2 col-form-label">Date of birth</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="dbirth">
+            <hr>
+            <div class="form-group">
+              <label for="oname">Other Name</label>
+                <input type="text" readonly class="form-control-plaintext" id="oname" formControlName="other_name">
             </div>
-          </div>
-
-          <div class="row details-modal">
-            <label for="email" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="email">
+            <hr>
+            <div class="form-group">
+              <label for="dbirth">Date of birth</label>
+                <input type="text" readonly class="form-control-plaintext" id="dbirth" formControlName="date_of_birth">
             </div>
-          </div>
-
-          <div class="row details-modal">
-            <label for="dbirth" class="col-sm-2 col-form-label">Gender</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="gender">
+            <hr>
+            <div class="form-group">
+              <label for="email">Email</label>
+                <input type="text" readonly class="form-control-plaintext" id="email" formControlName="email">
             </div>
-          </div>
-
-          <div class="row details-modal">
-            <label for="htown" class="col-sm-2 col-form-label">Hometown</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="htown">
+            <hr>
+            <div class="form-group">
+              <label for="dbirth">Gender</label>
+                <input type="text" readonly class="form-control-plaintext" id="gender" formControlName="gender">
             </div>
-          </div>
-
+            <hr>
+            <div class="form-group">
+              <label for="htown">Hometown</label>
+                <input type="text" readonly class="form-control-plaintext" id="htown" formControlName="home_town">
+            </div>
+            <hr>
+            
+            <div class="form-group">
+              <label for="occupation">Occupation</label>
+                <input type="text" readonly class="form-control-plaintext" id="occupation" formControlName="occupation">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="numberofchildren">Number of children</label>
+                <input type="text" readonly class="form-control-plaintext" id="numberofchildren" formControlName="number_of_children">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="mstatus">Marital status</label>
+                <input type="text" readonly class="form-control-plaintext" id="mstatus" formControlName="marital_status">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="raddress">Residential address</label>
+                <input type="text" readonly class="form-control-plaintext" id="raddress" formControlName="residential_address">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="placeofbirth">Place of birth</label>
+                <input type="text" readonly class="form-control-plaintext" id="placeofbirth" formControlName="place_of_birth">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="paddress">Postal address</label>
+                <input type="text" readonly class="form-control-plaintext" id="paddress" formControlName="postal_address">
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="ismember">Are you a member?</label>
+                <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member" placeholder="Yes" *ngIf="Yes">
+                <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member" placeholder="No" *ngIf="No">
+            </div>
+          </form>
           
-          <div class="mb-3 row details-modal">
-            <label for="occupation" class="col-sm-2 col-form-label">Occupation</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="occupation">
-            </div>
-          </div>
-
-          <div class="mb-3 row details-modal">
-            <label for="numberofchildren" class="col-sm-2 col-form-label">Number of children</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="numberofchildren">
-            </div>
-          </div>
-          
-          <div class="mb-3 row details-modal">
-            <label for="mstatus" class="col-sm-2 col-form-label">Marital status</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="mstatus">
-            </div>
-          </div>
-          
-          <div class="mb-3 row details-modal">
-            <label for="raddress" class="col-sm-2 col-form-label">Residential address</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="raddress">
-            </div>
-          </div>
-          
-          <div class="mb-3 row details-modal">
-            <label for="placeofbirth" class="col-sm-2 col-form-label">Place of birth</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="placeofbirth">
-            </div>
-          </div>
-          
-          <div class="mb-3 row details-modal">
-            <label for="paddress" class="col-sm-2 col-form-label">Postal address</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="paddress">
-            </div>
-          </div>
-          
-          <div class="mb-3 row details-modal">
-            <label for="ismember" class="col-sm-2 col-form-label">Are you a member?</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext print-Hidden" id="ismember" value="Yes || No">
-            </div>
-          </div>
-          <button printTitle="" styleSheetFile="../../assets/css/style.css" printSectionId="section" ngxPrint>
+          <button printTitle="" styleSheetFile="../../assets/css/style.css" printSectionId="section" ngxPrint class="printButton">
             <i class="bi bi-printer"></i>
           </button>
         </div>

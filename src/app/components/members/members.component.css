@@ -1,18 +1,22 @@
-.details-modal{
+
+.form-group{
     margin-left: 30%;
 }
 
-.form-control-plaintext{
-    margin-left: 20%;
+.printButton{
+    width:10%;
+    align-self: center;
+    margin-bottom: 10px;
 }
 
 label{
-    white-space: nowrap;
-    text-align: right;
+    margin-top: 8px;
+    font-weight: bold;
 }
 
 i.bi-printer{
-    margin-left: 50%;
+    align-self: center;
+    width: fit-content;
 }
 
 .addButton{
@@ -30,3 +34,9 @@ i.bi-printer{
     align-self: center;
     clear: both;
 }
+
+.modal-title{
+    margin-left: 30%;
+}
+
+
