@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../../shared/user.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,16 +12,27 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ResetComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute,private userService:UserService,private router:Router,private toaster:ToastrService) { }
+  resetGroup:FormGroup;
+  constructor(private route:ActivatedRoute,private userService:UserService,private router:Router,private toaster:ToastrService,
+    private formBuilder:FormBuilder) { 
+    this.resetGroup=this.formBuilder.group({
+      new_password:['',[Validators.required,Validators.email]],
+      confirm_new_password:['',[Validators.required,Validators.email]]
+    })
+  }
+
+  get r(){
+    return this.resetGroup.controls
+  }
 
   ngOnInit(): void {
     const snapshot=this.route.snapshot.params['token']
-    localStorage.setItem('token', snapshot)
+    localStorage.setItem('ADMIN-ASOREBA-GLC', snapshot)
   }
 
-  reset(form:NgForm){
-    const new_password = form.value.new_password;
-    const confirm_new_password = form.value.confirm_new_password;
+  reset(){
+    const new_password = this.resetGroup.value.new_password;
+    const confirm_new_password = this.resetGroup.value.confirm_new_password;
 
     if(confirm_new_password==new_password){
     this.userService.resetPassword(new_password).subscribe((res:any)=>{
@@ -43,7 +54,7 @@ export class ResetComponent implements OnInit {
 
   }else{
     this.toaster.error('Passwords mismatch')
-    form.reset()
+    this.resetGroup.reset()
   }
 }
 

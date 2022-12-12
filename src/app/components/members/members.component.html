@@ -64,6 +64,7 @@
             </button>
           </div>
 
+          <div class="card-body details-card-body">
           <form [formGroup]="printGroup" id="printForm" novalidate>
             <div class="form-group">
                 <label for="mnumber">Membership Number</label>
@@ -144,7 +145,7 @@
                 <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member" placeholder="No" *ngIf="No">
             </div>
           </form>
-          
+        </div>
           <button printTitle="" styleSheetFile="../../assets/css/style.css" printSectionId="section" ngxPrint class="printButton">
             <i class="bi bi-printer"></i>
           </button>
