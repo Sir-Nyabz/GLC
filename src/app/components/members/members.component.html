@@ -9,148 +9,155 @@
     </div>
 
     <div class="col-sm-2">
-       
+
       <select class="form-select form-control listtodisplay" id="getprofile" (change)="getProfile()">
         <option value="" disabled selected hidden>Select</option>
         <option value="all">All</option>
         <option value="onlymembers">Only Members</option>
       </select>
-        
+
     </div>
   </div>
 </div>
 
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="displayTable"
-      class="table table-striped table-bordered table-sm row-border hover table-responsive-sm" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th>Gender</th>
-          <th>Email</th>
-          <th>Hometown</th>
-          <th>Occupation</th>
-          <th>Membership number</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let membe of members">
-          <td>{{ membe.first_name+' '+membe.other_name+' '+membe.last_name }}</td>
-          <td>{{ membe.gender }}</td>
-          <td>{{ membe.email }}</td>
-          <td>{{ membe.home_town }}</td>
-          <td>{{ membe.occupation }}</td>
-          <td>{{ membe.membership_number }}</td>
-          <td>
-            <!-- details modal button -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" (click)="openDetails(membe)">Details</button> 
-            <button style="margin-right: 16px" (click)="deleteM(membe.asoreba_uuid)" class="btn btn-danger">
-              Delete
-            </button>
-            <a (click)="edit(membe)" style="margin-right: 16px" class="btn btn-success">Edit</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="displayTable"
+  class="table table-striped table-bordered table-sm row-border hover table-responsive-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Hometown</th>
+      <th>Occupation</th>
+      <th>Membership number</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let membe of members">
+      <td>{{ membe.first_name+' '+membe.other_name+' '+membe.last_name }}</td>
+      <td>{{ membe.gender }}</td>
+      <td>{{ membe.email }}</td>
+      <td>{{ membe.home_town }}</td>
+      <td>{{ membe.occupation }}</td>
+      <td>{{ membe.membership_number }}</td>
+      <td>
+        <!-- details modal button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg"
+          (click)="openDetails(membe)">Details</button>
+        <button style="margin-right: 16px" (click)="deleteM(membe.asoreba_uuid)" class="btn btn-danger">
+          Delete
+        </button>
+        <a (click)="edit(membe)" style="margin-right: 16px" class="btn btn-success">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-    <!-- details modal -->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="section">
-          <div class="modal-header">
-            <h5 class="modal-title">Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="card-body details-card-body">
-          <form [formGroup]="printGroup" id="printForm" novalidate>
-            <div class="form-group">
-                <label for="mnumber">Membership Number</label>
-                  <input type="text" readonly class="form-control-plaintext" id="mnumber" formControlName="membership_number">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="fname">First Name</label>
-                <input type="text" readonly class="form-control-plaintext" id="fname" formControlName="first_name">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="lname">Last Name</label>
-              
-                <input type="text" readonly class="form-control-plaintext" id="lname" formControlName="last_name">
-              
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="oname">Other Name</label>
-                <input type="text" readonly class="form-control-plaintext" id="oname" formControlName="other_name">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="dbirth">Date of birth</label>
-                <input type="text" readonly class="form-control-plaintext" id="dbirth" formControlName="date_of_birth">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="email">Email</label>
-                <input type="text" readonly class="form-control-plaintext" id="email" formControlName="email">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="dbirth">Gender</label>
-                <input type="text" readonly class="form-control-plaintext" id="gender" formControlName="gender">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="htown">Hometown</label>
-                <input type="text" readonly class="form-control-plaintext" id="htown" formControlName="home_town">
-            </div>
-            <hr>
-            
-            <div class="form-group">
-              <label for="occupation">Occupation</label>
-                <input type="text" readonly class="form-control-plaintext" id="occupation" formControlName="occupation">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="numberofchildren">Number of children</label>
-                <input type="text" readonly class="form-control-plaintext" id="numberofchildren" formControlName="number_of_children">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="mstatus">Marital status</label>
-                <input type="text" readonly class="form-control-plaintext" id="mstatus" formControlName="marital_status">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="raddress">Residential address</label>
-                <input type="text" readonly class="form-control-plaintext" id="raddress" formControlName="residential_address">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="placeofbirth">Place of birth</label>
-                <input type="text" readonly class="form-control-plaintext" id="placeofbirth" formControlName="place_of_birth">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="paddress">Postal address</label>
-                <input type="text" readonly class="form-control-plaintext" id="paddress" formControlName="postal_address">
-            </div>
-            <hr>
-            <div class="form-group">
-              <label for="ismember">Are you a member?</label>
-                <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member" placeholder="Yes" *ngIf="Yes">
-                <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member" placeholder="No" *ngIf="No">
-            </div>
-          </form>
-        </div>
-          <button printTitle="" styleSheetFile="../../assets/css/style.css" printSectionId="section" ngxPrint class="printButton">
-            <i class="bi bi-printer"></i>
-          </button>
-        </div>
+<!-- details modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="section">
+      <div class="modal-header">
+        <h5 class="modal-title">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      
+
+      <div class="card-body details-card-body">
+        <form [formGroup]="printGroup" id="printForm" novalidate>
+          <div class="form-group">
+            <label for="mnumber">Membership Number</label>
+            <input type="text" readonly class="form-control-plaintext" id="mnumber" formControlName="membership_number">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" readonly class="form-control-plaintext" id="fname" formControlName="first_name">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+
+            <input type="text" readonly class="form-control-plaintext" id="lname" formControlName="last_name">
+
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="oname">Other Name</label>
+            <input type="text" readonly class="form-control-plaintext" id="oname" formControlName="other_name">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="dbirth">Date of birth</label>
+            <input type="text" readonly class="form-control-plaintext" id="dbirth" formControlName="date_of_birth">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" readonly class="form-control-plaintext" id="email" formControlName="email">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="dbirth">Gender</label>
+            <input type="text" readonly class="form-control-plaintext" id="gender" formControlName="gender">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="htown">Hometown</label>
+            <input type="text" readonly class="form-control-plaintext" id="htown" formControlName="home_town">
+          </div>
+          <hr>
+
+          <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" readonly class="form-control-plaintext" id="occupation" formControlName="occupation">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="numberofchildren">Number of children</label>
+            <input type="text" readonly class="form-control-plaintext" id="numberofchildren"
+              formControlName="number_of_children">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="mstatus">Marital status</label>
+            <input type="text" readonly class="form-control-plaintext" id="mstatus" formControlName="marital_status">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="raddress">Residential address</label>
+            <input type="text" readonly class="form-control-plaintext" id="raddress"
+              formControlName="residential_address">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="placeofbirth">Place of birth</label>
+            <input type="text" readonly class="form-control-plaintext" id="placeofbirth"
+              formControlName="place_of_birth">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="paddress">Postal address</label>
+            <input type="text" readonly class="form-control-plaintext" id="paddress" formControlName="postal_address">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="ismember">Are you a member?</label>
+            <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member"
+              placeholder="Yes" *ngIf="Yes">
+            <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member"
+              placeholder="No" *ngIf="No">
+          </div>
+        </form>
+      </div>
+      <button printTitle="" styleSheetFile="../../assets/css/style.css" printSectionId="section" ngxPrint
+        class="printButton">
+        <i class="bi bi-printer"></i>
+      </button>
     </div>
- 
+  </div>
+
+</div>

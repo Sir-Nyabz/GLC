@@ -10,25 +10,25 @@ import { MemberService } from '../../shared/member.service';
 import { UserService } from '../../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
-declare const $:any;
+declare const $: any;
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css'],
 })
-export class MembersComponent implements OnDestroy,OnInit{
-  
+export class MembersComponent implements OnDestroy, OnInit {
+
   dtOptions: any = {};
-  printGroup:FormGroup;
+  printGroup: FormGroup;
   regions: any[] = [];
   branches: [] | any;
   member: Member | any;
   detail: any;
-  details:any;
-  members:Member[]=[];
+  details: any;
+  members: Member[] = [];
   dtTrigger: Subject<any> = new Subject<any>();
-  
+
   submitted: any;
   countries: any;
   country_uuid: Observable<any> | any;
@@ -45,37 +45,37 @@ export class MembersComponent implements OnDestroy,OnInit{
   branch_uuid: any;
   B: any;
   memberShip!: boolean;
-  Yes: boolean=false;
-  No: boolean=false;
+  Yes: boolean = false;
+  No: boolean = false;
 
   constructor(
     private userService: UserService,
     private memberService: MemberService,
-    private toaster:ToastrService,
-    private formBuilder:FormBuilder,
-    private router:Router) { 
-    this.printGroup=this.formBuilder.group({
-      membership_number:['',Validators.required],
-      first_name:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      last_name:['',Validators.required],
-      other_name:[''],
-      gender:['',Validators.required],
-      date_of_birth:['',Validators.required],
-      place_of_birth:['',Validators.required],
-      home_town:['',Validators.required],
-      region:['',Validators.required],
-      postal_address:[''],
-      residential_address:['',Validators.required],
-      occupation:['',Validators.required],
-      number_of_children:[''],
-      marital_status:['',Validators.required],
-      branch:['',Validators.required],
-      is_member:['',Validators.required]
+    private toaster: ToastrService,
+    private formBuilder: FormBuilder,
+    private router: Router) {
+    this.printGroup = this.formBuilder.group({
+      membership_number: ['', Validators.required],
+      first_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      last_name: ['', Validators.required],
+      other_name: [''],
+      gender: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+      place_of_birth: ['', Validators.required],
+      home_town: ['', Validators.required],
+      region: ['', Validators.required],
+      postal_address: [''],
+      residential_address: ['', Validators.required],
+      occupation: ['', Validators.required],
+      number_of_children: [''],
+      marital_status: ['', Validators.required],
+      branch: ['', Validators.required],
+      is_member: ['', Validators.required]
     })
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.userService.autoLogout();
 
     this.dtOptions = {
@@ -84,77 +84,77 @@ export class MembersComponent implements OnDestroy,OnInit{
     };
   }
 
-  getProfile(){
-    if((document.getElementById('getprofile') as HTMLInputElement).value=='all'){
-  
-      this.memberService.getAllMembers().subscribe((v:any)=>{
+  getProfile() {
+    if ((document.getElementById('getprofile') as HTMLInputElement).value == 'all') {
+
+      this.memberService.getAllMembers().subscribe((v: any) => {
         this.members = v.data_list;
-        
+
         this.dtTrigger.next(this.dtOptions);
         $("#displayTable").dataTable().fnDestroy();
       })
-    }else{
-  
-      this.memberService.getOnlyMembers().subscribe((v:any)=>{
+    } else {
+
+      this.memberService.getOnlyMembers().subscribe((v: any) => {
         this.members = v.data_list;
-        
+
         this.dtTrigger.next(this.dtOptions);
         $("#displayTable").dataTable().fnDestroy()
       })
     }
   }
 
-  navig_member_biodata(){
+  navig_member_biodata() {
     this.router.navigate(['/member-biodata']).
-    then(() => {
-      window.location.reload();
-    });
+      then(() => {
+        window.location.reload();
+      });
   }
 
   deleteM(id: any) {
-   
 
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, cancel!',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            Swal.fire(
-              'Cancelled',
-              'Your imaginary file is safe :)',
-              'error'
-            )
-          }
-        })
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
       }
-  edit(membe:Member){
+    })
+  }
+  edit(membe: Member) {
     this.memberService.setMember(membe);
     this.router.navigate(['/edit'])
   }
 
-  openDetails(membe:Member){
+  openDetails(membe: Member) {
     console.log(membe);
-    this.memberShip=membe.is_member
+    this.memberShip = membe.is_member
 
-    if(this.memberShip==true || this.memberShip==undefined){
-      this.Yes=true
+    if (this.memberShip == true || this.memberShip == undefined) {
+      this.Yes = true
     }
-    
-    if(this.memberShip==false){
-      this.No=true
+
+    if (this.memberShip == false) {
+      this.No = true
     }
 
     this.printGroup.patchValue({

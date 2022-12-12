@@ -11,42 +11,42 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ForgotComponent implements OnInit {
 
-  submitted=false;
-  forgotGroup:FormGroup;
+  submitted = false;
+  forgotGroup: FormGroup;
 
-  constructor(private userService:UserService,private router:Router,private formBuilder:FormBuilder,private toaster:ToastrService) { 
-    this.forgotGroup=this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]]
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private toaster: ToastrService) {
+    this.forgotGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
     })
   }
 
-  get f(){
+  get f() {
     return this.forgotGroup.controls
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.submitted=true;
+  onSubmit() {
+    this.submitted = true;
     const email = this.forgotGroup.value.email;
 
-    this.userService.sendMail(email).subscribe((res:any)=>{
-      if(res){
+    this.userService.sendMail(email).subscribe((res: any) => {
+      if (res) {
         this.toaster.success('Check your mail for reset link');
         this.router.navigate(['/forgot']);
         this.forgotGroup.reset()
-      //form.reset();
-      }else{
+        //form.reset();
+      } else {
         this.toaster.error('Email does not exist');
         this.forgotGroup.reset()
         //form.reset();
       }
-      
+
     },
-    err=>{
-      this.toaster.error('Network Challenge');
-    })
+      err => {
+        this.toaster.error('Network Challenge');
+      })
 
   }
 }

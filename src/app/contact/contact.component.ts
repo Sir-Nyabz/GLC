@@ -13,49 +13,49 @@ import { MemberService } from '../shared/member.service';
 })
 export class ContactComponent implements OnInit {
 
-  contactGroup:FormGroup;
-  submitted: boolean=false;
+  contactGroup: FormGroup;
+  submitted: boolean = false;
   asoreba_uuid: any;
-  constructor(private datepipe:DatePipe,
+  constructor(private datepipe: DatePipe,
     private memberService: MemberService,
-    private formBuilder:FormBuilder,
-    private router:Router, 
-    private toaster:ToastrService) {
-    this.contactGroup=this.formBuilder.group({
-      cemail:['',[Validators.required,Validators.email]],
-      msisdn:['',Validators.required],
-      voice_call:['',[Validators.required]],
-      whatsapp:['',[Validators.required]],
-      telegram:['',[Validators.required]]
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private toaster: ToastrService) {
+    this.contactGroup = this.formBuilder.group({
+      cemail: ['', [Validators.required, Validators.email]],
+      msisdn: ['', Validators.required],
+      voice_call: ['', [Validators.required]],
+      whatsapp: ['', [Validators.required]],
+      telegram: ['', [Validators.required]]
     })
-  
-   }
 
-   get c(){
+  }
+
+  get c() {
     return this.contactGroup.controls
   }
-  
+
   ngOnInit(): void {
     this.memberService.currentMember.pipe(take(1)).subscribe(
-      data=>{
-        this.asoreba_uuid=data.asoreba_uuid;
+      data => {
+        this.asoreba_uuid = data.asoreba_uuid;
         console.log(this.asoreba_uuid)
       },
     )
   }
 
-  addContact(){
-    this.submitted=true;
+  addContact() {
+    this.submitted = true;
     this.memberService.currentMember.pipe(take(1)).subscribe(
-      data=>{
-        this.asoreba_uuid=data.asoreba_uuid;
+      data => {
+        this.asoreba_uuid = data.asoreba_uuid;
       },
     )
-    const msisdn=this.contactGroup.value.msisdn;
-    const is_voice_call=this.contactGroup.value.voice_call;
-    const is_telegram=this.contactGroup.value.telegram;
-    const is_whatsapp=this.contactGroup.value.whatsapp;
-    const asoreba_uuid=this.asoreba_uuid
+    const msisdn = this.contactGroup.value.msisdn;
+    const is_voice_call = this.contactGroup.value.voice_call;
+    const is_telegram = this.contactGroup.value.telegram;
+    const is_whatsapp = this.contactGroup.value.whatsapp;
+    const asoreba_uuid = this.asoreba_uuid
 
     this.memberService.addAsorebaContact(
       msisdn,
@@ -63,15 +63,16 @@ export class ContactComponent implements OnInit {
       is_whatsapp,
       is_telegram,
       asoreba_uuid).subscribe({
-        next:(res:any)=>{
+        next: (res: any) => {
           this.toaster.success('Contact added successfully');
           this.contactGroup.reset();
           this.router.navigate(['/members'])
-      },
-      error: (e: any) => {this.toaster.error('There was an error');
-      this.contactGroup.reset()
-    },
-     }
+        },
+        error: (e: any) => {
+          this.toaster.error('There was an error');
+          this.contactGroup.reset()
+        },
+      }
       )
   }
 

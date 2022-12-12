@@ -14,9 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MemberBiodataComponent implements OnInit {
 
-  
-  biodataGroup:FormGroup;
-  submitted=false;
+
+  biodataGroup: FormGroup;
+  submitted = false;
   country_uuid: any;
   regions: [] | any;
   church_branch_uuid: any;
@@ -33,34 +33,33 @@ export class MemberBiodataComponent implements OnInit {
   B: any;
   id: any;
 
-  constructor(private datepipe:DatePipe,
-     private memberService: MemberService,
-     private formBuilder:FormBuilder,
-     private router:Router, 
-     private toaster:ToastrService) 
-     { 
-    this.biodataGroup=this.formBuilder.group({
-      first_name:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      last_name:['',Validators.required],
-      other_name:[''],
-      gender:['',Validators.required],
-      date_of_birth:['',Validators.required],
-      place_of_birth:['',Validators.required],
-      home_town:['',Validators.required],
-      region:['',Validators.required],
-      postal_address:[''],
-      residential_address:['',Validators.required],
-      occupation:['',Validators.required],
-      number_of_children:[''],
-      marital_status:['',Validators.required],
-      branch:['',Validators.required],
-      is_member:['',Validators.required]
+  constructor(private datepipe: DatePipe,
+    private memberService: MemberService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private toaster: ToastrService) {
+    this.biodataGroup = this.formBuilder.group({
+      first_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      last_name: ['', Validators.required],
+      other_name: [''],
+      gender: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+      place_of_birth: ['', Validators.required],
+      home_town: ['', Validators.required],
+      region: ['', Validators.required],
+      postal_address: [''],
+      residential_address: ['', Validators.required],
+      occupation: ['', Validators.required],
+      number_of_children: [''],
+      marital_status: ['', Validators.required],
+      branch: ['', Validators.required],
+      is_member: ['', Validators.required]
     })
 
 
   }
-  get emailid(){
+  get emailid() {
     return this.biodataGroup.controls
   }
 
@@ -69,94 +68,94 @@ export class MemberBiodataComponent implements OnInit {
     this.memberService.getAllMembers().pipe(
       tap(res => {
         this.members = res.data_list
-        
+
         for (var i = 0; i < this.members.length; i++) {
-            this.asoreba_uuid = this.members[i].asoreba_uuid
+          this.asoreba_uuid = this.members[i].asoreba_uuid
         }
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {
-        
-        }),
+
+      }),
     ).subscribe()
 
     this.getCountriesRegionsBranches();
-    
+
   }
 
-  membershipNumber(){
-    const member=this.biodataGroup.value.is_member;
+  membershipNumber() {
+    const member = this.biodataGroup.value.is_member;
 
-      const first_char='G';
-      const second_char='L';
-      const third_char='C';
-      const fourth_char=Math.floor(Math.random() * 10);
-      const fifth_char=Math.floor(Math.random() * 10);
-      const sixth_char=Math.floor(Math.random() * 10);
-      const seventh_char=Math.floor(Math.random() * 10);
-      const eighth_char=Math.floor(Math.random() * 10);
-  
-      const ID=first_char+second_char+third_char+fourth_char+fifth_char+sixth_char+seventh_char+eighth_char;
+    const first_char = 'G';
+    const second_char = 'L';
+    const third_char = 'C';
+    const fourth_char = Math.floor(Math.random() * 10);
+    const fifth_char = Math.floor(Math.random() * 10);
+    const sixth_char = Math.floor(Math.random() * 10);
+    const seventh_char = Math.floor(Math.random() * 10);
+    const eighth_char = Math.floor(Math.random() * 10);
 
-      if(member==true){
-      const memberID=ID+"M"
+    const ID = first_char + second_char + third_char + fourth_char + fifth_char + sixth_char + seventh_char + eighth_char;
+
+    if (member == true) {
+      const memberID = ID + "M"
       return memberID
-      }else{
-        const memberID=ID+"N"
+    } else {
+      const memberID = ID + "N"
       return memberID
-      }
+    }
   }
 
-  addBiodata(){
-    this.submitted=true;
+  addBiodata() {
+    this.submitted = true;
 
-    const first_name=this.biodataGroup.value.first_name;
-    const last_name=this.biodataGroup.value.last_name;
-    const other_name=this.biodataGroup.value.other_name;
-    const gender=this.biodataGroup.value.gender;
-    const date_of_birth= this.biodataGroup.value.date_of_birth
+    const first_name = this.biodataGroup.value.first_name;
+    const last_name = this.biodataGroup.value.last_name;
+    const other_name = this.biodataGroup.value.other_name;
+    const gender = this.biodataGroup.value.gender;
+    const date_of_birth = this.biodataGroup.value.date_of_birth
     const email = this.biodataGroup.value.email;
-    const place_of_birth=this.biodataGroup.value.place_of_birth;
-    const home_town=this.biodataGroup.value.home_town;
-    const region_uuid=this.region_uuid;
-    const postal_address=this.biodataGroup.value.postal_address;
-    const residential_address=this.biodataGroup.value.residential_address;
-    const occupation=this.biodataGroup.value.occupation;
-    const membership_number=this.membershipNumber();
-    const number_of_children=this.biodataGroup.value.number_of_children;
-    const marital_status=this.biodataGroup.value.marital_status;
-    const branch_uuid=this.branch_uuid;
-    const is_member=this.biodataGroup.value.is_member;
+    const place_of_birth = this.biodataGroup.value.place_of_birth;
+    const home_town = this.biodataGroup.value.home_town;
+    const region_uuid = this.region_uuid;
+    const postal_address = this.biodataGroup.value.postal_address;
+    const residential_address = this.biodataGroup.value.residential_address;
+    const occupation = this.biodataGroup.value.occupation;
+    const membership_number = this.membershipNumber();
+    const number_of_children = this.biodataGroup.value.number_of_children;
+    const marital_status = this.biodataGroup.value.marital_status;
+    const branch_uuid = this.branch_uuid;
+    const is_member = this.biodataGroup.value.is_member;
 
-      this.memberService.addAsorebaProfile(
-        branch_uuid,
-        date_of_birth,
-        email,
-        first_name,
-        gender,
-        home_town,
-        is_member,
-        last_name,
-        marital_status,
-        membership_number,
-        number_of_children,
-        occupation,
-        other_name,
-        place_of_birth,
-        postal_address,
-        region_uuid,
-        residential_address
-      ).subscribe({
-        next:(res:any)=>{
-          this.memberService.setMember(res);
-          this.toaster.success('Profile added successfully');
-          this.router.navigate(['/contact'])
-          //console.log(res)
+    this.memberService.addAsorebaProfile(
+      branch_uuid,
+      date_of_birth,
+      email,
+      first_name,
+      gender,
+      home_town,
+      is_member,
+      last_name,
+      marital_status,
+      membership_number,
+      number_of_children,
+      occupation,
+      other_name,
+      place_of_birth,
+      postal_address,
+      region_uuid,
+      residential_address
+    ).subscribe({
+      next: (res: any) => {
+        this.memberService.setMember(res);
+        this.toaster.success('Profile added successfully');
+        this.router.navigate(['/contact'])
+        //console.log(res)
       },
       error: (e: any) => this.toaster.error('There was an error'),
-     })
-    
-    }
+    })
+
+  }
 
 
   getCountriesRegionsBranches() {

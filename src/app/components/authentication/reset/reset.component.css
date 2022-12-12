@@ -1,8 +1,9 @@
-.card{
+.card {
     width: 600px;
     margin: auto;
 }
 
-.reset-card-body{
-    background-color: rgb(46, 200, 95);;
+.reset-card-body {
+    background-color: rgb(46, 200, 95);
+    ;
 }

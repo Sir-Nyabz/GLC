@@ -1,62 +1,66 @@
 <!-- Contact Form -->
 <div class="container">
   <div class="card-body contact-card-body">
-  <div class="row">
-  <div class="col-sm-2"></div>
-  <div class="col-sm-8">
-    <form (ngSubmit)="addContact()" [formGroup]="contactGroup" id="contactform" novalidate>
-    
-      <div class="form-group mb-3">
-        <label for="phoneNumber">Phone number</label>
-        <input type="text" class="form-control" formControlName="msisdn" [ngClass]="{'is-invalid':submitted && c['msisdn'].errors}" placeholder="Phone Number">
-        <div *ngIf="submitted && c['msisdn'].errors" class="show-error">
-          Enter a phone number
-        </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <form (ngSubmit)="addContact()" [formGroup]="contactGroup" id="contactform" novalidate>
+
+          <div class="form-group mb-3">
+            <label for="phoneNumber">Phone number</label>
+            <input type="text" class="form-control" formControlName="msisdn"
+              [ngClass]="{'is-invalid':submitted && c['msisdn'].errors}" placeholder="Phone Number">
+            <div *ngIf="submitted && c['msisdn'].errors" class="show-error">
+              Enter a phone number
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="voiCe">Is it reachable on voice?</label>
+            <select class="form-select form-control" formControlName="voice_call"
+              [ngClass]="{'is-invalid':submitted && c['voice_call'].errors}">
+              <option value="" disabled selected hidden>--Select--</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+            <div *ngIf="submitted && c['voice_call'].errors" class="show-error">
+              Select something
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="whatsApp">Is it reachable on whatsapp?</label>
+            <select class="form-select form-control" formControlName="whatsapp"
+              [ngClass]="{'is-invalid':submitted && c['whatsapp'].errors}">
+              <option value="" disabled selected hidden>--Select--</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+            <div *ngIf="submitted && c['whatsapp'].errors" class="show-error">
+              Select something
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="teleGram">Is it reachable on telegram?</label>
+            <select class="form-select form-control" formControlName="telegram"
+              [ngClass]="{'is-invalid':submitted && c['telegram'].errors}">
+              <option value="" disabled selected hidden>--Select--</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+            <div *ngIf="submitted && c['telegram'].errors" class="show-error">
+              Select something
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </div>
+        </form>
       </div>
-  
-      <div class="form-group mb-3">
-        <label for="voiCe">Is it reachable on voice?</label>
-        <select class="form-select form-control" formControlName="voice_call" [ngClass]="{'is-invalid':submitted && c['voice_call'].errors}">
-          <option value="" disabled selected hidden>--Select--</option>
-          <option value="True">Yes</option>
-          <option value="False">No</option>
-        </select>
-        <div *ngIf="submitted && c['voice_call'].errors" class="show-error">
-          Select something
-        </div>
-      </div>
-  
-      <div class="form-group mb-3">
-        <label for="whatsApp">Is it reachable on whatsapp?</label>
-        <select class="form-select form-control" formControlName="whatsapp" [ngClass]="{'is-invalid':submitted && c['whatsapp'].errors}">
-          <option value="" disabled selected hidden>--Select--</option>
-          <option value="True">Yes</option>
-          <option value="False">No</option>
-        </select>
-        <div *ngIf="submitted && c['whatsapp'].errors" class="show-error">
-          Select something
-        </div>
-      </div>
-  
-      <div class="form-group mb-3">
-        <label for="teleGram">Is it reachable on telegram?</label>
-        <select class="form-select form-control" formControlName="telegram" [ngClass]="{'is-invalid':submitted && c['telegram'].errors}">
-          <option value="" disabled selected hidden>--Select--</option>
-          <option value="True">Yes</option>
-          <option value="False">No</option>
-        </select>
-        <div *ngIf="submitted && c['telegram'].errors" class="show-error">
-          Select something
-        </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-4">
-          <button type="submit" class="btn btn-primary btn-block">Submit</button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
-  </div>
-</div>
 </div>

@@ -1,25 +1,24 @@
-
-.form-group{
+.form-group {
     margin-left: 30%;
 }
 
-.printButton{
-    width:10%;
+.printButton {
+    width: 10%;
     align-self: center;
     margin-bottom: 10px;
 }
 
-label{
+label {
     margin-top: 8px;
     font-weight: bold;
 }
 
-i.bi-printer{
+i.bi-printer {
     align-self: center;
     width: fit-content;
 }
 
-.addButton{
+.addButton {
     align-items: center;
     margin: 10px;
     align-content: center;
@@ -27,7 +26,7 @@ i.bi-printer{
     clear: both;
 }
 
-.listtodisplay{
+.listtodisplay {
     align-items: center;
     margin: 10px;
     align-content: center;
@@ -35,11 +34,11 @@ i.bi-printer{
     clear: both;
 }
 
-.modal-title{
+.modal-title {
     margin-left: 30%;
 }
 
-.details-card-body{
-    background-color: rgb(46, 200, 95);;
+.details-card-body {
+    background-color: rgb(46, 200, 95);
+    ;
 }
-

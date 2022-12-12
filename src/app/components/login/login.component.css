@@ -1,21 +1,23 @@
-.card{
+.card {
     width: 600px;
     margin: auto;
 }
 
-.login-card-body{
-    background-color: rgb(46, 200, 95);;
+.login-card-body {
+    background-color: rgb(46, 200, 95);
+    ;
 }
 
-.i-forgot-my-password{
+.i-forgot-my-password {
     color: white;
 }
- label{
+
+label {
     color: white;
     text-align: right;
     margin-right: 10px;
- }
+}
 
- .text-box{
+.text-box {
     width: 50px;
- }
+}

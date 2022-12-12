@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
   church_branches: any;
   branch: any;
   branch_uuid: any;
-  updateGroup:FormGroup;
+  updateGroup: FormGroup;
   member: any;
   detail!: string;
   status: any;
@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
   members: any;
   asoreba_uuid: any;
   Branch: any;
-  submitted: boolean=false;
+  submitted: boolean = false;
   m: any;
   sex: any;
   marital: any;
@@ -36,28 +36,28 @@ export class EditComponent implements OnInit {
   membershipNumber: any;
   church_branch_uuid: any;
 
-  constructor(private memberService: MemberService,private formBuilder:FormBuilder,private toaster:ToastrService,private router:Router) { 
-    this.updateGroup=this.formBuilder.group({
-      first_name:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      last_name:['',Validators.required],
-      other_name:[''],
-      gender:['',Validators.required],
-      date_of_birth:['',Validators.required],
-      place_of_birth:['',Validators.required],
-      home_town:['',Validators.required],
-      region:['',Validators.required],
-      postal_address:[''],
-      residential_address:['',Validators.required],
-      occupation:['',Validators.required],
-      number_of_children:[''],
-      marital_status:['',Validators.required],
-      branch:['',Validators.required],
-      is_member:['',Validators.required]
+  constructor(private memberService: MemberService, private formBuilder: FormBuilder, private toaster: ToastrService, private router: Router) {
+    this.updateGroup = this.formBuilder.group({
+      first_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      last_name: ['', Validators.required],
+      other_name: [''],
+      gender: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+      place_of_birth: ['', Validators.required],
+      home_town: ['', Validators.required],
+      region: ['', Validators.required],
+      postal_address: [''],
+      residential_address: ['', Validators.required],
+      occupation: ['', Validators.required],
+      number_of_children: [''],
+      marital_status: ['', Validators.required],
+      branch: ['', Validators.required],
+      is_member: ['', Validators.required]
     })
   }
 
-  get u(){
+  get u() {
     return this.updateGroup.controls
   }
 
@@ -95,68 +95,68 @@ export class EditComponent implements OnInit {
     this.getMember();
   }
 
-  getMember(){
+  getMember() {
     this.memberService.currentMember.pipe(take(1)).subscribe(
-      data=>{
-        if(data){
-        this.asoreba_uuid=data.asoreba_uuid;
-        this.membershipNumber=data.membership_number;
-        this.church_branch_uuid=data.church_branch_uuid;
-console.log(data)
-        this.updateGroup.patchValue({
-          first_name: data.first_name,
-          date_of_birth: data.date_of_birth,
-          email: data.email,
-          gender: data.gender,
-          other_name: data.other_name,
-          last_name: data.last_name,
-          place_of_birth: data.place_of_birth,
-          home_town: data.home_town,
-          postal_address: data.postal_address,
-          residential_address: data.residential_address,
-          occupation: data.occupation,
-          number_of_children: data.number_of_children,
-          marital_status: data.marital_status,
-          branch: data.church_branch_uuid,
-          region: data.region_uuid,
-        });
+      data => {
+        if (data) {
+          this.asoreba_uuid = data.asoreba_uuid;
+          this.membershipNumber = data.membership_number;
+          this.church_branch_uuid = data.church_branch_uuid;
+          console.log(data)
+          this.updateGroup.patchValue({
+            first_name: data.first_name,
+            date_of_birth: data.date_of_birth,
+            email: data.email,
+            gender: data.gender,
+            other_name: data.other_name,
+            last_name: data.last_name,
+            place_of_birth: data.place_of_birth,
+            home_town: data.home_town,
+            postal_address: data.postal_address,
+            residential_address: data.residential_address,
+            occupation: data.occupation,
+            number_of_children: data.number_of_children,
+            marital_status: data.marital_status,
+            branch: data.church_branch_uuid,
+            region: data.region_uuid,
+          });
 
-        if(data.is_member !== undefined) {
-          this.updateGroup.patchValue({
-            is_member: data.is_member,
-          });
+          if (data.is_member !== undefined) {
+            this.updateGroup.patchValue({
+              is_member: data.is_member,
+            });
+          } else {
+            this.updateGroup.patchValue({
+              is_member: true,
+            });
+          }
         } else {
-          this.updateGroup.patchValue({
-            is_member: true,
-          });
+          this.router.navigate(['/members'])
         }
-      }else{
-        this.router.navigate(['/members'])
-      }
       },
     )
   }
-  
+
   updateRecord() {
-    this.submitted=true;
-    const asoreba_uuid=this.asoreba_uuid
-    const first_name=this.updateGroup.value.first_name;
-    const last_name=this.updateGroup.value.last_name;
-    const other_name=this.updateGroup.value.other_name;
-    const gender=this.updateGroup.value.gender;
-    const date_of_birth= this.updateGroup.value.date_of_birth
+    this.submitted = true;
+    const asoreba_uuid = this.asoreba_uuid
+    const first_name = this.updateGroup.value.first_name;
+    const last_name = this.updateGroup.value.last_name;
+    const other_name = this.updateGroup.value.other_name;
+    const gender = this.updateGroup.value.gender;
+    const date_of_birth = this.updateGroup.value.date_of_birth
     const email = this.updateGroup.value.email;
-    const place_of_birth=this.updateGroup.value.place_of_birth;
-    const home_town=this.updateGroup.value.home_town;
-    const region_uuid=this.updateGroup.value.region;
-    const postal_address=this.updateGroup.value.postal_address;
-    const residential_address=this.updateGroup.value.residential_address;
-    const occupation=this.updateGroup.value.occupation;
-    const membership_number=this.membershipNumber;
-    const number_of_children=this.updateGroup.value.number_of_children;
-    const marital_status=this.updateGroup.value.number_of_children;
-    const branch_uuid=this.branch_uuid;
-    const is_member=this.updateGroup.value.is_member;
+    const place_of_birth = this.updateGroup.value.place_of_birth;
+    const home_town = this.updateGroup.value.home_town;
+    const region_uuid = this.updateGroup.value.region;
+    const postal_address = this.updateGroup.value.postal_address;
+    const residential_address = this.updateGroup.value.residential_address;
+    const occupation = this.updateGroup.value.occupation;
+    const membership_number = this.membershipNumber;
+    const number_of_children = this.updateGroup.value.number_of_children;
+    const marital_status = this.updateGroup.value.number_of_children;
+    const branch_uuid = this.branch_uuid;
+    const is_member = this.updateGroup.value.is_member;
     this.memberService.updateMember(
       asoreba_uuid,
       branch_uuid,
@@ -177,12 +177,12 @@ console.log(data)
       region_uuid,
       residential_address
     ).subscribe({
-      next:(res:any)=>{
+      next: (res: any) => {
         this.toaster.success('Profile updated successfully')
         this.router.navigate(['/members']);
         this.updateGroup.reset()
-    },
-    error: (e: any) => this.toaster.error('There was an error'),
-   })
+      },
+      error: (e: any) => this.toaster.error('There was an error'),
+    })
   }
 }

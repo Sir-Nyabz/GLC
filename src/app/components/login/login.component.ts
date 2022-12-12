@@ -11,45 +11,44 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  submitted=false;
-  loginGroup:FormGroup;
-  is_Loader:boolean=true;
+  submitted = false;
+  loginGroup: FormGroup;
+  is_Loader: boolean = true;
 
-  constructor(private userService: UserService, private router: Router,private formBuilder:FormBuilder,private toaster:ToastrService) {
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private toaster: ToastrService) {
 
-    this.loginGroup=this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',Validators.required]
+    this.loginGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     })
   }
 
-  get l(){
+  get l() {
     return this.loginGroup.controls
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit() {
-    setTimeout(()=>
-    {
-      this.is_Loader=false
-    },3000
+    setTimeout(() => {
+      this.is_Loader = false
+    }, 3000
     )
 
-    this.submitted=true;
+    this.submitted = true;
     const email = this.loginGroup.value.email;
     const password = this.loginGroup.value.password;
 
-    this.userService.login(email,password).subscribe(
+    this.userService.login(email, password).subscribe(
       (res: any) => {
         localStorage.setItem('ADMIN-ASOREBA-GLC', res.token);
-       
+
         // redirect to dashboard
-        this.router.navigate(['/members']).then(()=>{
+        this.router.navigate(['/members']).then(() => {
           window.location.reload();
           this.toaster.success('Logged in successfully');
         })
-        
+
       },
       (err) => {
         this.toaster.error('Network Challenge');

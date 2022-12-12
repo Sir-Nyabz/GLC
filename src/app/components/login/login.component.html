@@ -1,15 +1,16 @@
 <div class="hold-transition login-page">
   <div class="login-box">
-    
+
     <div class="card mt-4">
       <div class="card-body login-card-body">
-        
+
         <form (ngSubmit)="onSubmit()" [formGroup]="loginGroup">
           <div class="mb-3">
             <label for="email">Email</label>
             <div class="input-group">
-              
-              <input type="email" class="form-control text-box" formControlName="email" placeholder="Email" [ngClass]="{'is-invalid':submitted && l['email'].errors}">
+
+              <input type="email" class="form-control text-box" formControlName="email" placeholder="Email"
+                [ngClass]="{'is-invalid':submitted && l['email'].errors}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="bi bi-envelope-open"></i>
@@ -24,8 +25,9 @@
           <div class="mb-3">
             <label for="password">Password</label>
             <div class="input-group">
-              
-              <input type="password" class="form-control text-box" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':submitted && l['password'].errors}">
+
+              <input type="password" class="form-control text-box" formControlName="password" placeholder="Password"
+                [ngClass]="{'is-invalid':submitted && l['password'].errors}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="bi bi-lock"></i>
