@@ -1,8 +1,10 @@
-<div class="container">
-  <div class="card-body edit-card-body">
+
+  
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
+        <div class="card mt-4 mb-4">
+        <div class="card-body">
         <form (ngSubmit)="updateRecord()" [formGroup]="updateGroup" class="editForm">
           <div class="form-group mb-3">
             <label for="firstName">First Name</label>
@@ -176,7 +178,7 @@
           </div>
         </form>
       </div>
+      </div>
       <div class="col-sm-2"></div>
     </div>
-  </div>
 </div>
