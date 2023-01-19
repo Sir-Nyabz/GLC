@@ -24,14 +24,28 @@
 
 .navbar-brand {
     color: white;
-    font: 35px bold Franklin Gothic Medium italic;
+    font: 35px bold Franklin Gothic Medium italic;  
 }
 
-.heading{
-    color: white;
-    text-align: center;
+
+a.navbar-brand{
+    font-size: 30px;
+ 
 }
 
 p{
-    font-size: 20px;
+    text-align: center;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 998px) {
+    a.navbar-brand{
+        font-size: 20px;
+        text-align: center;
+      margin: 0 27.768%;
+     
+      
+    }
 }

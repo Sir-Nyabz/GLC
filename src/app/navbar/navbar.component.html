@@ -1,29 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg">
+  
   <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
       aria-controls="navbarNav" aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
-      <img src="" width="30" height="30" class="d-inline-block align-top" alt=""/>
-   
-    <div class="heading offset-4">
-      <a class="navbar-brand">Global Life Chapel</a>
-      <p>(ASORENMA)</p>
-    </div>
+      <!-- <img src="" width="30" height="30" class="d-inline-block align-top" alt=""/> -->
+      
+      <a class="navbar-brand">
+        Global Life Chapel
+        <p>(ASORENMA)</p>
+      </a>
+    
     
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto" *ngIf="LoggedIn">
           <li class="nav-item">
-            <a class="nav-link a-logout" (click)="goBack()"><i class="bi bi-skip-backward"></i>Back</a>
+            <a class="nav-link a-logout" (click)="goBack()" href=""><i class="bi bi-skip-backward"></i>Back</a>
           </li>
           <li class="nav-item">
             <a class="nav-link a-logout" (click)="Logout()" href="#"><i class="bi bi-box-arrow-left"></i>Logout</a>
           </li>
         </ul>
-      </div>
-    
-    
+    </div>
   </nav>
 
 
