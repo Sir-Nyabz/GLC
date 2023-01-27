@@ -14,10 +14,11 @@ export class MemberService {
   countriesUrl ='https://nyabz.pythonanywhere.com/admin-api/setups/countries/';
   regionsUrl='https://nyabz.pythonanywhere.com/admin-api/setups/country/regions/';
   branchesUrl='https://nyabz.pythonanywhere.com/admin-api/setups/region/church_branches/';
-  updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/'
-  addProfileUrl='https://nyabz.pythonanywhere.com/admin-api/profile/add/asoreba/'
-  addContactUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/contact/'
-  viewRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/"
+  updateMembersUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/';
+  addProfileUrl='https://nyabz.pythonanywhere.com/admin-api/profile/add/asoreba/';
+  addContactUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/contact/';
+  viewRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/";
+  deleteRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/"
 
   constructor(
     private http: HttpClient,
@@ -44,8 +45,8 @@ export class MemberService {
     return this.http.get<any>(this.getAllMembersUrl);
   }
 
-  deleteMember(id:any){
-    return this.http.delete(this.getAllMembersUrl + id)
+  deleteMember(asoreba_uuid:any){
+    return this.http.delete(this.deleteRecordUrl+asoreba_uuid)
   }
 
   updateMember(

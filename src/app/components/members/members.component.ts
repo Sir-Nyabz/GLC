@@ -111,7 +111,7 @@ export class MembersComponent implements OnDestroy, OnInit {
       });
   }
 
-  deleteM(id: any) {
+  deleteM(asoreba_uuid: any) {
 
 
     Swal.fire({
@@ -124,6 +124,7 @@ export class MembersComponent implements OnDestroy, OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        this.memberService.deleteMember(asoreba_uuid)
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
@@ -140,6 +141,7 @@ export class MembersComponent implements OnDestroy, OnInit {
       }
     })
   }
+
   edit(membe: Member) {
     this.memberService.setMember(membe);
     this.router.navigate(['/edit'])
