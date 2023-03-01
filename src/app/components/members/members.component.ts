@@ -112,34 +112,50 @@ export class MembersComponent implements OnDestroy, OnInit {
   }
 
   deleteM(asoreba_uuid: any) {
-
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.memberService.deleteMember(asoreba_uuid)
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
+    this.memberService.deleteMember(
+      asoreba_uuid).subscribe({
+        next: (res: any) => {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
+          //this.router.navigate(['/members']);
+          this.dtTrigger.next(this.dtOptions);
+          $("#displayTable").dataTable().fnDestroy()
+        },
+        error: (e: any) => {
+          this.toaster.error('There was an error');
+        },
       }
-    })
+      )
+
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: "You won't be able to revert this!",
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Yes, delete it!',
+    //   cancelButtonText: 'No, cancel!',
+    //   reverseButtons: true
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+        
+    //     Swal.fire(
+    //       'Deleted!',
+    //       'Your file has been deleted.',
+    //       'success'
+    //     )
+    //   } else if (
+    //     result.dismiss === Swal.DismissReason.cancel
+    //   ) {
+    //     Swal.fire(
+    //       'Cancelled',
+    //       'Your imaginary file is safe :)',
+    //       'error'
+    //     )
+    //   }
+    // })
   }
 
   edit(membe: Member) {

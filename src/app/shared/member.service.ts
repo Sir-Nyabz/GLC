@@ -46,7 +46,7 @@ export class MemberService {
   }
 
   deleteMember(asoreba_uuid:any){
-    return this.http.delete(this.deleteRecordUrl+asoreba_uuid)
+    return this.http.delete(this.deleteRecordUrl,{body: {asoreba_uuid:asoreba_uuid}})
   }
 
   updateMember(
