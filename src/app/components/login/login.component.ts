@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
   loginGroup: FormGroup;
-  is_Loader: boolean = true;
+  is_Loader: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private toaster: ToastrService) {
 
@@ -30,29 +30,27 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit() {
-    setTimeout(() => {
-      this.is_Loader = false
-    }, 3000
-    )
-
+    this.is_Loader = true;
     this.submitted = true;
     const email = this.loginGroup.value.email;
     const password = this.loginGroup.value.password;
 
     this.userService.login(email, password).subscribe(
       (res: any) => {
-        localStorage.setItem('ADMIN-ASOREBA-GLC', res.token);
-
-        // redirect to dashboard
-        this.router.navigate(['/members']).then(() => {
-          window.location.reload();
-          this.toaster.success('Logged in successfully');
-        })
-
+        if (res.status === (200 || 201)) {
+          localStorage.setItem('ADMIN-ASOREBA-GLC', res.token);
+          // redirect to dashboard
+          this.router.navigate(['/members']).then(() => {
+            this.toaster.success('Logged in successfully');
+          });
+        } else {
+          this.toaster.error(res.response);
+        };
+        this.is_Loader = false;
       },
       (err) => {
         this.toaster.error('Network Challenge');
-        window.location.reload();
+        this.is_Loader = false;
       }
     );
   }
