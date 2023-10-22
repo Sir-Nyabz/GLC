@@ -1,0 +1,85 @@
+
+  
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <div class="card mt-4 mb-4">
+          <div class="card-body">
+          <form (ngSubmit)="link_Members()" [formGroup]="formGroup" class="editForm">
+  
+            <div class="row">
+              <div class="col-sm-2"></div>
+  
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="are_you_a_member_label" class="are_you_a_member_label">Do you have any family member registered with the church?</label>
+                  <div class="form-group"
+                    [ngClass]="{'is-invalid':submitted}">
+                    <input class="form-check-input" type="radio" name="is_member" id="is_member" [value]="true"
+                      formControlName="is_member" aria-label="label for the input">
+                    <label class="form-check-label" for="yes">Yes</label>
+                  </div>
+                  <div class="form-group form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="is_member" id="is_member" [value]="false"
+                      formControlName="is_member" aria-label="label for the input">
+                    <label class="form-check-label" for="yes">No</label>
+                  </div>
+                  <div *ngIf="submitted" class="show-error">
+                    <div *ngIf="submitted">Select something</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="maritalStatus">Marital Status</label>
+              <select class="form-select form-control" formControlName="marital_status"
+                [ngClass]="{'is-invalid':submitted}" aria-label="label for the select">
+                <option value="" disabled selected hidden>--Select--</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Separated">Separated</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+              <div *ngIf="submitted" class="show-error">
+                field cannot be empty
+              </div>
+            </div>
+  
+  
+            <div class="form-group mb-3">
+              <label for="reGion">Which region is the church?</label>
+              <select class="form-select form-control" formControlName="region"
+                [ngClass]="{'is-invalid':submitted}" aria-label="label for the select">
+                <option value="" disabled selected hidden>--Select--</option>
+                <option value="c5e76afb-ad28-4d84-ac5f-453928a5efb7"></option>
+              </select>
+              <div *ngIf="submitted" class="show-error">
+                field cannot be empty
+              </div>
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="braNch">Which branch do you attend?</label>
+              <select class="form-select form-control" formControlName="branch"
+                [ngClass]="{'is-invalid':submitted}" aria-label="label for the select">
+                <option value="" disabled selected hidden>--Select--</option>
+                <option value="f8f6061a-989a-4225-8c53-0a527fae3e7c"></option>
+              </select>
+              <div *ngIf="submitted" class="show-error">
+                field cannot be empty
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+  </div>

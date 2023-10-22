@@ -20,13 +20,15 @@ import { FooterComponent } from './footer/footer.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     NavbarComponent,
     IsLoaderComponent,
-    FooterComponent
+    FooterComponent,
+   
   ],
   imports: [
     ToastrModule.forRoot(),
@@ -38,7 +40,8 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     HttpClientModule,
     DataTablesModule,
-    NgxPrintModule
+    NgxPrintModule,
+    CommonModule
   ],
   providers: [AuthGuard,BnNgIdleService,
   {

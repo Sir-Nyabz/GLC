@@ -7,6 +7,7 @@ import { MemberBiodataComponent } from './components/member-biodata/member-bioda
 import { MembersComponent } from './components/members/members.component';
 import { ContactComponent } from './contact/contact.component';
 import { EditComponent } from './edit/edit.component';
+import { LinkMembersComponent } from './components/link-members/link-members.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path:'members',component:MembersComponent,canActivate:[AuthGuard] },
   { path:'edit',component:EditComponent,canActivate:[AuthGuard] },
   { path:'member-biodata',component:MemberBiodataComponent,canActivate:[AuthGuard] },
-  { path:'contact',component:ContactComponent,canActivate:[AuthGuard] }
+  { path:'contact',component:ContactComponent,canActivate:[AuthGuard] },
+  { path:'link-members',component:LinkMembersComponent,canActivate:[AuthGuard] }
+
 ];
 
 @NgModule({
@@ -32,5 +35,6 @@ export const routingComponents=[
   MembersComponent,
   MemberBiodataComponent,
   EditComponent,
-  ContactComponent
+  ContactComponent,
+  LinkMembersComponent
 ]

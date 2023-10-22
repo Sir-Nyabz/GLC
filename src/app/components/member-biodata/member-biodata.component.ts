@@ -149,7 +149,7 @@ export class MemberBiodataComponent implements OnInit {
       next: (res: any) => {
         this.memberService.setMember(res);
         this.toaster.success('Profile added successfully');
-        this.router.navigate(['/contact'])
+        this.router.navigate(['/link-members'])
         //console.log(res)
       },
       error: (e: any) => this.toaster.error('There was an error'),
