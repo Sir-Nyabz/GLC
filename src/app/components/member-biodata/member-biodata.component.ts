@@ -1,11 +1,11 @@
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl, NgForm } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { concatMap, tap } from 'rxjs';
 import { MemberService } from 'src/app/shared/member.service';
-import { UserService } from '../../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-member-biodata',
@@ -55,29 +55,28 @@ export class MemberBiodataComponent implements OnInit {
       marital_status: ['', Validators.required],
       branch: ['', Validators.required],
       is_member: ['', Validators.required]
-    })
+    });
 
 
   }
   get emailid() {
-    return this.biodataGroup.controls
+    return this.biodataGroup.controls;
   }
 
   ngOnInit(): void {
 
     this.memberService.getAllMembers().pipe(
       tap(res => {
-        this.members = res.data_list
+        this.members = res.data_list;
 
         for (var i = 0; i < this.members.length; i++) {
-          this.asoreba_uuid = this.members[i].asoreba_uuid
+          this.asoreba_uuid = this.members[i].asoreba_uuid;
         }
       }),
       concatMap(res => this.memberService.viewMember(this.asoreba_uuid)),
       tap((res: any) => {
-
-      }),
-    ).subscribe()
+      })
+    ).subscribe();
 
     this.getCountriesRegionsBranches();
 
@@ -98,11 +97,11 @@ export class MemberBiodataComponent implements OnInit {
     const ID = first_char + second_char + third_char + fourth_char + fifth_char + sixth_char + seventh_char + eighth_char;
 
     if (member == true) {
-      const memberID = ID + "M"
-      return memberID
+      const memberID = ID + "M";
+      return memberID;
     } else {
-      const memberID = ID + "N"
-      return memberID
+      const memberID = ID + "N";
+      return memberID;
     }
   }
 
@@ -113,7 +112,7 @@ export class MemberBiodataComponent implements OnInit {
     const last_name = this.biodataGroup.value.last_name;
     const other_name = this.biodataGroup.value.other_name;
     const gender = this.biodataGroup.value.gender;
-    const date_of_birth = this.biodataGroup.value.date_of_birth
+    const date_of_birth = this.biodataGroup.value.date_of_birth;
     const email = this.biodataGroup.value.email;
     const place_of_birth = this.biodataGroup.value.place_of_birth;
     const home_town = this.biodataGroup.value.home_town;
@@ -147,13 +146,13 @@ export class MemberBiodataComponent implements OnInit {
       residential_address
     ).subscribe({
       next: (res: any) => {
-        this.memberService.setMember(res);
+        //this.memberService.setMember(res);
         this.toaster.success('Profile added successfully');
-        this.router.navigate(['/link-members'])
+        this.router.navigate(['/link-members']);
         //console.log(res)
       },
       error: (e: any) => this.toaster.error('There was an error'),
-    })
+    });
 
   }
 
@@ -162,20 +161,20 @@ export class MemberBiodataComponent implements OnInit {
     this.memberService.getCountries().pipe(
       tap(res => {
 
-        const countries = res.data_list
+        const countries = res.data_list;
         for (var i = 0; i < countries.length; i++) {
 
-          this.country_uuid = countries[i].country_uuid
+          this.country_uuid = countries[i].country_uuid;
         }
       }),
       concatMap(res => this.memberService.getRegions(this.country_uuid)),
       tap((res: any) => {
 
-        this.regions = res.data.regions
+        this.regions = res.data.regions;
         for (var i = 0; i < this.regions.length; i++) {
 
-          this.region = this.regions[i].region
-          this.region_uuid = this.regions[i].region_uuid
+          this.region = this.regions[i].region;
+          this.region_uuid = this.regions[i].region_uuid;
         }
       }),
       concatMap(res => this.memberService.getBranches(this.region_uuid)),
@@ -183,11 +182,10 @@ export class MemberBiodataComponent implements OnInit {
         this.church_branches = res.data.church_branches;
         for (var i = 0; i < this.church_branches.length; i++) {
 
-          this.branch = this.church_branches[i].branch
-          this.branch_uuid = this.church_branches[i].branch_uuid
+          this.branch = this.church_branches[i].branch;
+          this.branch_uuid = this.church_branches[i].branch_uuid;
         }
-      }),
-    ).subscribe()
+      })
+    ).subscribe();
   }
 }
-

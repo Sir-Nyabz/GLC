@@ -9,8 +9,8 @@
           <div class="form-group mb-3">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" placeholder="First Name" formControlName="first_name"
-              [ngClass]="{'is-invalid':submitted && u['first_name'].errors}">
-            <div *ngIf="submitted && u['first_name'].errors" class="show-error">
+              [ngClass]="{'is-invalid':submitted}">
+            <div *ngIf="submitted" class="show-error">
               Empty or invalid
             </div>
           </div>
@@ -18,8 +18,8 @@
           <div class="form-group mb-3">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name"
-              [ngClass]="{'is-invalid':submitted && u['last_name'].errors}">
-            <div *ngIf="submitted && u['last_name'].errors" class="show-error">
+              [ngClass]="{'is-invalid':submitted}">
+            <div *ngIf="submitted" class="show-error">
               Empty or invalid
             </div>
           </div>
@@ -31,7 +31,7 @@
 
           <div class="form-group mb-3">
             <label for="sex">Gender</label>
-            <select class="form-select form-control" [ngClass]="{'is-invalid':submitted && u['gender'].errors}"
+            <select class="form-select form-control" [ngClass]="{'is-invalid':submitted}"
               formControlName="gender" aria-label="label for the select">
               <option value="" disabled selected hidden>--Select--</option>
               <option>Male</option>
