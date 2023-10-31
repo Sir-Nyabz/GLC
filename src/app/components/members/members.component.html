@@ -10,7 +10,7 @@
 
     <div class="col-sm-2">
 
-      <select class="form-select form-control listtodisplay" id="getprofile" (change)="getProfile()">
+      <select class="form-select form-control listtodisplay" id="getprofile" (change)="getProfile()" aria-label="label for the select">
         <option value="" disabled selected hidden>Select</option>
         <option value="all">All</option>
         <option value="onlymembers">Only Members</option>
@@ -147,7 +147,7 @@
           <div class="form-group">
             <label for="ismember">Are you a member?</label>
             <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member"
-              placeholder="Yes" *ngIf="Yes">
+              placeholder="Yes" *ngIf="Yes" aria-label="label for the">
             <input type="text" readonly class="form-control-plaintext" id="ismember" formControlName="is_member"
               placeholder="No" *ngIf="No">
           </div>

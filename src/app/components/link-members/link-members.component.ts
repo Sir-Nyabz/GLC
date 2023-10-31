@@ -19,6 +19,8 @@ export class LinkMembersComponent implements OnInit {
   formGroup: FormGroup;
   submitted: boolean = false;
   asoreba_uuid: any;
+  members: any;
+
   constructor(private datepipe: DatePipe,
     private memberService: MemberService,
     private formBuilder: FormBuilder,
@@ -26,10 +28,7 @@ export class LinkMembersComponent implements OnInit {
     private toaster: ToastrService) {
     this.formGroup = this.formBuilder.group({
       cemail: ['', [Validators.required, Validators.email]],
-      msisdn: ['', Validators.required],
-      voice_call: ['', [Validators.required]],
-      whatsapp: ['', [Validators.required]],
-      telegram: ['', [Validators.required]]
+      example: ['', Validators.required]
     })
 
   }
@@ -41,12 +40,15 @@ export class LinkMembersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.memberService.currentMember.pipe(take(1)).subscribe(
-      data => {
-        this.asoreba_uuid = data.asoreba_uuid;
-        console.log(this.asoreba_uuid)
-      },
-    )
+    this.memberService.getAllMembers()
+    .subscribe(
+      {
+        next: (res: any) => {
+          this.members = res.data_list;
+        },
+        error: (e: any) => this.toaster.error('There was an error'),
+      }
+    );
   }
 
   hideDiv: boolean = true; // Initially hidden
@@ -58,37 +60,19 @@ export class LinkMembersComponent implements OnInit {
     this.boxDisplay = isChecked ? 'block' : 'none';
   }
 
-//  link_Members() {
-//     this.submitted = true;
-//     this.memberService.currentMember.pipe(take(1)).subscribe(
-//       data => {
-//         this.asoreba_uuid = data.asoreba_uuid;
-//       },
-//     )
-//     const ismember = this.formGroup.value.is_member;
-//     const is_voice_call = this.formGroup.value.voice_call;
-//     const is_telegram = this.formGroup.value.telegram;
-//     const is_whatsapp = this.formGroup.value.whatsapp;
-//     const asoreba_uuid = this.asoreba_uuid
+ linkMembers() {
+    this.submitted = true;
+    this.memberService.currentMember.pipe(take(1)).subscribe(
+      data => {
+        this.asoreba_uuid = data.asoreba_uuid;
+      },
+    )
+    const ismember = this.formGroup.value.example;
 
-//     this.memberService.addAsorebaContact(
-//       ismember,
-//       is_voice_call,
-//       is_whatsapp,
-//       is_telegram,
-//       asoreba_uuid).subscribe({
-//         next: (res: any) => {
-//           this.toaster.success('Contact added successfully');
-//           this.formGroup.reset();
-//           this.router.navigate(['/contact'])
-//         },
-//         error: (e: any) => {
-//           this.toaster.error('There was an error');
-//           this.formGroup.reset()
-//         },
-//       }
-//       )
-//   }
+    
+          this.router.navigate(['/contact'])
+      
+  }
 }
 function handleRadioClick(): (this: HTMLInputElement, ev: MouseEvent) => any {
   throw new Error('Function not implemented.');

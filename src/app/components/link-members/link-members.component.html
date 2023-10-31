@@ -5,7 +5,7 @@
         <div class="col-sm-8">
           <div class="card mt-4 mb-4">
           <div class="card-body">
-          <form [formGroup]="formGroup" class="editForm">
+          <form [formGroup]="formGroup" class="linkmembersform" (ngSubmit)="linkMembers()" id="linkmembersform" novalidate>
   
             <div class="row">
   
@@ -13,13 +13,13 @@
                 <div class="form-group">
                   <label for="are_you_a_member_label" class="are_you_a_member_label">Do you have any family member registered with the church?</label>
                   <div class="form-group  form-check form-check-inline">
-                    <input class="form-check-input" type="radio" (click)="handleRadioClick(true)" [(ngModel)]="isChecked" #is_yes
-                      formControlName="is_member" aria-label="label for the input" name="example">
+                    <input class="form-check-input" name="example" type="radio" (click)="handleRadioClick(true)" [(ngModel)]="isChecked" #is_yes
+                       aria-label="label for the input">
                     <label class="form-check-label" for="yes">Yes</label>
                   </div>
                   <div class="form-group form-check form-check-inline">
-                    <input class="form-check-input" type="radio" (click)="handleRadioClick(false)" [(ngModel)]="isChecked"
-                      formControlName="is_member" aria-label="label for the input" name="example">
+                    <input class="form-check-input" name="example" type="radio" (click)="handleRadioClick(false)" [(ngModel)]="isChecked"
+                       aria-label="label for the input no">
                     <label class="form-check-label" for="yes">No</label>
                   </div>
                   <div *ngIf="submitted" class="show-error">
@@ -29,12 +29,11 @@
               </div>
             </div>
   
-            <div class="form-group mb-3" id="select_relation" [style.display]="boxDisplay" *ngIf="hideDiv">
+            <div class="form-group mb-3" id="select_relation" [style.display]="boxDisplay" *ngIf="hideDiv" >
               <label for="maritalStatus">Please select the name of the person</label>
-              <select class="form-select form-control" formControlName="marital_status" [disabled]="isElementDisabled"
-                [ngClass]="{'is-invalid':submitted}" aria-label="label for the select">
-                <option value="" disabled selected hidden>--Select--</option>
-                <option value="Single"></option>
+              <select class="form-select form-control" aria-label="label for the select">
+                <option value="" selected>--Select--</option>
+                <option [value]="name.asoreba_uuid" *ngFor="let name of members">{{name.first_name+" "+name.last_name}}</option>
                
               </select>
               <div *ngIf="submitted" class="show-error">
