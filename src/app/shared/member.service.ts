@@ -19,6 +19,7 @@ export class MemberService {
   addContactUrl='https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/contact/';
   viewRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/";
   deleteRecordUrl="https://nyabz.pythonanywhere.com/admin-api/profile/asoreba/"
+  createRelationshipUrl="https://nyabz.pythonanywhere.com/admin-api/profile/add/relationship/"
 
   constructor(
     private http: HttpClient,
@@ -27,6 +28,7 @@ export class MemberService {
   ) {}
 
   private receiveMembers=new BehaviorSubject<any>(false);
+  
   currentMember=this.receiveMembers.asObservable();
 
   setMember(object:any){
@@ -168,6 +170,20 @@ export class MemberService {
         is_whatsapp: is_whatsapp,
         is_telegram: is_telegram,
         asoreba_uuid:asoreba_uuid
+      } 
+      )
+  }
+
+  createRelationship(
+    asoreba_one_uuid: string,
+    asoreba_two_uuid:string,
+    relationship:string
+  ){
+    return this.http.post(this.createRelationshipUrl,
+      {
+        asoreba_one_uuid: asoreba_one_uuid,
+        asoreba_two_uuid: asoreba_two_uuid,
+        relationship:relationship
       } 
       )
   }

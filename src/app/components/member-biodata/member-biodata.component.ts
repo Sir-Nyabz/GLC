@@ -146,7 +146,7 @@ export class MemberBiodataComponent implements OnInit {
       residential_address
     ).subscribe({
       next: (res: any) => {
-        //this.memberService.setMember(res);
+        this.memberService.setMember(res);
         this.toaster.success('Profile added successfully');
         this.router.navigate(['/link-members']);
         //console.log(res)

@@ -1,57 +1,67 @@
 
-  
+
+  <!--Link Members Form -->
+<div class="container">
+  <div class="card-body contact-card-body mt-4 mb-4">
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-          <div class="card mt-4 mb-4">
-          <div class="card-body">
-          <form [formGroup]="formGroup" class="linkmembersform" (ngSubmit)="linkMembers()" id="linkmembersform" novalidate>
-  
-            <div class="row">
-  
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="are_you_a_member_label" class="are_you_a_member_label">Do you have any family member registered with the church?</label>
-                  <div class="form-group  form-check form-check-inline">
-                    <input class="form-check-input" name="example" type="radio" (click)="handleRadioClick(true)" [(ngModel)]="isChecked" #is_yes
-                       aria-label="label for the input">
-                    <label class="form-check-label" for="yes">Yes</label>
-                  </div>
-                  <div class="form-group form-check form-check-inline">
-                    <input class="form-check-input" name="example" type="radio" (click)="handleRadioClick(false)" [(ngModel)]="isChecked"
-                       aria-label="label for the input no">
-                    <label class="form-check-label" for="yes">No</label>
-                  </div>
-                  <div *ngIf="submitted" class="show-error">
-                    <div *ngIf="submitted">Select something</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="form-group mb-3" id="select_relation" [style.display]="boxDisplay" *ngIf="hideDiv" >
-              <label for="maritalStatus">Please select the name of the person</label>
-              <select class="form-select form-control" aria-label="label for the select">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <form (ngSubmit)="linkMembers()" [formGroup]="userForm" id="linkGroup" novalidate>
+
+          <div class="form-group mb-3">
+            <label for="are_you_a_member_label" class="are_you_a_member_label">Are you a member?</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="is_member" id="is_member" value="true"
+                        formControlName="is_member" aria-label="label for the input" (click)="handleRadioClick(true)"  #is_yes
+                        [ngClass]="{'is-invalid':is_member?.errors && is_member?.touched}">
+                      <label class="form-check-label" for="yes">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="is_member" id="is_member" value="false"
+                        formControlName="is_member" aria-label="label for the input" (click)="handleRadioClick(false)" [(ngModel)]="isChecked">
+                      <label class="form-check-label" for="yes">No</label>
+                    </div>
+                    <div *ngIf="is_member?.hasError('required')" class="show-error">
+                      Select something
+                    </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="select_relation">Please select the name of the person</label>
+              <select class="form-select form-control" aria-label="label for the select" formControlName="select_relation"
+              [ngClass]="{'is-invalid':submitted && select_relation?.errors}">
                 <option value="" selected>--Select--</option>
                 <option [value]="name.asoreba_uuid" *ngFor="let name of members">{{name.first_name+" "+name.last_name}}</option>
                
               </select>
-              <div *ngIf="submitted" class="show-error">
-                field cannot be empty
-              </div>
+            <div *ngIf="submitted && select_relation?.errors" class="show-error">
+              Select something
             </div>
-  
-  
-           
-  
-            <div class="row">
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-              </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="teleGram">Relationship</label>
+            <select class="form-select form-control" formControlName="relationship_status"
+              [ngClass]="{'is-invalid':submitted && relationship_status?.errors}" aria-label="label for the select">
+              <option value="" disabled selected>--Select--</option>
+              <option value="couple">Couple</option>
+              <option value="sibling">Sibling</option>
+              <option value="child">Child</option>
+              <option value="parent">Parent</option>
+              <option value="other">Other</option>
+            </select>
+            <div *ngIf="submitted && relationship_status?.errors" class="show-error">
+              Select something
             </div>
-          </form>
-        </div>
-        </div>
-        <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="userForm.invalid">Submit</button>
+            </div>
+          </div>
+        </form>
       </div>
+    </div>
   </div>
+</div>
