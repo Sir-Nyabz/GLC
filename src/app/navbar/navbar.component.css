@@ -1,3 +1,8 @@
+.navbar{
+    position: relative; /* usually the parent, in this case the body element, has position relative so that the absolute positioned child is positioned relative to it */
+  margin: 0; /* recommended */
+}
+
 .nav-item a:hover {
     /* background-color: #ddd; */
     color: rgb(255, 255, 255);
@@ -25,6 +30,12 @@
 .navbar-brand {
     color: white;
     font: 35px bold Franklin Gothic Medium italic;  
+    padding-top: 25px;
+    top: 50%; /* moved down by 50% of the screen height */
+    transform: translateY(-20%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+    width: 100%; /* needs to be defined to keep the default block behavior */
+ text-align: center;
+ 
 }
 
 
