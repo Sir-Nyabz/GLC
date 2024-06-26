@@ -37,14 +37,9 @@ div.data_tabs {
 
 .biodataForm {
   margin-bottom: 60px;
-  background-color: rgb(46, 200, 95)    ;
+  background-color: rgb(208, 219, 212);
 }
 
 .are_you_a_member_label {
   margin-right: 5px;
-}
-
-.biodata-card-body {
-  background-color: rgb(46, 200, 95);
-  ;
 }
