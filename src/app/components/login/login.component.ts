@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loginGroup: FormGroup;
   is_Loader: boolean = false;
+  showPassword: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private toaster: ToastrService) {
 
@@ -25,6 +26,10 @@ export class LoginComponent implements OnInit {
 
   get l() {
     return this.loginGroup.controls
+  }
+
+   togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   ngOnInit(): void { }

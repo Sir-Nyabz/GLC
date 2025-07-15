@@ -60,3 +60,77 @@ p{
       
     }
 }
+
+    .navbar {
+      background: linear-gradient(45deg, #007bff, #00d4ff);
+      font-family: 'Poppins', sans-serif;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateY(-2px);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.2;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      border-radius: 5px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .navbar-nav .a-logout {
+      color: #fff !important;
+      font-weight: 600;
+    }
+
+    .navbar-nav .a-logout:hover {
+      background-color: #dc3545;
+    }
+
+    .navbar-toggler {
+      border: none;
+      color: #fff;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1.25rem;
+      }
+      .brand-subtitle {
+        font-size: 0.75rem;
+      }
+      .navbar-nav .nav-link {
+        padding: 0.5rem;
+      }
+    }
